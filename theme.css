@@ -4927,8 +4927,8 @@ body.mist-ui-ready.mist-night #chat > .mes.mist-letter > .mes_block {
   color: var(--mist-ink) !important;
 }
 /* One fixed canvas spans the top bar, scrolling chat and input. Panels stay opaque. */
-body.mist-ui-ready.mist-night.mist-chat-image::before,
-body.mist-ui-ready.mist-night.mist-chat-image::after {
+body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::before,
+body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::after {
   content: '';
   position: fixed;
   top: 0;
@@ -4938,18 +4938,28 @@ body.mist-ui-ready.mist-night.mist-chat-image::after {
   transform: translateX(-50%);
   pointer-events: none;
 }
-body.mist-ui-ready.mist-night.mist-chat-image::before {
+body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::before {
   z-index: 0;
   background-image: var(--mist-chat-image);
   background-size: cover;
   background-position: var(--mist-bg-position-x, 50%) var(--mist-bg-position-y, 50%);
   filter: blur(var(--mist-blur, 0px));
 }
-body.mist-ui-ready.mist-night.mist-chat-image::after {
+body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::after {
   z-index: 1;
   background: rgba(25, 26, 24, var(--mist-darkness, .55));
 }
-body.mist-ui-ready.mist-night.mist-chat-image :is(
+/* Touch screens also need the full canvas in landscape, even above 768px. */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::before,
+  body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::after {
+    left: 0;
+    width: 100vw;
+    width: 100dvw;
+    transform: none;
+  }
+}
+body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel)) :is(
   #top-bar, #top-settings-holder, #sheld, #chat, #form_sheld,
   #send_form, #nonQRFormItems, #leftSendForm, #rightSendForm, #send_textarea
 ) {
