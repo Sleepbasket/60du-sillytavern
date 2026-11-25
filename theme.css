@@ -4243,7 +4243,8 @@ body.mist-ui-ready {
   --letter-paper: var(--mist-paper);
 }
 /* ===== 21.1 开篇艺术题签 ===== */
-body.mist-ui-ready #chat > .mist-letter-opening {
+body.mist-ui-ready #chat > .mist-letter-opening,
+body.mist-ui-ready #chat > .mes > .mist-letter-opening {
   position: relative;
   display: block;
   flex: 0 0 auto;

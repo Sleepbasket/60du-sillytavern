@@ -1,3 +1,28 @@
+// TauriTavern can keep only a small, replaceable window of message nodes in
+// the DOM. Its mount callback is the reliable point to decorate each new row.
+let managedMode = false;
+let managedHooks = null;
+let participantRegistered = false;
+
+export function registerLetterChatSurface() {
+  const api = window.__TAURITAVERN__?.api?.chatSurface;
+  if (participantRegistered || api?.isManagedOwnershipRequired?.() !== true) return;
+  if (api.protocolVersion !== 1) throw new Error('Unsupported ChatSurface protocol');
+  api.registerParticipant({
+    id: '60du/letter',
+    protocolVersion: 1,
+    didMount({ element }) {
+      managedHooks?.mount(element);
+      return () => managedHooks?.unmount(element);
+    },
+    didCommitContent({ element }) {
+      managedHooks?.mount(element);
+    }
+  });
+  participantRegistered = true;
+  managedMode = true;
+}
+
 export function initLetter() {
   const chat = $('#chat')[0];
   if (!chat) return () => {};
@@ -185,7 +210,7 @@ export function initLetter() {
 function sync() {
   if (!active) return;
   const messages = [...chat.children].filter(el => el.matches?.(selector));
-  const currentOpening = chat.querySelector(':scope > .mist-letter-opening');
+  const currentOpening = chat.querySelector(':scope > .mist-letter-opening, :scope > .mes > .mist-letter-opening');
   if (!messages.length) {
     currentOpening?.remove();
     return;
@@ -194,7 +219,11 @@ function sync() {
   const firstRealMessage = messages.find(mes => mes.getAttribute('mesid') === '0');
   if (firstRealMessage) {
     const opening = currentOpening || makeOpening();
-    if (opening.nextElementSibling !== firstRealMessage) {
+    if (managedMode) {
+      // Keep ChatSurface's #chat child list under host control.
+      if (opening.parentElement !== firstRealMessage || firstRealMessage.firstElementChild !== opening)
+        firstRealMessage.prepend(opening);
+    } else if (opening.nextElementSibling !== firstRealMessage) {
       chat.insertBefore(opening, firstRealMessage);
     }
   } else {
@@ -215,16 +244,30 @@ function sync() {
     });
   }
   /* ===== 10. 监听聊天与原生数据 ===== */
-  const observer = new MutationObserver(records => {
+  const observer = managedMode ? null : new MutationObserver(records => {
     let needsSync = false;
     for (const record of records) {
       const el = record.target.nodeType === 1
         ? record.target
         : record.target.parentElement;
       if (!el) continue;
+      if (record.type === 'attributes') {
+        if (el.matches?.(selector) &&
+            (record.attributeName === 'mesid' || !el.classList.contains('mist-letter'))) {
+          needsSync = true;
+          break;
+        }
+        continue;
+      }
       if (el.closest('.mist-letter-opening, .mist-letter-head, .mist-letter-sign')) continue;
       if (el.closest('.mes_text, .mes_reasoning_details, .extraMesButtons, .mist-letter-swipes')) continue;
       if (el === chat) {
+        needsSync = true;
+        break;
+      }
+      const message = el.closest('.mes');
+      if (message?.matches(selector) &&
+          !message.querySelector(':scope > .mes_block > .mist-letter-head')) {
         needsSync = true;
         break;
       }
@@ -243,27 +286,38 @@ function sync() {
     }
     if (needsSync) scheduleSync();
   });
-  observer.observe(chat, {
+  observer?.observe(chat, {
     childList: true,
     subtree: true,
-    characterData: true
+    characterData: true,
+    attributes: true,
+    attributeFilter: ['class', 'mesid']
   });
   /* ===== 11. 清理与恢复原生结构 ===== */
+  function cleanupMessage(mes) {
+    const group = mes.querySelector('.mist-letter-swipes');
+    const block = mes.querySelector(':scope > .mes_block');
+    if (group && block) {
+      const left = group.querySelector('.swipe_left');
+      const right = group.querySelector('.swipeRightBlock');
+      if (left) mes.insertBefore(left, block);
+      if (right) mes.append(right);
+      group.remove();
+    }
+    mes.querySelectorAll('.mist-letter-opening, .mist-letter-head, .mist-letter-sign')
+      .forEach(el => el.remove());
+    mes.classList.remove('mist-letter', 'mist-letter-last');
+  }
+  const hooks = {
+    mount(mes) { updateLetter(mes); scheduleSync(); },
+    unmount(mes) { if (mes?.classList?.contains('mist-letter')) cleanupMessage(mes); scheduleSync(); }
+  };
+  if (managedMode) managedHooks = hooks;
   const cleanup = () => {
     active = false;
-    observer.disconnect();
-    chat.querySelectorAll('.mes.mist-letter').forEach(mes => {
-      const group = mes.querySelector('.mist-letter-swipes');
-      const block = mes.querySelector(':scope > .mes_block');
-      if (group && block) {
-        const left = group.querySelector('.swipe_left');
-        const right = group.querySelector('.swipeRightBlock');
-        if (left) mes.insertBefore(left, block);
-        if (right) mes.append(right);
-        group.remove();
-      }
-      mes.classList.remove('mist-letter', 'mist-letter-last');
-    });
+    if (managedHooks === hooks) managedHooks = null;
+    observer?.disconnect();
+    chat.querySelectorAll('.mes.mist-letter').forEach(cleanupMessage);
     chat.querySelectorAll('.mist-letter-opening, .mist-letter-head, .mist-letter-sign')
       .forEach(el => el.remove());
   };

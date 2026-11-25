@@ -1,5 +1,5 @@
 import { initTopbar } from './topbar.js';
-import { initLetter } from './letter.js';
+import { initLetter, registerLetterChatSurface } from './letter.js';
 import { initTeaHome } from './tea-home.js';
 import { initReception } from './reception.js';
 import { initHostTheme } from './host-theme.js';
@@ -253,7 +253,7 @@ function begin() {
   started = true;
   const link = document.createElement('link');
   link.id = 'mist-theme-link'; link.rel = 'stylesheet';
-  link.href = new URL('./theme.css?v=0.4.0', import.meta.url).href;
+  link.href = new URL('./theme.css?v=0.4.1', import.meta.url).href;
   document.head.append(link);
   cleanupTopbar = initTopbar(character, apply);
   cleanupTeaHome = initTeaHome();
@@ -316,6 +316,7 @@ function startBridge(forceTheme = false) {
 }
 export function onActivate() { startBridge(); }
 export function onEnable() { startBridge(true); }
+export function registerChatSurface() { registerLetterChatSurface(); }
 export function onDisable() {
   clearTimeout(bridgeTimer);
   stop();
