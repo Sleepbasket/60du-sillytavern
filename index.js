@@ -253,7 +253,7 @@ function begin() {
   started = true;
   const link = document.createElement('link');
   link.id = 'mist-theme-link'; link.rel = 'stylesheet';
-  link.href = new URL('./theme.css?v=0.4.3', import.meta.url).href;
+  link.href = new URL('./theme.css?v=0.4.4', import.meta.url).href;
   document.head.append(link);
   cleanupTopbar = initTopbar(character, apply);
   cleanupTeaHome = initTeaHome();

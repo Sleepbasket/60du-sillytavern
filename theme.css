@@ -4918,6 +4918,12 @@ body.mist-ui-ready.mist-night :is(input, textarea, select) {
 body.mist-ui-ready.mist-night .drawer-content {
   color-scheme: dark !important;
 }
+/* Embedded status HTML uses a transparent light-scheme document. Match the
+   iframe's scheme so browsers do not paint its empty canvas white. */
+body.mist-ui-ready.mist-night #chat .mes_text iframe {
+  color-scheme: light !important;
+  background: transparent !important;
+}
 body.mist-ui-ready #chat .mes_text {
   font-size: var(--mist-font-size, 1em) !important;
 }
