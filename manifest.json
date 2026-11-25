@@ -3,7 +3,7 @@
   "loading_order": 100,
   "js": "index.js",
   "author": "60度",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "hooks": {
     "chatSurface": "registerChatSurface",
     "activate": "onActivate",

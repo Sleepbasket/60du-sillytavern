@@ -23,11 +23,14 @@ export function registerLetterChatSurface() {
   managedMode = true;
 }
 
-export function initLetter() {
+export function initLetter({ eventSource, eventTypes } = {}) {
   const chat = $('#chat')[0];
   if (!chat) return () => {};
   const doc = chat.ownerDocument;
-  const selector = '.mes[is_system="false"]:not([type="welcome_prompt"]):not([type="assistant_message"])';
+  // SillyTavern marks older messages hidden from the AI as is_system="true".
+  // They remain ordinary chat entries (type="") and should still look like
+  // letters. Real system UI messages have a non-empty type and stay untouched.
+  const selector = '.mes[mesid]:not([type="welcome_prompt"]):not([type="assistant_message"]):is([is_system="false"], [is_system="true"][type=""])';
   const hanDigits = '零一二三四五六七八九';
   let active = true;
   let scheduled = false;
@@ -188,7 +191,8 @@ export function initLetter() {
     const avatar = mes.querySelector(':scope > .mesAvatarWrapper');
     const timer = durationOf(avatar?.querySelector('.mes_timer')?.textContent);
     const tokens = tokensOf(avatar?.querySelector('.tokenCounterDisplay')?.textContent);
-    const pieces = [timer, tokens].filter(Boolean);
+    const hiddenFromAi = mes.getAttribute('is_system') === 'true';
+    const pieces = [hiddenFromAi ? '对 AI 隐藏' : '', timer, tokens].filter(Boolean);
     const recordValue = pieces.join('|');
     if (record.dataset.value !== recordValue) {
       record.dataset.value = recordValue;
@@ -293,6 +297,27 @@ function sync() {
     attributes: true,
     attributeFilter: ['class', 'mesid']
   });
+  // TauriTavern 2.2.0 can add older rows through Show More after the first
+  // render. Its ChatSurface startup hook is not available to arbitrary
+  // extensions, so observe the native event as well as DOM changes.
+  const refreshEvents = managedMode ? [] : [
+    eventTypes?.MORE_MESSAGES_LOADED,
+    eventTypes?.USER_MESSAGE_RENDERED,
+    eventTypes?.CHARACTER_MESSAGE_RENDERED,
+    eventTypes?.MESSAGE_UPDATED
+  ].filter(Boolean);
+  for (const event of refreshEvents) eventSource?.on?.(event, scheduleSync);
+  // A scroll can expose rows restored by an older host without a matching
+  // message event. Check for undecorated rows once per animation frame.
+  let scrollFrame = 0;
+  function onScroll() {
+    if (managedMode || scrollFrame || !active) return;
+    scrollFrame = requestAnimationFrame(() => {
+      scrollFrame = 0;
+      if (chat.querySelector(`${selector}:not(.mist-letter)`)) scheduleSync();
+    });
+  }
+  if (!managedMode) doc.addEventListener('scroll', onScroll, { passive: true, capture: true });
   /* ===== 11. 清理与恢复原生结构 ===== */
   function cleanupMessage(mes) {
     const group = mes.querySelector('.mist-letter-swipes');
@@ -317,6 +342,9 @@ function sync() {
     active = false;
     if (managedHooks === hooks) managedHooks = null;
     observer?.disconnect();
+    if (scrollFrame) cancelAnimationFrame(scrollFrame);
+    doc.removeEventListener('scroll', onScroll, true);
+    for (const event of refreshEvents) eventSource?.removeListener?.(event, scheduleSync);
     chat.querySelectorAll('.mes.mist-letter').forEach(cleanupMessage);
     chat.querySelectorAll('.mist-letter-opening, .mist-letter-head, .mist-letter-sign')
       .forEach(el => el.remove());

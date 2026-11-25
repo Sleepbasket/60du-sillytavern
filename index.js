@@ -253,21 +253,22 @@ function begin() {
   started = true;
   const link = document.createElement('link');
   link.id = 'mist-theme-link'; link.rel = 'stylesheet';
-  link.href = new URL('./theme.css?v=0.4.1', import.meta.url).href;
+  link.href = new URL('./theme.css?v=0.4.2', import.meta.url).href;
   document.head.append(link);
   cleanupTopbar = initTopbar(character, apply);
   cleanupTeaHome = initTeaHome();
   cleanupReception = initReception();
-  cleanupLetter = initLetter();
+  const { eventSource, event_types, eventTypes } = context();
+  const letterEvents = { eventSource, eventTypes: event_types || eventTypes };
+  cleanupLetter = initLetter(letterEvents);
   makePanel();
   const bar = document.getElementById('top-settings-holder');
   barObserver = new MutationObserver(() => {
     if (!bar.classList.contains('mist-collapsed')) togglePanel(false);
   });
   barObserver.observe(bar, { attributes: true, attributeFilter: ['class'] });
-  const { eventSource, event_types, eventTypes } = context();
   const chatChanged = (event_types || eventTypes)?.CHAT_CHANGED;
-  listenChat = () => { apply(); cleanupLetter(); cleanupLetter = initLetter(); };
+  listenChat = () => { apply(); cleanupLetter(); cleanupLetter = initLetter(letterEvents); };
   if (eventSource && chatChanged) eventSource.on(chatChanged, listenChat);
   loadImage();
   apply();
