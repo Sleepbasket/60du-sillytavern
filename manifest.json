@@ -1,0 +1,13 @@
+{
+  "display_name": "60度",
+  "loading_order": 100,
+  "js": "index.js",
+  "author": "60度",
+  "version": "0.4.0",
+  "hooks": {
+    "activate": "onActivate",
+    "enable": "onEnable",
+    "disable": "onDisable",
+    "delete": "onDisable"
+  }
+}

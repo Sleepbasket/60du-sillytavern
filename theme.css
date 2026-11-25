@@ -1,0 +1,5366 @@
+@import url("https://fontsapi.zeoseven.com/7/main/result.css");
+@import url("https://fontsapi.zeoseven.com/513/main/result.css");
+@import url("https://fontsapi.zeoseven.com/672/main/result.css");
+
+/* ===== 01. THEME ===== */
+body.mist-ui-ready {
+  --mainFontFamily: "Zhuque Fangsong (technical preview)", serif;
+  --mist-title-font: "PING FANG YU TONG", sans-serif;
+  --mist-bg: #F8F7F1;
+  --mist-ink: #38352F;
+  --mist-muted: #817769;
+  --mist-yellow: #FFD12F;
+  --mist-hover: #F0E8D2;
+  --mist-nav-height: 36px;
+}
+body.mist-ui-ready {
+  font-family: var(--mainFontFamily);
+  background: var(--mist-bg) !important;
+}
+body.mist-ui-ready #bg1 {
+  background-image: none !important;
+  background-color: var(--mist-bg) !important;
+}
+/* ===== 02. TOP BAR ===== */
+body.mist-ui-ready {
+  --topBarBlockSize: var(--mist-nav-height);
+}
+body.mist-ui-ready #top-bar {
+  width: var(--sheldWidth) !important;
+  max-width: 100dvw !important;
+  height: var(--mist-nav-height) !important;
+  margin: 0 auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: var(--mist-bg) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+body.mist-ui-ready #top-settings-holder {
+  width: var(--sheldWidth) !important;
+  max-width: 100dvw !important;
+  height: var(--mist-nav-height) !important;
+  margin: 0 auto !important;
+  padding: 0 5px !important;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0 !important;
+  box-sizing: border-box;
+  background: var(--mist-bg) !important;
+}
+/* ===== 03. LINE ICONS ===== */
+body.mist-ui-ready #top-settings-holder > .drawer {
+  flex: 1 1 0;
+  min-width: 0;
+  height: var(--mist-nav-height);
+}
+body.mist-ui-ready #top-settings-holder > .drawer > .drawer-toggle {
+  width: 100%;
+  height: var(--mist-nav-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body.mist-ui-ready #top-settings-holder > .drawer > .drawer-toggle .drawer-icon {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  color: var(--mist-ink) !important;
+  font-size: 0 !important;
+  width: 32px;
+  height: 32px;
+  padding: 0 !important;
+  opacity: 1 !important;
+  filter: none !important;
+  text-shadow: none !important;
+  transition: color .2s ease, transform .2s ease;
+}
+body.mist-ui-ready #top-settings-holder > .drawer > .drawer-toggle .drawer-icon::before {
+  display: none !important;
+}
+.mist-line-icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+body.mist-ui-ready #top-settings-holder .drawer-icon:hover {
+  color: #BB9948 !important;
+  transform: translateY(-1px);
+}
+/* ===== 04. PAC-MAN ===== */
+#mist-pacman {
+  position: relative;
+  z-index: 5;
+  flex: 0 0 38px;
+  width: 38px;
+  height: var(--mist-nav-height);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  appearance: none;
+  cursor: pointer;
+}
+#mist-pacman::before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: var(--mist-yellow);
+  border-radius: 50%;
+  clip-path: polygon(50% 50%, 0 17%, 0 0, 100% 0, 100% 100%, 0 100%, 0 83%);
+  transition: transform .2s ease;
+}
+#mist-pacman::after {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 19px;
+  width: 4px;
+  height: 4px;
+  background: #25231E;
+  border-radius: 50%;
+}
+#mist-pacman:hover::before {
+  transform: scale(1.08);
+}
+/* ===== 05. COLLAPSED TITLE ===== */
+#mist-reveal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  z-index: 4;
+  height: var(--mist-nav-height);
+  max-width: calc(100% - 20px);
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  background: transparent;
+  color: var(--mist-ink);
+  border: 0;
+  box-shadow: none;
+  text-align: left;
+  appearance: none;
+  cursor: pointer;
+}
+#mist-reveal .mist-title {
+  display: block;
+  position: relative;
+  color: var(--mist-ink);
+  font-family: var(--mist-title-font) !important;
+  font-size: 29px;
+  font-weight: normal !important;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-shadow: none !important;
+  transition: transform .2s ease;
+}
+#mist-reveal:hover .mist-title {
+  transform: translateX(3px);
+}
+#mist-reveal .mist-photo {
+  display: none;
+}
+/* ===== 06. CHARACTER COMPOSITION ===== */
+#mist-reveal.mist-character {
+  width: min(440px, calc(100% - 20px));
+  height: var(--mist-nav-height);
+}
+#mist-reveal.mist-character .mist-photo[src] {
+  display: block;
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 120px;
+  height: 28px;
+  object-fit: cover;
+  object-position: var(--mist-focus-x, 50%) var(--mist-focus-y, 25%);
+  transform: scale(var(--mist-focus-scale, 1));
+  transform-origin: left center;
+  border: 0;
+  border-radius: 0;
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 48%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 0%, #000 48%, transparent 100%);
+}
+#mist-reveal.mist-character .mist-title {
+  position: absolute;
+  top: 2px;
+  left: 87px;
+  z-index: 2;
+  max-width: calc(100% - 96px);
+  color: var(--mist-ink) !important;
+  font-size: 23px;
+  font-weight: normal;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: visible;
+  -webkit-text-stroke: 0;
+  text-shadow: none !important;
+}
+#mist-reveal.mist-character .mist-title::before,
+#mist-reveal.mist-character .mist-title::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  pointer-events: none;
+}
+#mist-reveal.mist-character .mist-title::before {
+  top: -3px;
+  left: -10px;
+  border-top: 1.5px solid var(--mist-ink);
+  border-left: 1.5px solid var(--mist-ink);
+}
+#mist-reveal.mist-character .mist-title::after {
+  right: -9px;
+  bottom: -3px;
+  border-right: 1.5px solid var(--mist-ink);
+  border-bottom: 1.5px solid var(--mist-ink);
+}
+/* ===== 07. EXPAND / COLLAPSE ===== */
+body.mist-ui-ready #top-settings-holder.mist-collapsed > .drawer > .drawer-toggle {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body.mist-ui-ready #top-settings-holder.mist-collapsed #mist-pacman {
+  display: none;
+}
+body.mist-ui-ready #top-settings-holder.mist-collapsed #mist-reveal {
+  display: flex;
+  animation: mist-title-enter .28s ease both;
+}
+body.mist-ui-ready #top-settings-holder.mist-collapsed #mist-reveal.mist-character {
+  display: block;
+}
+@keyframes mist-title-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-9px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* ===== 08. EATING ANIMATION ===== */
+#top-settings-holder.mist-eating #mist-pacman {
+  pointer-events: none;
+  animation: mist-travel .56s linear both;
+}
+#top-settings-holder.mist-eating #mist-pacman::before {
+  animation: mist-mouth .14s steps(2) infinite;
+}
+#top-settings-holder.mist-eating > .drawer > .drawer-toggle {
+  animation: mist-eaten .17s ease both;
+  animation-delay: var(--mist-delay, 0ms);
+}
+#top-settings-holder.mist-opening > .drawer > .drawer-toggle {
+  animation: mist-icon-enter .24s ease both;
+  animation-delay: var(--mist-open-delay, 0ms);
+}
+@keyframes mist-travel {
+  to {
+    transform: translateX(calc(-1 * var(--mist-travel, 200px)));
+  }
+}
+@keyframes mist-mouth {
+  0%, 100% {
+    clip-path: polygon(50% 50%, 0 17%, 0 0, 100% 0, 100% 100%, 0 100%, 0 83%);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 40%, 0 0, 100% 0, 100% 100%, 0 100%, 0 60%);
+  }
+}
+@keyframes mist-eaten {
+  to {
+    opacity: 0;
+    transform: scale(.5);
+  }
+}
+@keyframes mist-icon-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* ===== 09. MAIN CHAT SURFACES ===== */
+body.mist-ui-ready #sheld,
+body.mist-ui-ready #chat,
+body.mist-ui-ready #form_sheld,
+body.mist-ui-ready #send_form {
+  background: var(--mist-bg) !important;
+  color: var(--mist-ink) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+body.mist-ui-ready #sheld,
+body.mist-ui-ready #chat,
+body.mist-ui-ready #send_form {
+  border-radius: 0 !important;
+}
+/* ===== 10. WELCOME PAGE ===== */
+body.mist-ui-ready #chat .welcomePanel,
+body.mist-ui-ready #chat .welcomeHeaderTitle,
+body.mist-ui-ready #chat .welcomeHeader,
+body.mist-ui-ready #chat .welcomeRecent,
+body.mist-ui-ready #chat .recentChatList {
+  background: transparent !important;
+  color: var(--mist-ink) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat .welcomePanel :is(
+  .welcomeHeaderVersionDisplay,
+  .recentChatsTitle,
+  .chatName,
+  .chatMessage,
+  .characterName,
+  .welcomeShortcutsSeparator
+) {
+  color: var(--mist-ink) !important;
+  text-shadow: none !important;
+}
+body.mist-ui-ready #chat .welcomePanel :is(
+  .chatDate,
+  .chatStats,
+  .fileSize
+) {
+  color: var(--mist-muted) !important;
+}
+body.mist-ui-ready #chat .recentChat {
+  background: transparent !important;
+  color: var(--mist-ink) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 5px;
+  padding: 8px 5px;
+  transition: background .2s ease;
+}
+body.mist-ui-ready #chat .recentChat:hover {
+  background: var(--mist-hover) !important;
+}
+body.mist-ui-ready #chat .welcomePanel :is(
+  .menu_button,
+  .mes_button
+) {
+  background: transparent !important;
+  color: var(--mist-ink) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+body.mist-ui-ready #chat .welcomePanel .menu_button:hover {
+  background: var(--mist-hover) !important;
+}
+body.mist-ui-ready #chat .recentChat .avatar,
+body.mist-ui-ready #chat .recentChat .avatar img {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* ===== 11. CHAT MESSAGES ===== */
+body.mist-ui-ready #chat > .mes {
+  background: transparent !important;
+  color: var(--mist-ink) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat > .mes :is(
+  .mes_text,
+  .name_text
+) {
+  color: var(--mist-ink) !important;
+}
+body.mist-ui-ready #chat > .mes :is(
+  .timestamp,
+  .mes_timer,
+  .mesIDDisplay
+) {
+  color: var(--mist-muted) !important;
+}
+body.mist-ui-ready #chat > .mes .mes_button {
+  color: var(--mist-ink) !important;
+}
+/* ===== 12. INPUT AREA ===== */
+body.mist-ui-ready #send_form,
+body.mist-ui-ready #nonQRFormItems,
+body.mist-ui-ready #leftSendForm,
+body.mist-ui-ready #rightSendForm {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #send_textarea {
+  background: transparent !important;
+  color: var(--mist-ink) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-family: var(--mainFontFamily);
+}
+body.mist-ui-ready #send_textarea::placeholder {
+  color: var(--mist-muted) !important;
+  opacity: .8;
+}
+body.mist-ui-ready #send_form :is(
+  #options_button,
+  #extensionsMenuButton,
+  #send_but,
+  #mes_continue,
+  #mes_impersonate,
+  .stscript_btn
+) {
+  color: var(--mist-ink) !important;
+  text-shadow: none !important;
+}
+/* ===== 13. RESPONSIVE ===== */
+@media screen and (max-width: 1000px) {
+  body.mist-ui-ready #top-bar,
+  body.mist-ui-ready #top-settings-holder {
+    width: 100dvw !important;
+    max-width: 100dvw !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  body.mist-ui-ready {
+    --mist-nav-height: 34px;
+  }
+  body.mist-ui-ready #top-settings-holder {
+    padding: 0 3px !important;
+  }
+  .mist-line-icon {
+    width: 16px;
+    height: 16px;
+  }
+  body.mist-ui-ready #top-settings-holder > .drawer > .drawer-toggle .drawer-icon {
+    width: 26px;
+    height: 30px;
+  }
+  #mist-pacman {
+    flex-basis: 32px;
+    width: 32px;
+  }
+  #mist-pacman::before {
+    width: 27px;
+    height: 27px;
+  }
+  #mist-pacman::after {
+    top: 9px;
+    left: 15px;
+  }
+  #mist-reveal {
+    left: 8px;
+  }
+  #mist-reveal .mist-title {
+    font-size: 26px;
+  }
+  #mist-reveal.mist-character .mist-photo[src] {
+    top: 6px;
+    width: 99px;
+    height: 25px;
+  }
+  #mist-reveal.mist-character .mist-title {
+    top: 3px;
+    left: 72px;
+    max-width: calc(100% - 82px);
+    font-size: 20px;
+  }
+}
+/* ===== 14. REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  #top-settings-holder.mist-eating #mist-pacman,
+  #top-settings-holder.mist-eating #mist-pacman::before,
+  #top-settings-holder.mist-eating > .drawer > .drawer-toggle,
+  #top-settings-holder.mist-opening > .drawer > .drawer-toggle,
+  #top-settings-holder.mist-collapsed #mist-reveal {
+    animation: none !important;
+  }
+}
+/* ===== 16. TEA ARCHIVE v1.4 ===== */
+body.mist-ui-ready #chat .welcomePanel.mist-tea-ready {
+  container: mist-tea / inline-size;
+  width: 100%;
+  padding: 12px clamp(12px, 3vw, 30px) 30px;
+  box-sizing: border-box;
+  background: transparent !important;
+  color: var(--mist-ink);
+}
+body.mist-ui-ready #chat .mist-tea-ready .welcomeHeaderTitle,
+body.mist-ui-ready #chat .mist-tea-ready .recentChatList {
+  display: none !important;
+}
+/* ===== 16.1 HEADER ===== */
+body.mist-ui-ready #chat .mist-tea-ready .welcomeHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 0;
+  padding: 10px 0 24px;
+  background: transparent !important;
+}
+body.mist-ui-ready #chat .mist-tea-ready .recentChatsTitle {
+  flex: 1 1 200px;
+  font-family: "ふい字", var(--mainFontFamily) !important;
+  font-size: clamp(32px, 4vw, 43px);
+  font-weight: normal;
+  line-height: 1.3;
+  color: var(--mist-ink) !important;
+}
+body.mist-ui-ready #chat .mist-tea-ready .recentChatsTitle::before {
+  content: "A LITTLE CUP OF STORIES";
+  display: block;
+  margin-bottom: 5px;
+  color: #B09A69;
+  font: 10px/1.4 sans-serif;
+  letter-spacing: .13em;
+}
+body.mist-ui-ready #chat .mist-tea-ready .recentChatsTitle::after {
+  content: "揀一包，繼續傾。";
+  display: block;
+  margin-top: 4px;
+  color: var(--mist-muted);
+  font-family: "ふい字", var(--mainFontFamily) !important;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.5;
+}
+body.mist-ui-ready #chat .mist-tea-ready .welcomeShortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+body.mist-ui-ready #chat .mist-tea-ready .welcomeShortcuts .menu_button {
+  background: transparent !important;
+  color: var(--mist-muted) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 3px !important;
+  font-size: 11px;
+}
+body.mist-ui-ready #chat .mist-tea-ready .welcomeShortcutsSeparator {
+  display: none !important;
+}
+/* ===== 16.2 THREE TEA BAGS ===== */
+body.mist-ui-ready #chat .mist-tea-featured {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  align-items: start;
+  padding: 0 0 25px;
+}
+body.mist-ui-ready #chat .mist-tea-card {
+  position: relative;
+  min-width: 0;
+  padding-top: 23px;
+  overflow: visible;
+}
+body.mist-ui-ready #chat .mist-tea-card:nth-child(2) {
+  transform: translateY(9px);
+}
+body.mist-ui-ready #chat .mist-tea-card:nth-child(3) {
+  transform: translateY(4px);
+}
+/* 三种短款手绘茶绳 */
+body.mist-ui-ready #chat .mist-tea-card::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: calc(50% - 47px);
+  width: 94px;
+  height: 42px;
+  background: transparent;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+  transform: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 94 42'%3E%3Cpath d='M47 41 C46 33 36 29 27 22 C18 15 21 8 30 8 C42 8 56 15 69 12 C79 10 83 5 80 3' fill='none' stroke='%23AA9B80' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+body.mist-ui-ready #chat .mist-tea-card:nth-child(2)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 94 42'%3E%3Cpath d='M47 41 C46 33 43 28 43 20 C42 11 45 3 51 3 C60 3 61 13 54 19 C50 22 46 22 43 20' fill='none' stroke='%23AA9B80' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+body.mist-ui-ready #chat .mist-tea-card:nth-child(3)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 94 42'%3E%3Cpath d='M47 41 C46 32 45 26 45 19 C36 10 29 7 27 13 C24 22 36 23 45 19 C56 11 67 8 68 15 C69 23 55 24 45 19' fill='none' stroke='%23AA9B80' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+body.mist-ui-ready #chat .mist-tea-paper-wrap {
+  position: relative;
+  min-width: 0;
+}
+/* ===== 16.3 FILTER PAPER ===== */
+body.mist-ui-ready #chat .mist-tea-paper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+  padding: 19px 13px 12px;
+  background: #F0EADD;
+  clip-path: polygon(0 14px, 14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+body.mist-ui-ready #chat .mist-tea-card:nth-child(2) .mist-tea-paper {
+  background: #EDE8DD;
+}
+body.mist-ui-ready #chat .mist-tea-card:nth-child(3) .mist-tea-paper {
+  background: #F1E8D6;
+}
+/* 纸张细颗粒与纤维纹理 */
+body.mist-ui-ready #chat .mist-tea-paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .30;
+  mix-blend-mode: multiply;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' seed='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23p)' opacity='.72'/%3E%3Cpath d='M8 19l11 2M45 33l7-3M90 17l9 2M121 48l-8 2M17 86l12-2M69 104l9 3M108 121l13-2M35 131l7 1' fill='none' stroke='%237D705B' stroke-width='.7' opacity='.65'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(108deg, transparent 0 12px, rgba(105, 92, 67, .075) 12px 12.5px, transparent 13px 25px);
+  background-size: 140px 140px, 97px 113px;
+}
+body.mist-ui-ready #chat .mist-tea-paper::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: calc(50% - 2px);
+  width: 4px;
+  height: 4px;
+  background: #C4B69B;
+  border-radius: 50%;
+}
+body.mist-ui-ready #chat .mist-tea-paper > * {
+  position: relative;
+  z-index: 1;
+}
+/* ===== 16.4 BAG CONTENT ===== */
+body.mist-ui-ready #chat .mist-tea-main {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 185px;
+  padding: 0 !important;
+  color: var(--mist-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-align: left;
+  cursor: pointer;
+}
+body.mist-ui-ready #chat .mist-tea-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+  min-height: 75px;
+}
+body.mist-ui-ready #chat .mist-tea-label-stack {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  min-width: 0;
+}
+body.mist-ui-ready #chat .mist-tea-index-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+/* 标签字号加大 */
+body.mist-ui-ready #chat .mist-tea-index {
+  color: #998569;
+  font-family: "ふい字", var(--mainFontFamily);
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+body.mist-ui-ready #chat .mist-tea-pin,
+body.mist-ui-ready #chat .mist-tea-other-pin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #9A7B42;
+}
+body.mist-ui-ready #chat .mist-tea-pin svg,
+body.mist-ui-ready #chat .mist-tea-other-pin svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* 小照片 */
+body.mist-ui-ready #chat .mist-tea-stamp {
+  position: relative;
+  width: 56px;
+  height: 66px;
+  padding: 0;
+  flex: 0 0 auto;
+  background: transparent;
+  box-sizing: border-box;
+  transform: rotate(3deg);
+}
+body.mist-ui-ready #chat .mist-tea-card:nth-child(2) .mist-tea-stamp {
+  transform: rotate(-3deg);
+}
+body.mist-ui-ready #chat .mist-tea-stamp img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 23%;
+  background: #C7BBA9;
+  border: 0 !important;
+  border-radius: 0 !important;
+  clip-path: polygon(2% 0, 100% 2%, 98% 100%, 0 98%);
+  filter: saturate(.88) sepia(.05);
+}
+body.mist-ui-ready #chat .mist-tea-stamp::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 16px;
+  width: 26px;
+  height: 9px;
+  background: rgba(219, 201, 161, .7);
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+/* 已售 / 净重字号加大 */
+body.mist-ui-ready #chat .mist-tea-sales {
+  margin: 0;
+  color: #74624B;
+  font-family: var(--mainFontFamily);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: .01em;
+}
+body.mist-ui-ready #chat .mist-tea-sales span {
+  display: block;
+  white-space: nowrap;
+}
+body.mist-ui-ready #chat .mist-tea-name {
+  margin: 0;
+  color: var(--mist-ink);
+  font-family: var(--mist-title-font) !important;
+  font-size: clamp(19px, 2.3vw, 26px);
+  font-weight: normal;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+body.mist-ui-ready #chat .mist-tea-chat-title {
+  color: var(--mist-deep-ink);
+  font-size: 13.5px;
+  line-height: 1.55;
+  font-weight: 500;
+}
+body.mist-ui-ready #chat .mist-tea-preview {
+  margin-top: 3px;
+  color: #6A6054;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+body.mist-ui-ready #chat .mist-tea-chat-title,
+body.mist-ui-ready #chat .mist-tea-preview {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+}
+body.mist-ui-ready #chat .mist-tea-main:hover .mist-tea-name {
+  color: #A17D37;
+}
+/* ===== 16.5 BAG FOOTER ===== */
+body.mist-ui-ready #chat .mist-tea-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  margin-top: 13px;
+  color: #928674;
+  font-size: 10px;
+}
+body.mist-ui-ready #chat .mist-tea-foot-tools,
+body.mist-ui-ready #chat .mist-tea-other-tools {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+}
+body.mist-ui-ready #chat .mist-tea-toggle,
+body.mist-ui-ready #chat .mist-tea-other-toggle,
+body.mist-ui-ready #chat .mist-tea-single-count {
+  padding: 4px;
+  color: #685A45 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  font-family: var(--mainFontFamily);
+  font-size: 11px;
+  white-space: nowrap;
+}
+body.mist-ui-ready #chat :is(.mist-tea-toggle, .mist-tea-other-toggle) {
+  cursor: pointer;
+}
+body.mist-ui-ready #chat :is(.mist-tea-toggle, .mist-tea-other-toggle):hover {
+  color: #A17D37 !important;
+}
+body.mist-ui-ready #chat .mist-tea-single-count {
+  cursor: default;
+}
+/* ===== 16.6 OTHER FLAVOURS ===== */
+body.mist-ui-ready #chat .mist-tea-others {
+  margin-top: 11px;
+}
+body.mist-ui-ready #chat .mist-tea-others-heading {
+  margin-bottom: 11px;
+  color: var(--mist-ink);
+  font-family: "ふい字", var(--mainFontFamily) !important;
+  font-size: 27px;
+  font-weight: normal;
+}
+/* 茶签：完全透明，不使用交替色块 */
+body.mist-ui-ready #chat .mist-tea-other-item {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* 分割线放在两条茶签之间，间距由上下等量 padding 控制 */
+body.mist-ui-ready #chat .mist-tea-other-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 49px;
+  width: 36%;
+  max-width: 340px;
+  height: 1px;
+  background: #D7CEBF;
+  pointer-events: none;
+}
+body.mist-ui-ready #chat .mist-tea-other-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 10px;
+  background: transparent;
+  transition: background-color .16s ease;
+}
+body.mist-ui-ready #chat .mist-tea-other-head:hover {
+  background: #F0ECE4;
+}
+body.mist-ui-ready #chat .mist-tea-other-main {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  gap: 11px;
+  padding: 0 !important;
+  color: var(--mist-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  text-align: left;
+  cursor: pointer;
+}
+body.mist-ui-ready #chat .mist-tea-other-no {
+  color: #AC986F;
+  font: 11px sans-serif;
+}
+body.mist-ui-ready #chat .mist-tea-other-text {
+  flex: 1;
+  min-width: 0;
+}
+body.mist-ui-ready #chat .mist-tea-other-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3px 7px;
+  color: #454036;
+  font-size: 14px;
+  font-weight: 600;
+}
+body.mist-ui-ready #chat .mist-tea-other-name-label {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+body.mist-ui-ready #chat .mist-tea-other-stats {
+  color: #826F55;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+body.mist-ui-ready #chat .mist-tea-other-preview {
+  display: block;
+  overflow: hidden;
+  color: #655A4B;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+body.mist-ui-ready #chat .mist-tea-other-date {
+  color: #9A907F;
+  font-size: 10px;
+  white-space: nowrap;
+}
+body.mist-ui-ready #chat .mist-tea-other-main:hover .mist-tea-other-name {
+  color: #454036;
+}
+/* ===== 16.7 EXPANDED HISTORY - SHARED ===== */
+body.mist-ui-ready #chat .mist-tea-history {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat .mist-tea-history[hidden] {
+  display: none !important;
+}
+/* 展开区域顶部短线 */
+body.mist-ui-ready #chat .mist-tea-history::before {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 1px;
+  margin: 0 0 8px 4px;
+  background: #CEBFA7;
+}
+/* 展开列表：确保标题、预览真正占满可用宽度 */
+body.mist-ui-ready #chat .mist-tea-convo-entry {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  min-width: 0;
+  padding: 4px 3px;
+  box-sizing: border-box;
+}
+body.mist-ui-ready #chat .mist-tea-convo-entry:hover {
+  background: rgba(216, 204, 187, .25);
+}
+body.mist-ui-ready #chat .mist-tea-convo-open {
+  display: block;
+  flex: 1 1 0;
+  width: 100%;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 3px 4px !important;
+  color: var(--mist-deep-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-align: left;
+  cursor: pointer;
+}
+/* 展开记录：标题、统计、日期同行 */
+body.mist-ui-ready #chat .mist-tea-convo-heading {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 9px;
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 5px;
+}
+/* 聊天标题 */
+body.mist-ui-ready #chat .mist-tea-convo-title {
+  display: block;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--mist-deep-ink);
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* 已售杯数 / 净重：浅咖色小标签 */
+body.mist-ui-ready #chat .mist-tea-convo-stats {
+  display: inline-block;
+  flex: 0 0 auto;
+  padding: 2px 7px;
+  color: #826F55;
+  background: var(--mist-paper-alt);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: var(--mainFontFamily);
+  font-size: 11.5px;
+  font-weight: normal;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+/* 日期：尽量靠右 */
+body.mist-ui-ready #chat .mist-tea-convo-date {
+  display: block;
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: #918572;
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+/* 内容预览：独立第二行 */
+body.mist-ui-ready #chat .mist-tea-convo-preview {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin: 2px 0;
+  color: #6E6256;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+/* ===== 16.8 TEA BAG EXPANDED PAPER ===== */
+/* 与茶包相同的底色、纹理，且不再使用 48px 左缩进 */
+body.mist-ui-ready #chat .mist-tea-card > .mist-tea-history {
+  display: block;
+  align-self: stretch;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 6px 0 0;
+  padding: 10px 12px 11px !important;
+  background: #F0EADD !important;
+  overflow: visible;
+}
+body.mist-ui-ready #chat .mist-tea-card > .mist-tea-history[hidden] {
+  display: none !important;
+}
+body.mist-ui-ready #chat .mist-tea-card:nth-child(2) > .mist-tea-history {
+  background: #EDE8DD !important;
+}
+body.mist-ui-ready #chat .mist-tea-card:nth-child(3) > .mist-tea-history {
+  background: #F1E8D6 !important;
+}
+/* 为展开色块叠加与茶包相同的纸纹，不影响内部文字透明度 */
+body.mist-ui-ready #chat .mist-tea-card > .mist-tea-history::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .30;
+  mix-blend-mode: multiply;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' seed='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23p)' opacity='.72'/%3E%3Cpath d='M8 19l11 2M45 33l7-3M90 17l9 2M121 48l-8 2M17 86l12-2M69 104l9 3M108 121l13-2M35 131l7 1' fill='none' stroke='%237D705B' stroke-width='.7' opacity='.65'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(108deg, transparent 0 12px, rgba(105, 92, 67, .075) 12px 12.5px, transparent 13px 25px);
+  background-size: 140px 140px, 97px 113px;
+}
+body.mist-ui-ready #chat .mist-tea-card > .mist-tea-history > .mist-tea-convo-entry {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-width: 0;
+}
+body.mist-ui-ready #chat .mist-tea-card .mist-tea-convo-open {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+/* ===== 16.9 TEA TAG EXPANDED HISTORY ===== */
+/* 下方茶签保持透明，只做少量缩进 */
+body.mist-ui-ready #chat .mist-tea-other-item > .mist-tea-history {
+  width: 100% !important;
+  margin: 0;
+  padding: 5px 8px 10px 36px !important;
+  background: transparent !important;
+}
+body.mist-ui-ready #chat .mist-tea-other-item > .mist-tea-history::before {
+  width: 56px;
+  margin-bottom: 7px;
+}
+/* ===== 16.10 CHAT ACTION MENUS ===== */
+body.mist-ui-ready #chat .mist-tea-dots {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 26px;
+  padding: 0 !important;
+  color: #625B4E !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: sans-serif;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+  cursor: pointer;
+}
+body.mist-ui-ready #chat .mist-tea-dots:hover {
+  background: #E7DFD3 !important;
+}
+body.mist-ui-ready #chat .mist-tea-actions {
+  position: absolute;
+  top: calc(100% - 2px);
+  right: 0;
+  z-index: 20;
+  display: none;
+  flex-direction: column;
+  min-width: 92px;
+  padding: 3px;
+  background: #DDD3C1;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat .mist-tea-card.mist-primary-menu-open,
+body.mist-ui-ready #chat .mist-tea-other-item.mist-primary-menu-open,
+body.mist-ui-ready #chat .mist-tea-convo-entry.mist-actions-open {
+  z-index: 30;
+}
+body.mist-ui-ready #chat .mist-tea-paper-wrap > .mist-tea-primary-actions {
+  top: auto;
+  right: 10px;
+  bottom: 34px;
+}
+body.mist-ui-ready #chat .mist-tea-other-head > .mist-tea-primary-actions {
+  top: calc(100% - 2px);
+  right: 8px;
+}
+body.mist-ui-ready #chat .mist-primary-menu-open .mist-tea-primary-actions,
+body.mist-ui-ready #chat .mist-tea-convo-entry.mist-actions-open > .mist-tea-actions {
+  display: flex;
+}
+body.mist-ui-ready #chat .mist-tea-action {
+  padding: 7px 10px !important;
+  color: #474034 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-align: left;
+  font-family: var(--mainFontFamily);
+  font-size: 12px;
+  cursor: pointer;
+}
+body.mist-ui-ready #chat .mist-tea-action:hover {
+  background: #E9DECA !important;
+}
+body.mist-ui-ready #chat .mist-tea-empty {
+  color: var(--mist-muted);
+  font-size: 13px;
+}
+/* ===== 16.11 COLLAPSED TOP BAR ===== */
+body.mist-ui-ready:has(#chat .welcomePanel.mist-tea-ready) #top-settings-holder.mist-collapsed #mist-reveal {
+  left: calc(10px + clamp(12px, 3vw, 30px)) !important;
+}
+/* ===== 16.12 RESPONSIVE ===== */
+@container mist-tea (max-width: 680px) {
+  body.mist-ui-ready #chat .mist-tea-featured {
+    display: flex;
+    overflow-x: auto;
+    gap: 13px;
+    padding: 16px 0 20px;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 4px;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+  body.mist-ui-ready #chat .mist-tea-featured::-webkit-scrollbar {
+    display: none;
+  }
+  body.mist-ui-ready #chat .mist-tea-card {
+    flex: 0 0 clamp(190px, 44cqw, 240px);
+    padding-top: 23px;
+    scroll-snap-align: start;
+  }
+  body.mist-ui-ready #chat .mist-tea-paper {
+    min-height: 245px;
+    padding: 18px 11px 12px;
+  }
+  body.mist-ui-ready #chat .mist-tea-name {
+    font-size: 22px;
+  }
+  body.mist-ui-ready #chat .mist-tea-top {
+    min-height: 73px;
+  }
+  body.mist-ui-ready #chat .mist-tea-index {
+    font-size: 15.5px;
+  }
+  body.mist-ui-ready #chat .mist-tea-stamp {
+    width: 49px;
+    height: 61px;
+  }
+  body.mist-ui-ready #chat .mist-tea-sales {
+    font-size: 12.5px;
+  }
+  body.mist-ui-ready #chat .mist-tea-chat-title {
+    font-size: 12.5px;
+  }
+  body.mist-ui-ready #chat .mist-tea-preview {
+    font-size: 12px;
+  }
+  body.mist-ui-ready #chat .mist-tea-card > .mist-tea-history {
+    width: 100% !important;
+    padding: 9px 9px 10px !important;
+  }
+  body.mist-ui-ready #chat .mist-tea-card .mist-tea-convo-title {
+    font-size: 12px;
+  }
+  body.mist-ui-ready #chat .mist-tea-card .mist-tea-convo-preview {
+    font-size: 11.5px;
+  }
+  body.mist-ui-ready #chat .mist-tea-card .mist-tea-convo-date {
+    font-size: 10.5px;
+  }
+  body.mist-ui-ready #chat .mist-tea-other-head {
+    gap: 5px;
+    padding: 9px 5px;
+  }
+  body.mist-ui-ready #chat .mist-tea-other-main {
+    gap: 7px;
+  }
+  body.mist-ui-ready #chat .mist-tea-other-date {
+    display: none;
+  }
+  body.mist-ui-ready #chat .mist-tea-other-item:not(:last-child)::after {
+    left: 35px;
+    width: 40%;
+  }
+  body.mist-ui-ready #chat .mist-tea-other-item > .mist-tea-history {
+    padding: 5px 3px 9px 16px !important;
+  }
+  body.mist-ui-ready #chat .mist-tea-convo-entry.mist-actions-open {
+    flex-wrap: wrap;
+  }
+  body.mist-ui-ready #chat .mist-tea-convo-entry.mist-actions-open > .mist-tea-actions {
+    position: static;
+    flex: 1 0 100%;
+    min-width: 0;
+    flex-direction: row;
+  }
+  body.mist-ui-ready #chat .mist-tea-card .mist-tea-convo-heading {
+    gap: 4px 6px;
+  }
+  body.mist-ui-ready #chat .mist-tea-card .mist-tea-convo-stats {
+    padding: 2px 5px;
+    font-size: 10.5px;
+  }
+}
+@container mist-tea (max-width: 460px) {
+  body.mist-ui-ready #chat .mist-tea-card {
+    flex-basis: clamp(192px, 63cqw, 238px);
+  }
+  body.mist-ui-ready #chat .mist-tea-other-stats {
+    font-size: 11.5px;
+  }
+  body.mist-ui-ready #chat .mist-tea-other-preview {
+    font-size: 12.5px;
+  }
+}
+@media screen and (max-width: 600px) {
+  body.mist-ui-ready:has(#chat .welcomePanel.mist-tea-ready) #top-settings-holder.mist-collapsed #mist-reveal {
+    left: calc(8px + clamp(12px, 3vw, 30px)) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.mist-ui-ready #chat .mist-tea-other-head {
+    transition: none;
+  }
+}
+
+
+/* ===== 17. TEA ASSISTANT v1.1 ===== */
+body.mist-ui-ready {
+  --mist-tea-reception-enabled: 1;
+}
+/* 只隐藏默认 Assistant 欢迎消息 */
+body.mist-ui-ready #chat .mes.mist-tea-assistant-source {
+  display: none !important;
+}
+/* ===== 17.1 RECEPTION ===== */
+body.mist-ui-ready #chat .mist-tea-reception {
+  display: block;
+  flex: 0 0 auto;
+  align-self: center;
+  width: min(760px, calc(100% - 32px));
+  margin: 28px auto 12px;
+  padding: 8px 0;
+  box-sizing: border-box;
+  background: transparent !important;
+  color: var(--mist-ink);
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat .mist-reception-header {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 17px;
+}
+body.mist-ui-ready #chat .mist-reception-logo {
+  display: flex;
+  width: 84px;
+  height: 84px;
+  align-items: center;
+  justify-content: center;
+}
+body.mist-ui-ready #chat .mist-reception-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat .mist-reception-copy {
+  min-width: 0;
+}
+body.mist-ui-ready #chat .mist-reception-eyebrow {
+  display: block;
+  margin-bottom: 7px;
+  color: #B29A6A;
+  font: 10px/1.4 sans-serif;
+  letter-spacing: .12em;
+}
+body.mist-ui-ready #chat .mist-reception-title {
+  margin: 0 0 9px;
+  color: var(--mist-ink);
+  font-family: "ふい字", var(--mainFontFamily) !important;
+  font-size: clamp(21px, 2.5vw, 27px);
+  font-weight: normal;
+  line-height: 1.3;
+}
+body.mist-ui-ready #chat .mist-reception-description {
+  margin: 0;
+  color: #776D5E;
+  font-family: var(--mainFontFamily);
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+/* ===== 17.2 TIPS ===== */
+body.mist-ui-ready #chat .mist-reception-bottom {
+  margin: 17px 0 0 101px;
+}
+body.mist-ui-ready #chat .mist-reception-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 10px 14px;
+  background: #EEE9DD;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat .mist-reception-note-label {
+  flex: 0 0 auto;
+  padding-top: 1px;
+  color: #967F56;
+  font-family: "ふい字", var(--mainFontFamily);
+  font-size: 15px;
+  white-space: nowrap;
+}
+body.mist-ui-ready #chat .mist-reception-note-text {
+  color: #756A5D;
+  font-size: 12px;
+  line-height: 1.7;
+}
+/* ===== 17.3 NATIVE WELCOME BUTTONS ===== */
+/* 使用 SillyTavern System 原生三个按钮 */
+body.mist-ui-ready #chat:has(.mist-tea-reception) > .mes[type="welcome_prompt"] {
+  width: 100%;
+  margin: 2px auto 40px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat:has(.mist-tea-reception) > .mes[type="welcome_prompt"] .mes_block,
+body.mist-ui-ready #chat:has(.mist-tea-reception) > .mes[type="welcome_prompt"] .mes_text {
+  width: 100%;
+  max-width: 100%;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .custom-flex-container {
+  display: flex !important;
+  align-items: center;
+  justify-content: center !important;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: transparent !important;
+}
+/* 按钮本体：透明、无边框、无圆角 */
+body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 98px;
+  height: 36px;
+  padding: 6px 11px !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+  color: #55483B !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-family: "ふい字", var(--mainFontFamily) !important;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: transform .2s ease, color .2s ease;
+}
+/* 隐藏原生图标，但不删除原生按钮 */
+body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button i {
+  display: none !important;
+}
+body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button span {
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit;
+  line-height: inherit;
+}
+/* 手绘外框 */
+body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 54' preserveAspectRatio='none'%3E%3Cpath d='M19 6 C8 6 5 11 6 23 L7 39 C7 48 14 49 26 49 L124 48 C138 48 144 44 143 35 L142 17 C141 7 133 5 118 6 Z' fill='none' stroke='%23796856' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button:nth-child(2)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 54' preserveAspectRatio='none'%3E%3Cpath d='M22 5 C10 6 7 10 7 22 L6 38 C7 47 15 49 28 48 L124 49 C137 48 143 45 142 34 L143 19 C142 8 132 6 117 6 Z' fill='none' stroke='%23796856' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button:nth-child(3)::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 54' preserveAspectRatio='none'%3E%3Cpath d='M19 7 C8 6 6 13 7 24 L6 38 C7 47 16 49 29 48 L121 49 C135 49 143 45 143 35 L142 17 C142 8 131 5 118 6 Z' fill='none' stroke='%23796856' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button:hover {
+  color: #A27D3A !important;
+  transform: translateY(-1px);
+}
+body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button:focus-visible {
+  outline: 2px solid #D5B25C !important;
+  outline-offset: 3px;
+}
+/* ===== 17.4 MOBILE ===== */
+@media screen and (max-width: 600px) {
+  body.mist-ui-ready #chat .mist-tea-reception {
+    width: calc(100% - 24px);
+    margin: 20px auto 8px;
+  }
+  body.mist-ui-ready #chat .mist-reception-header {
+    grid-template-columns: 75px minmax(0, 1fr);
+    column-gap: 12px;
+  }
+  body.mist-ui-ready #chat .mist-reception-logo {
+    width: 75px;
+    height: 75px;
+  }
+  body.mist-ui-ready #chat .mist-reception-title {
+    font-size: 23px;
+  }
+  body.mist-ui-ready #chat .mist-reception-description {
+    font-size: 12px;
+  }
+  body.mist-ui-ready #chat .mist-reception-bottom {
+    margin: 18px 0 0;
+  }
+  body.mist-ui-ready #chat .mist-reception-note {
+    gap: 8px;
+    padding: 10px;
+  }
+  body.mist-ui-ready #chat .mist-reception-note-text {
+    font-size: 11px;
+  }
+  body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .custom-flex-container {
+    gap: 5px;
+  }
+  body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button {
+    min-width: 92px;
+    height: 38px;
+    padding: 7px 9px !important;
+    font-size: 15px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.mist-ui-ready #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button {
+    transition: none;
+  }
+}
+
+/* ===== 19. TEA COMPOSER v1.2 ===== */
+body.mist-ui-ready {
+  --mist-compose-ink: var(--mist-ink);
+  --mist-compose-muted: var(--mist-muted);
+  --mist-compose-panel: #EEE8DE;
+  --mist-compose-hover: #E4DDD2;
+  --mist-compose-active: #D8CCBB;
+  --mist-compose-danger: #966F64;
+}
+/* ===== 19.1 TRANSPARENT INPUT ===== */
+body.mist-ui-ready #form_sheld {
+  width: var(--sheldWidth) !important;
+  max-width: 100dvw !important;
+  margin: 0 auto !important;
+  padding: 0 6px !important;
+  box-sizing: border-box;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+body.mist-ui-ready #send_form,
+body.mist-ui-ready #nonQRFormItems,
+body.mist-ui-ready #leftSendForm,
+body.mist-ui-ready #rightSendForm,
+body.mist-ui-ready #qr--bar {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+body.mist-ui-ready #send_form {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 !important;
+  padding: 2px 0 !important;
+  box-sizing: border-box;
+}
+body.mist-ui-ready #nonQRFormItems {
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  box-sizing: border-box;
+}
+body.mist-ui-ready #leftSendForm,
+body.mist-ui-ready #rightSendForm {
+  align-items: center;
+  gap: 3px;
+}
+body.mist-ui-ready #send_textarea {
+  min-width: 0;
+  padding: 6px 10px !important;
+  background: transparent !important;
+  color: var(--mist-compose-ink) !important;
+  caret-color: #77644E;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-family: var(--mainFontFamily);
+  font-size: 15.5px !important;
+  line-height: 1.5;
+}
+body.mist-ui-ready #send_textarea::placeholder {
+  color: var(--mist-compose-muted) !important;
+  opacity: .85;
+}
+body.mist-ui-ready #send_form:focus-within,
+body.mist-ui-ready #send_textarea:focus {
+  background: transparent !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* ===== 19.2 INPUT BUTTON BASE ===== */
+body.mist-ui-ready #nonQRFormItems :is(
+  #options_button,
+  #extensionsMenuButton,
+  #stscript_continue,
+  #stscript_pause,
+  #stscript_stop,
+  #mes_stop,
+  #mes_impersonate,
+  #mes_continue,
+  #send_but
+) {
+  position: relative;
+  flex: 0 0 32px;
+  width: 32px;
+  min-width: 32px;
+  height: 34px;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: var(--mist-compose-ink) !important;
+  background: transparent !important;
+  background-image: none !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  transition: background-color .16s ease;
+}
+/* 隐藏原有字体图标，但不影响按钮功能与显隐 */
+body.mist-ui-ready #nonQRFormItems :is(
+  #options_button,
+  #extensionsMenuButton,
+  #mes_impersonate,
+  #mes_continue,
+  #send_but
+)::before {
+  content: none !important;
+  display: none !important;
+}
+body.mist-ui-ready #nonQRFormItems :is(
+  #stscript_continue,
+  #stscript_pause,
+  #stscript_stop,
+  #mes_stop
+) > i {
+  display: none !important;
+}
+/* 用完整 SVG 替换原有图标 */
+body.mist-ui-ready #nonQRFormItems :is(
+  #options_button,
+  #extensionsMenuButton,
+  #stscript_continue,
+  #stscript_pause,
+  #stscript_stop,
+  #mes_stop,
+  #mes_impersonate,
+  #mes_continue,
+  #send_but
+)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  background-color: transparent !important;
+  background-image: var(--mist-compose-icon);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  -webkit-mask: none !important;
+  mask: none !important;
+  pointer-events: none;
+}
+/* Hover 与面板完全一致：仅改变底色 */
+body.mist-ui-ready #nonQRFormItems :is(
+  #options_button,
+  #extensionsMenuButton,
+  #stscript_continue,
+  #stscript_pause,
+  #stscript_stop,
+  #mes_stop,
+  #mes_impersonate,
+  #mes_continue,
+  #send_but
+):hover {
+  color: var(--mist-compose-ink) !important;
+  background: var(--mist-compose-hover) !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+body.mist-ui-ready #nonQRFormItems :is(
+  #options_button,
+  #extensionsMenuButton,
+  #stscript_continue,
+  #stscript_pause,
+  #stscript_stop,
+  #mes_stop,
+  #mes_impersonate,
+  #mes_continue,
+  #send_but
+):active {
+  background: var(--mist-compose-active) !important;
+}
+body.mist-ui-ready #nonQRFormItems :is(
+  #options_button,
+  #extensionsMenuButton,
+  #stscript_continue,
+  #stscript_pause,
+  #stscript_stop,
+  #mes_stop,
+  #mes_impersonate,
+  #mes_continue,
+  #send_but
+):focus-visible {
+  outline: 1px solid #A99C89 !important;
+  outline-offset: 1px;
+}
+/* ===== 19.3 CUSTOM LINE ICONS ===== */
+/* 菜单 */
+body.mist-ui-ready #options_button {
+  --mist-compose-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338352F' stroke-width='1.7' stroke-linecap='round'%3E%3Cpath d='M4 6h16M4 12h16M4 18h16'/%3E%3C/svg%3E");
+}
+/* 魔法棒：完整细线棒身，配四角星光 */
+body.mist-ui-ready #extensionsMenuButton {
+  --mist-compose-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338352F' stroke-width='1.65' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3.4 18.8 11.2-11.2 2.8 2.8L6.2 21.6a2 2 0 0 1-2.8-2.8Z'/%3E%3Cpath d='m19 1.8.7 2.1 2.1.7-2.1.7-.7 2.1-.7-2.1-2.1-.7 2.1-.7.7-2.1ZM6 3v3M4.5 4.5h3M20 13v3M18.5 14.5h3'/%3E%3C/svg%3E");
+}
+body.mist-ui-ready #extensionsMenuButton::after {
+  width: 20px !important;
+  height: 20px !important;
+}
+/* 脚本继续 */
+body.mist-ui-ready #stscript_continue {
+  --mist-compose-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338352F' stroke-width='1.7' stroke-linejoin='round'%3E%3Cpath d='M8 5 19 12 8 19Z'/%3E%3C/svg%3E");
+}
+/* 脚本暂停 */
+body.mist-ui-ready #stscript_pause {
+  --mist-compose-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338352F' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M8 5v14M16 5v14'/%3E%3C/svg%3E");
+}
+/* 脚本停止 */
+body.mist-ui-ready #stscript_stop {
+  --mist-compose-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338352F' stroke-width='1.7'%3E%3Crect x='6' y='6' width='12' height='12'/%3E%3C/svg%3E");
+}
+/* 中止生成 */
+body.mist-ui-ready #mes_stop {
+  --mist-compose-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338352F' stroke-width='1.7'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Crect x='9' y='9' width='6' height='6'/%3E%3C/svg%3E");
+}
+/* AI 帮答 */
+body.mist-ui-ready #mes_impersonate {
+  --mist-compose-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338352F' stroke-width='1.7' stroke-linecap='round'%3E%3Ccircle cx='10' cy='8' r='3.5'/%3E%3Cpath d='M3 20c0-4 3-7 7-7 2 0 4 1 5 2M18 3v6M15 6h6'/%3E%3C/svg%3E");
+}
+/* 续写 */
+body.mist-ui-ready #mes_continue {
+  --mist-compose-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338352F' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14m-6-6 6 6-6 6'/%3E%3C/svg%3E");
+}
+/* 发送 */
+body.mist-ui-ready #send_but {
+  --mist-compose-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338352F' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21 3-8 18-4-8-8-4 20-6ZM9 13 21 3'/%3E%3C/svg%3E");
+}
+body.mist-ui-ready #send_but::after {
+  width: 19px !important;
+  height: 19px !important;
+}
+/* ===== 19.4 MENU SURFACES ===== */
+/* 保留酒馆原生宽度和弹出位置 */
+body.mist-ui-ready #options,
+body.mist-ui-ready #extensionsMenu,
+body.mist-ui-ready #dialogue_del_mes {
+  color: var(--mist-compose-ink) !important;
+  background: var(--mist-compose-panel) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% 100%,
+    0 100%
+  );
+}
+body.mist-ui-ready #options,
+body.mist-ui-ready #extensionsMenu {
+  padding: 4px 0 !important;
+  box-sizing: border-box;
+}
+body.mist-ui-ready #options .options-content,
+body.mist-ui-ready #extensionsMenu .extension_container {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #options .options-content {
+  gap: 0 !important;
+  row-gap: 0 !important;
+  padding: 0 !important;
+  max-height: 70dvh;
+  overflow-y: auto;
+}
+body.mist-ui-ready #extensionsMenu {
+  max-height: min(70dvh, 550px);
+  overflow-y: auto;
+}
+/* ===== 19.5 EVENLY SPACED MENU ROWS ===== */
+/* 菜单项统一等距，不改原来的显示/隐藏逻辑 */
+body.mist-ui-ready #options .options-content > a,
+body.mist-ui-ready #extensionsMenu .list-group-item {
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 34px !important;
+  height: auto;
+  margin: 0 !important;
+  padding: 5px 10px !important;
+  box-sizing: border-box;
+  color: var(--mist-compose-ink) !important;
+  -webkit-text-fill-color: var(--mist-compose-ink) !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  font-family: var(--mainFontFamily);
+  font-size: 14px !important;
+  font-weight: normal;
+  line-height: 1.4;
+  transition: background-color .15s ease;
+}
+/* 可见菜单项内的文字和图标自然对齐 */
+body.mist-ui-ready #options .options-content > a:not(.displayNone) {
+  display: flex;
+}
+body.mist-ui-ready #extensionsMenu .list-group-item:not(.displayNone) {
+  display: flex;
+}
+body.mist-ui-ready #options .options-content > a.displayNone,
+body.mist-ui-ready #extensionsMenu .list-group-item.displayNone {
+  display: none !important;
+}
+/* 去掉原生分组分隔线及额外占位 */
+body.mist-ui-ready #options .options-content > hr {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+/* 修复原生深色主题遗留的低透明度 */
+body.mist-ui-ready #options .options-content > a:not(.disabled):not([aria-disabled="true"]),
+body.mist-ui-ready #extensionsMenu .list-group-item:not(.disabled):not([aria-disabled="true"]) {
+  opacity: 1 !important;
+}
+/* 文字和图标统一炭灰色 */
+body.mist-ui-ready #options .options-content > a > :is(i, span),
+body.mist-ui-ready #extensionsMenu .list-group-item :is(
+  i,
+  span,
+  .extensionsMenuExtensionButton
+) {
+  color: var(--mist-compose-ink) !important;
+  -webkit-text-fill-color: var(--mist-compose-ink) !important;
+  text-shadow: none !important;
+}
+body.mist-ui-ready #options .options-content > a > i,
+body.mist-ui-ready #extensionsMenu .extensionsMenuExtensionButton {
+  flex: 0 0 16px;
+  width: 16px;
+  min-width: 16px;
+  margin: 0 !important;
+  color: var(--mist-compose-ink) !important;
+  font-size: 14px !important;
+  line-height: 1.4;
+  opacity: 1 !important;
+}
+/* Hover 只改变背景 */
+body.mist-ui-ready #options .options-content > a:hover,
+body.mist-ui-ready #extensionsMenu .list-group-item:hover,
+body.mist-ui-ready #extensionsMenu .extension_container:hover > .list-group-item {
+  background: var(--mist-compose-hover) !important;
+  background-image: none !important;
+  color: var(--mist-compose-ink) !important;
+  -webkit-text-fill-color: var(--mist-compose-ink) !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #options .options-content > a:hover > :is(i, span),
+body.mist-ui-ready #extensionsMenu .list-group-item:hover :is(
+  i,
+  span,
+  .extensionsMenuExtensionButton
+) {
+  color: var(--mist-compose-ink) !important;
+  -webkit-text-fill-color: var(--mist-compose-ink) !important;
+}
+/* 选中：稍深一阶的拿铁色 */
+body.mist-ui-ready #options .options-content > a:is(
+  .active,
+  .selected,
+  [aria-selected="true"]
+),
+body.mist-ui-ready #extensionsMenu .list-group-item:is(
+  .active,
+  .selected,
+  [aria-selected="true"]
+) {
+  background: var(--mist-compose-active) !important;
+  color: var(--mist-compose-ink) !important;
+}
+body.mist-ui-ready #options .options-content > a:focus-visible,
+body.mist-ui-ready #extensionsMenu .list-group-item:focus-visible {
+  outline: none !important;
+  background: var(--mist-compose-hover) !important;
+}
+/* 删除操作保留克制的陶土红 */
+body.mist-ui-ready #options #option_delete_mes,
+body.mist-ui-ready #options #option_delete_mes > :is(i, span) {
+  color: var(--mist-compose-danger) !important;
+  -webkit-text-fill-color: var(--mist-compose-danger) !important;
+}
+body.mist-ui-ready #options #option_delete_mes:hover {
+  background: var(--mist-compose-hover) !important;
+  color: var(--mist-compose-danger) !important;
+}
+/* ===== 19.6 MENU SCROLLBAR ===== */
+body.mist-ui-ready #options .options-content,
+body.mist-ui-ready #extensionsMenu {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(185, 170, 144, .68) transparent;
+}
+body.mist-ui-ready #options .options-content::-webkit-scrollbar,
+body.mist-ui-ready #extensionsMenu::-webkit-scrollbar {
+  width: 5px;
+}
+body.mist-ui-ready #options .options-content::-webkit-scrollbar-track,
+body.mist-ui-ready #extensionsMenu::-webkit-scrollbar-track {
+  background: transparent;
+}
+body.mist-ui-ready #options .options-content::-webkit-scrollbar-thumb,
+body.mist-ui-ready #extensionsMenu::-webkit-scrollbar-thumb {
+  background: rgba(185, 170, 144, .68);
+  border: 0;
+  border-radius: 0;
+}
+/* ===== 19.7 ATTACHMENTS & DELETE ===== */
+body.mist-ui-ready #file_form .file_attached {
+  color: var(--mist-compose-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #dialogue_del_mes {
+  padding: 10px !important;
+}
+body.mist-ui-ready #dialogue_del_mes .menu_button {
+  color: var(--mist-compose-ink) !important;
+  background: var(--mist-compose-hover) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #dialogue_del_mes .menu_button:hover {
+  color: var(--mist-compose-ink) !important;
+  background: var(--mist-compose-active) !important;
+}
+/* ===== 19.8 RESPONSIVE ===== */
+@media screen and (max-width: 1000px) {
+  body.mist-ui-ready #form_sheld {
+    width: calc(100dvw - 16px) !important;
+    max-width: calc(100dvw - 16px) !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+}
+@media screen and (max-width: 600px) {
+  body.mist-ui-ready #nonQRFormItems :is(
+    #options_button,
+    #extensionsMenuButton,
+    #stscript_continue,
+    #stscript_pause,
+    #stscript_stop,
+    #mes_stop,
+    #mes_impersonate,
+    #mes_continue,
+    #send_but
+  ) {
+    flex-basis: 30px;
+    width: 30px;
+    min-width: 30px;
+    height: 36px;
+  }
+  body.mist-ui-ready #nonQRFormItems :is(
+    #options_button,
+    #extensionsMenuButton,
+    #stscript_continue,
+    #stscript_pause,
+    #stscript_stop,
+    #mes_stop,
+    #mes_impersonate,
+    #mes_continue,
+    #send_but
+  )::after {
+    width: 17px;
+    height: 17px;
+  }
+  body.mist-ui-ready #extensionsMenuButton::after {
+    width: 19px !important;
+    height: 19px !important;
+  }
+  body.mist-ui-ready #send_textarea {
+    font-size: 16px !important;
+    padding: 7px 5px !important;
+  }
+  body.mist-ui-ready #leftSendForm,
+  body.mist-ui-ready #rightSendForm {
+    gap: 2px;
+  }
+  body.mist-ui-ready #options .options-content > a,
+  body.mist-ui-ready #extensionsMenu .list-group-item {
+    font-size: 14px !important;
+    min-height: 36px !important;
+    padding: 6px 9px !important;
+  }
+  body.mist-ui-ready #extensionsMenu {
+    max-height: 60dvh;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.mist-ui-ready #nonQRFormItems :is(
+    #options_button,
+    #extensionsMenuButton,
+    #stscript_continue,
+    #stscript_pause,
+    #stscript_stop,
+    #mes_stop,
+    #mes_impersonate,
+    #mes_continue,
+    #send_but
+  ),
+  body.mist-ui-ready #options .options-content > a,
+  body.mist-ui-ready #extensionsMenu .list-group-item {
+    transition: none;
+  }
+}
+
+/* ===== 20. TEA SETTINGS v1.1.2 ===== */
+body.mist-ui-ready {
+  --mist-panel-bg: var(--mist-bg);
+  --mist-panel-ink: var(--mist-ink);
+  --mist-panel-muted: var(--mist-muted);
+  --mist-panel-khaki: #9C815D;
+  --mist-panel-soft: #B6A791;
+  --mist-panel-track: #C9BEAE;
+  --mist-panel-line: #B8A68B;
+  --mist-panel-code: var(--mist-paper-alt);
+}
+/* ===== 20.1 GLOBAL SCROLLBARS ===== */
+body.mist-ui-ready,
+body.mist-ui-ready * {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(185, 170, 144, .68) transparent;
+}
+body.mist-ui-ready::-webkit-scrollbar,
+body.mist-ui-ready *::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+body.mist-ui-ready::-webkit-scrollbar-track,
+body.mist-ui-ready *::-webkit-scrollbar-track {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready::-webkit-scrollbar-thumb,
+body.mist-ui-ready *::-webkit-scrollbar-thumb {
+  background: rgba(185, 170, 144, .68);
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready::-webkit-scrollbar-thumb:hover,
+body.mist-ui-ready *::-webkit-scrollbar-thumb:hover {
+  background: rgba(147, 130, 104, .8);
+}
+body.mist-ui-ready *::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+/* ===== 20.2 COMMON PANEL SURFACE & TEXT ===== */
+body.mist-ui-ready .drawer-content {
+  color: var(--mist-panel-ink) !important;
+  background: var(--mist-panel-bg) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color-scheme: light;
+}
+/* 九个面板共用的结构容器 */
+body.mist-ui-ready .drawer-content :is(
+  .scrollableInner,
+  .right_menu,
+  .extensions_block,
+  .range-block,
+  .range-block-title,
+  .range-block-range,
+  .range-block-counter,
+  .range-block-range-and-counter,
+  .standoutHeader,
+  .title_restorable,
+  .openai_restorable,
+  .inline-drawer,
+  .inline-drawer-toggle,
+  .inline-drawer-header,
+  .inline-drawer-content,
+  .toggle-description
+) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 仅清理预设面板的结构层，不干扰表单与代码控件 */
+body.mist-ui-ready #left-nav-panel :where(
+  div,
+  section,
+  article,
+  ul,
+  li,
+  form,
+  fieldset,
+  label,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  a,
+  button
+) {
+  background-color: transparent !important;
+  background-image: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 普通标题、标签：统一深炭灰 */
+body.mist-ui-ready .drawer-content :is(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  label,
+  .checkbox_label,
+  .range-block-title,
+  .standoutHeader,
+  .inline-drawer-header
+),
+body.mist-ui-ready .drawer-content :is(
+  label,
+  .checkbox_label,
+  .range-block-title,
+  .inline-drawer-header
+) :is(span, small) {
+  color: var(--mist-panel-ink) !important;
+  -webkit-text-fill-color: var(--mist-panel-ink) !important;
+  text-shadow: none !important;
+}
+/* small：统一修复其他面板的浅白色文字 */
+body.mist-ui-ready .drawer-content small,
+body.mist-ui-ready .drawer-content small :is(span, i) {
+  color: var(--mist-deep-ink) !important;
+  -webkit-text-fill-color: var(--mist-deep-ink) !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+/* 描述文字单独使用辅助色，不依赖降低透明度 */
+body.mist-ui-ready .drawer-content :is(
+  .toggle-description,
+  .editable-slider-notification,
+  .text_muted
+) {
+  color: var(--mist-panel-muted) !important;
+  -webkit-text-fill-color: var(--mist-panel-muted) !important;
+  opacity: 1;
+  text-shadow: none !important;
+}
+body.mist-ui-ready .drawer-content hr {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+/* ===== 20.3 BUTTONS & HELP ICONS ===== */
+/* 默认按钮：深炭灰 */
+body.mist-ui-ready .drawer-content :is(
+  .menu_button,
+  .menu_button_icon,
+  .right_menu_button
+) {
+  color: var(--mist-ink) !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  transition: color .18s ease !important;
+}
+/* Hover：只改变文字与图标颜色 */
+body.mist-ui-ready .drawer-content :is(
+  .menu_button,
+  .menu_button_icon,
+  .right_menu_button
+):hover:not(.disabled):not(.red_button) {
+  color: #765F45 !important;
+  background-image: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+body.mist-ui-ready .drawer-content :is(
+  .menu_button,
+  .menu_button_icon,
+  .right_menu_button
+):focus-visible {
+  outline: 1px solid var(--mist-panel-line) !important;
+  outline-offset: 1px;
+}
+body.mist-ui-ready .drawer-content :is(
+  .menu_button,
+  .menu_button_icon,
+  .right_menu_button
+) i {
+  color: inherit !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+/* 提示图标保持卡其灰 */
+body.mist-ui-ready .drawer-content :is(
+  .note-link-span,
+  .fa-circle-question,
+  .fa-circle-info
+) {
+  color: var(--mist-panel-soft) !important;
+  -webkit-text-fill-color: var(--mist-panel-soft) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* ===== 20.4 INPUTS & SELECTS ===== */
+body.mist-ui-ready .drawer-content :is(
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  select,
+  .text_pole,
+  .neo-range-input
+):not([type="range"]):not([type="checkbox"]):not([type="radio"]) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-family: var(--mainFontFamily);
+}
+body.mist-ui-ready .drawer-content :is(
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  select,
+  .text_pole,
+  .neo-range-input
+):not([type="range"]):not([type="checkbox"]):not([type="radio"]):is(
+  :focus,
+  :focus-visible
+) {
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  outline: 1px solid var(--mist-panel-line) !important;
+  outline-offset: -1px;
+  box-shadow: none !important;
+}
+body.mist-ui-ready .drawer-content select option {
+  color: var(--mist-panel-ink) !important;
+  background: var(--mist-panel-bg) !important;
+}
+body.mist-ui-ready .drawer-content :is(input, textarea)::placeholder {
+  color: var(--mist-panel-muted) !important;
+  opacity: .8;
+}
+body.mist-ui-ready .drawer-content :is(input, textarea)::selection {
+  color: var(--mist-panel-ink);
+  background: #D9CCB8;
+}
+/* ===== 20.5 CHECKBOXES ===== */
+/* 保留当前正常工作的自绘勾选方案 */
+body.mist-ui-ready .drawer-content input[type="checkbox"]:not([role="switch"]) {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  position: relative;
+  display: inline-block;
+  flex: 0 0 16px;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px;
+  min-height: 16px;
+  margin: 0 7px 0 0;
+  padding: 0 !important;
+  vertical-align: -2px;
+  align-self: center;
+  background: transparent !important;
+  border: 1.5px solid #9C815D !important;
+  border-radius: 2px !important;
+  outline: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  cursor: pointer;
+}
+body.mist-ui-ready .drawer-content input[type="checkbox"]:not([role="switch"]):checked {
+  background-color: var(--mist-panel-khaki) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3 8 3.4 3.1L13 4.5' fill='none' stroke='%23F8F7F1' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+  background-position: center !important;
+  background-size: 14px 14px !important;
+  background-repeat: no-repeat !important;
+  border-color: var(--mist-panel-khaki) !important;
+}
+body.mist-ui-ready .drawer-content input[type="checkbox"]:not([role="switch"])::before,
+body.mist-ui-ready .drawer-content input[type="checkbox"]:not([role="switch"])::after {
+  content: none !important;
+  display: none !important;
+}
+body.mist-ui-ready .drawer-content .checkbox_label,
+body.mist-ui-ready .drawer-content label:has(> input[type="checkbox"]) {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready .drawer-content input[type="checkbox"]:focus-visible {
+  outline: 1px solid var(--mist-panel-line) !important;
+  outline-offset: 2px;
+}
+/* ===== 20.6 RANGE SLIDERS ===== */
+/* 所有状态固定颜色，不再叠加独立 Hover 补丁 */
+body.mist-ui-ready .drawer-content input[type="range"],
+body.mist-ui-ready .drawer-content input[type="range"]:is(
+  :hover,
+  :active,
+  :focus
+),
+body.mist-ui-ready .drawer-content .range-block:hover input[type="range"] {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  height: 4px !important;
+  min-height: 4px;
+  background: var(--mist-panel-track) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  accent-color: var(--mist-panel-khaki) !important;
+  transition: none !important;
+  cursor: pointer;
+}
+body.mist-ui-ready .drawer-content input[type="range"]::-webkit-slider-runnable-track,
+body.mist-ui-ready .drawer-content input[type="range"]:is(
+  :hover,
+  :active,
+  :focus
+)::-webkit-slider-runnable-track,
+body.mist-ui-ready .drawer-content .range-block:hover input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px !important;
+  background: var(--mist-panel-track) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+body.mist-ui-ready .drawer-content input[type="range"]::-webkit-slider-thumb,
+body.mist-ui-ready .drawer-content input[type="range"]:is(
+  :hover,
+  :active,
+  :focus
+)::-webkit-slider-thumb,
+body.mist-ui-ready .drawer-content .range-block:hover input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 15px !important;
+  height: 15px !important;
+  margin-top: -5.5px;
+  background: var(--mist-panel-khaki) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  outline: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+body.mist-ui-ready .drawer-content input[type="range"]::-moz-range-track,
+body.mist-ui-ready .drawer-content input[type="range"]:is(
+  :hover,
+  :active,
+  :focus
+)::-moz-range-track {
+  height: 4px;
+  background: var(--mist-panel-track) !important;
+  border: 0;
+  border-radius: 0;
+}
+body.mist-ui-ready .drawer-content input[type="range"]::-moz-range-progress {
+  height: 4px;
+  background: var(--mist-panel-track) !important;
+}
+body.mist-ui-ready .drawer-content input[type="range"]::-moz-range-thumb,
+body.mist-ui-ready .drawer-content input[type="range"]:is(
+  :hover,
+  :active,
+  :focus
+)::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: var(--mist-panel-khaki) !important;
+  border: 0 !important;
+  border-radius: 50%;
+  box-shadow: none !important;
+}
+body.mist-ui-ready .drawer-content input[type="range"]:focus-visible {
+  outline: 1px solid var(--mist-panel-line) !important;
+  outline-offset: 5px;
+}
+
+/* ===== 20.7 INLINE DRAWERS ===== */
+body.mist-ui-ready .drawer-content :is(
+  .inline-drawer,
+  .inline-drawer-toggle,
+  .inline-drawer-header,
+  .inline-drawer-content
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* 全局展开与收起图标，不依赖 .drawer-content 层级 */
+body.mist-ui-ready .inline-drawer-icon.fa-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 26px;
+  width: 26px;
+  height: 26px;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  color: #9C815D !important;
+  -webkit-text-fill-color: #9C815D !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  transition: color .16s ease !important;
+}
+/* Font Awesome 实际绘制圆形图标的伪元素 */
+body.mist-ui-ready .inline-drawer-icon.fa-solid::before {
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+  font-size: inherit !important;
+  line-height: 1 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+/* Hover：轻微加深，不改变大小 */
+body.mist-ui-ready .inline-drawer-icon.fa-solid:hover {
+  color: #8B7353 !important;
+  -webkit-text-fill-color: #8B7353 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* ===== 20.8 CODE MARKERS ===== */
+/* 代码标记保留浅咖底与 4px 圆角 */
+body.mist-ui-ready .drawer-content :is(
+  code,
+  kbd,
+  samp,
+  .code,
+  .code_inline
+),
+body.mist-ui-ready #completion_prompt_manager_popup :is(
+  code,
+  kbd,
+  samp
+) {
+  color: #65533D !important;
+  background: var(--mist-panel-code) !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  padding: 1px 5px;
+  font-size: .92em;
+}
+body.mist-ui-ready .drawer-content pre,
+body.mist-ui-ready #completion_prompt_manager_popup pre {
+  color: #65533D !important;
+  background: var(--mist-panel-code) !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  padding: 8px 10px;
+}
+/* ===== 20.9 PRESET PANEL ===== */
+body.mist-ui-ready #left-nav-panel :is(
+  #respective-presets-block,
+  #respective-ranges-and-temps,
+  #range_block_openai,
+  #ai_response_configuration,
+  #openai_api-presets,
+  #completion_prompt_manager,
+  .completion_prompt_manager_header,
+  .completion_prompt_manager_footer
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #left-nav-panel .standoutHeader {
+  padding: 6px 0 !important;
+}
+body.mist-ui-ready #left-nav-panel .editable-slider-notification {
+  color: var(--mist-panel-muted) !important;
+  background: transparent !important;
+}
+body.mist-ui-ready #left-nav-panel .topRightInset {
+  color: var(--mist-panel-khaki) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+/* ===== 20.10 PROMPT TEXTAREAS ===== */
+body.mist-ui-ready #left-nav-panel :is(
+  .range-block textarea,
+  .inline-drawer-content textarea,
+  .textarea_compact,
+  .autoSetHeight
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #left-nav-panel :is(
+  .range-block textarea,
+  .inline-drawer-content textarea,
+  .textarea_compact,
+  .autoSetHeight
+):focus {
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  outline: 1px solid var(--mist-panel-line) !important;
+  outline-offset: -1px;
+  box-shadow: none !important;
+}
+/* ===== 20.11 PROMPT MANAGER ===== */
+body.mist-ui-ready #completion_prompt_manager,
+body.mist-ui-ready #completion_prompt_manager_list,
+body.mist-ui-ready #completion_prompt_manager :is(
+  .completion_prompt_manager_list_head,
+  .completion_prompt_manager_list_separator,
+  .completion_prompt_manager_header,
+  .completion_prompt_manager_footer
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 提示词标题：清除文字阴影及滤镜 */
+body.mist-ui-ready .completion_prompt_manager_header_advanced,
+body.mist-ui-ready .completion_prompt_manager_header_advanced > span {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  -webkit-text-stroke: 0 !important;
+  opacity: 1 !important;
+}
+body.mist-ui-ready #completion_prompt_manager :is(
+  h3,
+  h4,
+  label,
+  .completion_prompt_manager_list_head,
+  .completion_prompt_manager_list_head span
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+/* 提示词列表：无色块、无 Hover */
+body.mist-ui-ready #completion_prompt_manager_list .completion_prompt_manager_prompt {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+body.mist-ui-ready #completion_prompt_manager_list .completion_prompt_manager_prompt:hover {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #completion_prompt_manager_list .completion_prompt_manager_prompt:is(
+  :focus,
+  :focus-within,
+  .selected,
+  .active,
+  .ui-selected
+) {
+  background: transparent !important;
+  border-color: var(--mist-panel-line) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* 提示词名称、操作文字 */
+body.mist-ui-ready #completion_prompt_manager_list .completion_prompt_manager_prompt :is(
+  .completion_prompt_manager_prompt_name,
+  .prompt-manager-inspect-action,
+  .prompt_manager_prompt_controls,
+  .prompt_manager_prompt_tokens,
+  .drag-handle
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+/* 关闭的提示词：只略微降低文字对比 */
+body.mist-ui-ready #completion_prompt_manager_list .completion_prompt_manager_prompt_disabled :is(
+  .completion_prompt_manager_prompt_name,
+  .prompt-manager-inspect-action,
+  .drag-handle
+) {
+  color: #8B8072 !important;
+}
+/* 提示词图标：补齐左右两侧的星号、人物及操作图标 */
+body.mist-ui-ready #completion_prompt_manager_list .completion_prompt_manager_prompt :is(
+  i,
+  .fa-solid,
+  .fa-regular,
+  .fa-asterisk,
+  .fa-user,
+  .fa-user-circle,
+  .fa-star
+) {
+  color: #9C815D !important;
+  -webkit-text-fill-color: #9C815D !important;
+  text-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+/* 编辑与解绑按钮保留独立的柔和咖灰色 */
+body.mist-ui-ready #completion_prompt_manager_list :is(
+  .prompt-manager-edit-action,
+  .prompt-manager-detach-action
+) {
+  color: #8B7C69 !important;
+  -webkit-text-fill-color: #8B7C69 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+/* 开关状态覆盖普通图标颜色 */
+body.mist-ui-ready #completion_prompt_manager_list .prompt-manager-toggle-action,
+body.mist-ui-ready #completion_prompt_manager_list .prompt-manager-toggle-action:hover {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+body.mist-ui-ready #completion_prompt_manager_list .prompt-manager-toggle-action.fa-toggle-on {
+  color: var(--mist-panel-khaki) !important;
+  -webkit-text-fill-color: var(--mist-panel-khaki) !important;
+}
+body.mist-ui-ready #completion_prompt_manager_list .prompt-manager-toggle-action.fa-toggle-off {
+  color: #B3A797 !important;
+  -webkit-text-fill-color: #B3A797 !important;
+}
+body.mist-ui-ready #completion_prompt_manager_list .ui-sortable-helper {
+  background: var(--mist-panel-bg) !important;
+  border: 1px solid var(--mist-panel-line) !important;
+  box-shadow: none !important;
+}
+/* ===== 20.12 PROMPT EDIT POPUP ===== */
+body.mist-ui-ready #completion_prompt_manager_popup {
+  color: var(--mist-panel-ink) !important;
+  background: var(--mist-panel-bg) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+/* 弹窗内的已知布局容器 */
+body.mist-ui-ready #completion_prompt_manager_popup :is(
+  .completion_prompt_manager_popup_entry,
+  .completion_prompt_manager_popup_entry_form,
+  .completion_prompt_manager_popup_entry_form_control,
+  .completion_prompt_manager_popup_header,
+  .completion_prompt_manager_popup_entry_form_footer,
+  #completion_prompt_manager_popup_edit,
+  #completion_prompt_manager_popup_inspect
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #completion_prompt_manager_popup :is(
+  h3,
+  label,
+  label span
+) {
+  color: var(--mist-panel-ink) !important;
+  text-shadow: none !important;
+}
+body.mist-ui-ready #completion_prompt_manager_popup .text_muted {
+  color: var(--mist-panel-muted) !important;
+}
+body.mist-ui-ready #completion_prompt_manager_popup :is(
+  input[type="text"],
+  textarea,
+  select
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #completion_prompt_manager_popup :is(
+  input[type="text"],
+  textarea,
+  select
+):focus {
+  background: transparent !important;
+  border: 0 !important;
+  outline: 1px solid var(--mist-panel-line) !important;
+  outline-offset: -1px;
+  box-shadow: none !important;
+}
+/* Select2 下拉组件 */
+body.mist-ui-ready #completion_prompt_manager_popup .select2-container--default .select2-selection,
+body.mist-ui-ready .select2-container--open .select2-dropdown {
+  color: var(--mist-panel-ink) !important;
+  background: var(--mist-panel-bg) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #completion_prompt_manager_popup .select2-selection__choice {
+  color: var(--mist-panel-ink) !important;
+  background: var(--mist-panel-code) !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready .select2-container--open .select2-results__option {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+}
+body.mist-ui-ready .select2-container--open .select2-results__option--highlighted {
+  color: var(--mist-panel-khaki) !important;
+  background: transparent !important;
+}
+body.mist-ui-ready #completion_prompt_manager_popup .completion_prompt_manager_popup_entry_form_footer .menu_button,
+body.mist-ui-ready #completion_prompt_manager_popup .completion_prompt_manager_popup_entry_form_footer .menu_button:hover {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* ===== 20.13 RESPONSIVE ===== */
+@media screen and (max-width: 600px) {
+  body.mist-ui-ready .drawer-content input[type="range"]::-webkit-slider-thumb {
+    width: 16px !important;
+    height: 16px !important;
+    margin-top: -6px;
+  }
+  body.mist-ui-ready #completion_prompt_manager_popup .completion_prompt_manager_popup_entry_form_control {
+    min-width: 0;
+  }
+}
+
+/* ===== 20.14 API CONNECTION BUTTONS ===== */
+body.mist-ui-ready .drawer-content .flex-container:has(> #api_button_openai) > :is(
+  #api_button_openai,
+  .api_loading,
+  #customize_additional_parameters,
+  .openrouter_authorize,
+  #test_api_button
+) {
+  color: var(--mist-deep-ink) !important;
+  background: var(--mist-paper-alt) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  transition: background-color .18s ease;
+}
+body.mist-ui-ready .drawer-content .flex-container:has(> #api_button_openai) > :is(
+  #api_button_openai,
+  .api_loading,
+  #customize_additional_parameters,
+  .openrouter_authorize,
+  #test_api_button
+):hover {
+  color: var(--mist-deep-ink) !important;
+  background: #DED5C6 !important;
+  box-shadow: none !important;
+}
+/* ===== 20.15 API KEY LINK ===== */
+body.mist-ui-ready #viewSecrets,
+body.mist-ui-ready #viewSecrets span {
+  color: #826F55 !important;
+  -webkit-text-fill-color: #826F55 !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+body.mist-ui-ready #viewSecrets:hover,
+body.mist-ui-ready #viewSecrets:hover span {
+  color: #6D5B45 !important;
+  -webkit-text-fill-color: #6D5B45 !important;
+}
+/* ===== 20.16 ADVANCED FORMATTING NOTICE ===== */
+body.mist-ui-ready #advanced-formatting-cc-notice.info-block.warning {
+  color: #6B604F !important;
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+body.mist-ui-ready #advanced-formatting-cc-notice.info-block.warning i {
+  color: #9C815D !important;
+  -webkit-text-fill-color: #9C815D !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+body.mist-ui-ready #advanced-formatting-cc-notice.info-block.warning span {
+  color: #6B604F !important;
+  -webkit-text-fill-color: #6B604F !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* ===== 20.17 WORLD INFO SELECT2 ===== */
+/* 所有世界书选择器：统一浅咖底、无黑色边框 */
+body.mist-ui-ready #WorldInfo .select2-container--default .select2-selection {
+  color: var(--mist-panel-ink) !important;
+  background: var(--mist-panel-code) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+body.mist-ui-ready #WorldInfo .select2-container--default .select2-selection:is(:hover, :focus, :focus-within) {
+  background: var(--mist-panel-code) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* 选择器外层透明，不重复增加底色 */
+body.mist-ui-ready #WorldInfo .select2-container,
+body.mist-ui-ready #WorldInfo .select2-container .selection,
+body.mist-ui-ready #WorldInfo .select2-selection__rendered,
+body.mist-ui-ready #WorldInfo .select2-search,
+body.mist-ui-ready #WorldInfo .select2-search--inline {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 单选和多选框内部的文字 */
+body.mist-ui-ready #WorldInfo :is(
+  .select2-selection--single,
+  .select2-selection--multiple
+) .select2-selection__rendered,
+body.mist-ui-ready #WorldInfo .select2-selection__rendered > span {
+  color: var(--mist-panel-ink) !important;
+  -webkit-text-fill-color: var(--mist-panel-ink) !important;
+  opacity: 1 !important;
+}
+/* Select2 内的搜索输入 */
+body.mist-ui-ready #WorldInfo .select2-search__field,
+body.mist-ui-ready #WorldInfo .select2-search__field:focus {
+  color: var(--mist-panel-ink) !important;
+  -webkit-text-fill-color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+body.mist-ui-ready #WorldInfo .select2-search__field::placeholder {
+  color: #83745F !important;
+  -webkit-text-fill-color: #83745F !important;
+  opacity: 1 !important;
+}
+/* 已选中的世界书标签 */
+body.mist-ui-ready #WorldInfo .select2-selection__choice {
+  color: var(--mist-deep-ink) !important;
+  -webkit-text-fill-color: var(--mist-deep-ink) !important;
+  background: #DDD1BE !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #WorldInfo .select2-selection__choice__display,
+body.mist-ui-ready #WorldInfo .select2-selection__choice__remove {
+  color: var(--mist-deep-ink) !important;
+  -webkit-text-fill-color: var(--mist-deep-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+body.mist-ui-ready #WorldInfo .select2-selection__choice__remove:hover {
+  color: #7E674A !important;
+  background: transparent !important;
+}
+/* 下拉箭头和清除按钮 */
+body.mist-ui-ready #WorldInfo .select2-selection__arrow b {
+  border-top-color: #9C815D !important;
+  border-bottom-color: #9C815D !important;
+}
+body.mist-ui-ready #WorldInfo .select2-selection__clear {
+  color: #8E795D !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* ===== 20.18 WORLD INFO DROPDOWNS ===== */
+/* Select2 弹出层通常被挂载到 body，不能只写 #WorldInfo 后代 */
+/* 仅世界书面板打开时套用这组下拉菜单外观 */
+body.mist-ui-ready:has(#WorldInfo.openDrawer) .select2-container--open .select2-dropdown {
+  color: var(--mist-panel-ink) !important;
+  background: var(--mist-panel-bg) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+body.mist-ui-ready:has(#WorldInfo.openDrawer) .select2-container--open .select2-results,
+body.mist-ui-ready:has(#WorldInfo.openDrawer) .select2-container--open .select2-results__options {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* 普通条目：没有灰色块 */
+body.mist-ui-ready:has(#WorldInfo.openDrawer) .select2-container--open .select2-results__option {
+  color: var(--mist-deep-ink) !important;
+  -webkit-text-fill-color: var(--mist-deep-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+/* 鼠标经过时只增加很淡的咖色 */
+body.mist-ui-ready:has(#WorldInfo.openDrawer) .select2-container--open .select2-results__option--highlighted {
+  color: var(--mist-panel-ink) !important;
+  -webkit-text-fill-color: var(--mist-panel-ink) !important;
+  background: #EEE7DD !important;
+}
+/* 已选中的世界书 */
+body.mist-ui-ready:has(#WorldInfo.openDrawer) .select2-container--open .select2-results__option--selected,
+body.mist-ui-ready:has(#WorldInfo.openDrawer) .select2-container--open .select2-results__option[aria-selected="true"] {
+  color: #6D573E !important;
+  -webkit-text-fill-color: #6D573E !important;
+  background: var(--mist-paper-alt) !important;
+}
+/* 下拉框自带搜索框 */
+body.mist-ui-ready:has(#WorldInfo.openDrawer) .select2-container--open .select2-search__field {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid #D5C7B4 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 世界书两套 Select2 选项统一定位 */
+body.mist-ui-ready :is(
+  .select2-results__option[id^="select2-world_info-result-"],
+  .select2-results__option[id^="select2-world_editor_select-result-"]
+) {
+  position: relative;
+  padding-left: 36px !important;
+}
+/* 复选框固定垂直居中，不再受到文字行高影响 */
+body.mist-ui-ready :is(
+  .select2-results__option[id^="select2-world_info-result-"],
+  .select2-results__option[id^="select2-world_editor_select-result-"]
+)::before {
+  content: "" !important;
+  position: absolute !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  left: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 17px !important;
+  height: 17px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+  vertical-align: baseline;
+  color: var(--mist-bg) !important;
+  background: transparent !important;
+  border: 1.5px solid #9C815D !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font: 700 13px/1 sans-serif !important;
+}
+/* 已选中 */
+body.mist-ui-ready :is(
+  .select2-results__option[id^="select2-world_info-result-"],
+  .select2-results__option[id^="select2-world_editor_select-result-"]
+).select2-results__option--selected::before {
+  content: "✓" !important;
+  color: var(--mist-bg) !important;
+  background: #9C815D !important;
+  border-color: #9C815D !important;
+}
+/* Hover 不改变复选框 */
+body.mist-ui-ready :is(
+  .select2-results__option[id^="select2-world_info-result-"],
+  .select2-results__option[id^="select2-world_editor_select-result-"]
+):hover::before {
+  box-shadow: none !important;
+  filter: none !important;
+}
+/* ===== 20.19 WORLD INFO PAGINATION ===== */
+/* 分页容器透明 */
+body.mist-ui-ready #WorldInfo #world_info_pagination,
+body.mist-ui-ready #WorldInfo #world_info_pagination .paginationjs,
+body.mist-ui-ready #WorldInfo #world_info_pagination .paginationjs-pages,
+body.mist-ui-ready #WorldInfo #world_info_pagination .paginationjs-pages ul,
+body.mist-ui-ready #WorldInfo #world_info_pagination .paginationjs-pages li {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* 翻页按钮：无外框，显示深咖色箭头 */
+body.mist-ui-ready #WorldInfo #world_info_pagination .paginationjs-pages li a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #6F5B43 !important;
+  -webkit-text-fill-color: #6F5B43 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-size: 17px;
+  opacity: 1 !important;
+  transition: color .15s ease;
+}
+/* Hover 只加深文字，不增加色块 */
+body.mist-ui-ready #WorldInfo #world_info_pagination .paginationjs-pages li:not(.disabled) a:hover {
+  color: #483C2F !important;
+  -webkit-text-fill-color: #483C2F !important;
+  background: transparent !important;
+}
+/* 不可点击的按钮稍淡，但不能白到看不见 */
+body.mist-ui-ready #WorldInfo #world_info_pagination .paginationjs-pages li.disabled a {
+  color: #B5AA99 !important;
+  -webkit-text-fill-color: #B5AA99 !important;
+  background: transparent !important;
+  opacity: 1 !important;
+  cursor: default;
+}
+body.mist-ui-ready #WorldInfo #world_info_pagination .paginationjs-nav,
+body.mist-ui-ready #WorldInfo #world_info_pagination .paginationjs-size-changer {
+  color: var(--mist-muted) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #WorldInfo #world_info_pagination .J-paginationjs-size-select {
+  color: var(--mist-deep-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* ===== 20.20 WORLD INFO ENTRIES ===== */
+/* 外层条目：原本的黑色框换成浅卡其细线 */
+body.mist-ui-ready #WorldInfo #world_popup_entries_list .world_entry {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #WorldInfo #world_popup_entries_list .world_entry_form.wi-card-entry {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 1px solid #C9B9A2 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 聚焦内部内容时只略微加深整张卡的框线 */
+body.mist-ui-ready #WorldInfo .world_entry_form.wi-card-entry:focus-within {
+  border-color: #B6A083 !important;
+  box-shadow: none !important;
+}
+/* 卡片内部不再产生第二层背景或轮廓 */
+body.mist-ui-ready #WorldInfo .world_entry_form :is(
+  .inline-drawer,
+  .inline-drawer-header,
+  .inline-drawer-content,
+  .inline-drawer-outlet,
+  .world_entry_edit,
+  .world_entry_thin_controls,
+  .world_entry_form_control,
+  .WIEntryTitleAndStatus,
+  .WIEnteryHeaderControls,
+  .range-block,
+  .range-block-range
+) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 条目标题与各种说明文字 */
+body.mist-ui-ready #WorldInfo .world_entry_form :is(
+  label,
+  small,
+  .world_entry_form_token_counter,
+  .world_entry_form_uid_value
+) {
+  color: #62584C !important;
+  -webkit-text-fill-color: #62584C !important;
+  text-shadow: none !important;
+}
+/* 世界书条目开关：与预设面板相同的卡其系 */
+body.mist-ui-ready #WorldInfo .world_entry_form .killSwitch {
+  color: #B1A494 !important;
+  -webkit-text-fill-color: #B1A494 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  cursor: pointer;
+}
+body.mist-ui-ready #WorldInfo .world_entry_form .killSwitch.fa-toggle-on {
+  color: #9C815D !important;
+  -webkit-text-fill-color: #9C815D !important;
+}
+body.mist-ui-ready #WorldInfo .world_entry_form .killSwitch.fa-toggle-off {
+  color: #B1A494 !important;
+  -webkit-text-fill-color: #B1A494 !important;
+}
+/* 条目标题输入框，保持干净 */
+body.mist-ui-ready #WorldInfo .world_entry_form textarea[name="comment"] {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* 主关键字、次关键字：轻微底部区隔 */
+body.mist-ui-ready #WorldInfo .world_entry_form :is(
+  .keyprimarytextpole,
+  .keysecondarytextpole
+) {
+  color: var(--mist-deep-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid #D9CDBD !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* 重点：正文编辑器单独使用一层浅暖咖色 */
+body.mist-ui-ready #WorldInfo .world_entry_form textarea[name="content"] {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  color: var(--mist-panel-ink) !important;
+  -webkit-text-fill-color: var(--mist-panel-ink) !important;
+  background: var(--mist-paper) !important;
+  background-image: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  line-height: 1.6;
+  padding: 9px 11px !important;
+}
+/* 正文聚焦：不出现黄色左侧竖线 */
+body.mist-ui-ready #WorldInfo .world_entry_form textarea[name="content"]:focus {
+  background: var(--mist-paper) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* 可输入内容区域的提示语 */
+body.mist-ui-ready #WorldInfo .world_entry_form textarea::placeholder {
+  color: #9A8B78 !important;
+  -webkit-text-fill-color: #9A8B78 !important;
+  opacity: 1 !important;
+}
+/* 条目中的下拉框继续使用透明方案 */
+body.mist-ui-ready #WorldInfo .world_entry_form select.text_pole {
+  color: var(--mist-deep-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* 条目标题、内容以外的数字控件保留原有尺寸 */
+body.mist-ui-ready #WorldInfo .world_entry_form input[type="number"] {
+  color: var(--mist-deep-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* 世界书头部和内容区的辅助图标 */
+body.mist-ui-ready #WorldInfo .world_entry_form :is(
+  .move_entry_button,
+  .duplicate_entry_button,
+  .delete_entry_button,
+  .editor_maximize
+) {
+  color: #6C5D4B !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+/* 默认复选框沿用第 20.5 节，不重新覆盖 */
+/* ===== 20.21 COMMON ACTION POPUPS ===== */
+/* 弹窗是 body 下的独立 dialog，不能用 #WorldInfo 后代定位 */
+body.mist-ui-ready dialog.popup {
+  color: var(--mist-panel-ink) !important;
+  background: var(--mist-panel-bg) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  color-scheme: light;
+}
+/* 遮罩不再是强烈的黑色 */
+body.mist-ui-ready dialog.popup::backdrop {
+  background: rgba(56, 53, 47, .25) !important;
+}
+/* 弹窗内部不出现第二层黑色容器 */
+body.mist-ui-ready dialog.popup :is(
+  .popup-body,
+  .popup-content,
+  .popup-controls,
+  .popup-inputs,
+  .popup-crop-wrap
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 标题、提示文字 */
+body.mist-ui-ready dialog.popup .popup-content,
+body.mist-ui-ready dialog.popup .popup-content :is(h1, h2, h3, p, span, strong) {
+  color: var(--mist-panel-ink) !important;
+  -webkit-text-fill-color: var(--mist-panel-ink) !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+/* 输入式弹窗也统一文字与聚焦状态 */
+body.mist-ui-ready dialog.popup :is(
+  .popup-input,
+  .text_pole
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready dialog.popup :is(
+  .popup-input,
+  .text_pole
+):focus {
+  border: 0 !important;
+  outline: 1px solid var(--mist-panel-line) !important;
+  outline-offset: -1px;
+  box-shadow: none !important;
+}
+/* 确定、取消：沿用 API 连接按钮的浅咖色 */
+
+/* 弹窗按钮：浅咖底色，无边框、圆角、阴影 */
+body.mist-ui-ready dialog.popup .popup-controls :is(
+  .popup-button-ok,
+  .popup-button-cancel,
+  .menu_button
+) {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  color: var(--mist-deep-ink) !important;
+  -webkit-text-fill-color: var(--mist-deep-ink) !important;
+  background: var(--mist-paper-alt) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  padding: 7px 17px !important;
+  transition: background-color .16s ease;
+}
+/* Hover：仅轻微加深 */
+body.mist-ui-ready dialog.popup .popup-controls :is(
+  .popup-button-ok,
+  .popup-button-cancel,
+  .menu_button
+):hover {
+  color: var(--mist-deep-ink) !important;
+  background: #DED5C6 !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* 自动聚焦、鼠标点击、键盘聚焦：不出现额外轮廓 */
+body.mist-ui-ready dialog.popup .popup-controls :is(
+  .popup-button-ok,
+  .popup-button-cancel,
+  .menu_button
+):is(:focus, :focus-visible, :active) {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* 键盘操作时通过轻微底色变化辨认焦点 */
+body.mist-ui-ready dialog.popup .popup-controls :is(
+  .popup-button-ok,
+  .popup-button-cancel,
+  .menu_button
+):focus-visible {
+  background: #DED5C6 !important;
+}
+/* 关闭按钮也去掉原来的黑色阴影 */
+body.mist-ui-ready dialog.popup .popup-button-close {
+  color: #9C815D !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* ===== END 20. WORLD INFO ===== */
+/* ===== 20.22 UI PANEL SECTION HEADERS ===== */
+body.mist-ui-ready #user-settings-button .drawer-content h4,
+body.mist-ui-ready #user-settings-block h4 {
+  color: var(--mist-deep-ink) !important;
+  background: var(--mist-paper) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  padding: 6px 12px !important;
+  font-weight: normal;
+}
+body.mist-ui-ready #user-settings-button .drawer-content h4:hover,
+body.mist-ui-ready #user-settings-block h4:hover {
+  color: var(--mist-deep-ink) !important;
+  background: var(--mist-paper) !important;
+  box-shadow: none !important;
+}
+
+/* ===== 20.23 LARGE TEXT EDITOR POPUPS ===== */
+/* 大型编辑弹窗：适用于自定义 CSS 及同类文本编辑器 */
+body.mist-ui-ready dialog.popup:has(textarea.maximized_textarea) {
+  color: var(--mist-panel-ink) !important;
+  background: var(--mist-panel-bg) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  color-scheme: light;
+}
+/* 保留原生宽高和布局，仅清除嵌套容器的底色 */
+body.mist-ui-ready dialog.popup:has(textarea.maximized_textarea) :is(
+  .popup-body,
+  .popup-content,
+  .popup-content > .flex-container,
+  .popup-controls
+) {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 文本编辑区域：浅暖咖底，不增加边框 */
+body.mist-ui-ready dialog.popup textarea.maximized_textarea {
+  color: var(--mist-ink) !important;
+  -webkit-text-fill-color: var(--mist-ink) !important;
+  background: var(--mist-paper) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  box-sizing: border-box;
+  padding: 14px 16px !important;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace !important;
+  font-size: 13.5px !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0;
+  tab-size: 2;
+  caret-color: #9C815D;
+}
+/* 聚焦时只显示卡其细线，不出现黄色高亮 */
+body.mist-ui-ready dialog.popup textarea.maximized_textarea:focus {
+  color: var(--mist-ink) !important;
+  background: var(--mist-paper) !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  outline: 1px solid #B8A68B !important;
+  outline-offset: -1px;
+  box-shadow: none !important;
+}
+/* 选中文字 */
+body.mist-ui-ready dialog.popup textarea.maximized_textarea::selection {
+  color: var(--mist-ink) !important;
+  background: #D8C7AD !important;
+  -webkit-text-fill-color: var(--mist-ink) !important;
+}
+/* 隐藏状态由酒馆管理，不改变弹窗按钮的显示逻辑 */
+body.mist-ui-ready dialog.popup:has(textarea.maximized_textarea) .popup-button-close {
+  color: #9C815D !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* 小屏幕：适度收紧编辑区内边距 */
+@media screen and (max-width: 600px) {
+  body.mist-ui-ready dialog.popup textarea.maximized_textarea {
+    padding: 10px 12px !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+  }
+}
+
+/* ===== 20.24 BACKGROUNDS PANEL ===== */
+/* 20.24.1 主容器：单一奶油白背景 */
+body.mist-ui-ready #Backgrounds {
+  color: var(--mist-panel-ink) !important;
+  background: var(--mist-panel-bg) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* 20.24.2 顶部搜索：只保留一根分割线 */
+body.mist-ui-ready #Backgrounds #bg-header-fixed {
+  background: var(--mist-panel-bg) !important;
+  border: 0 !important;
+  border-bottom: 1px solid #D2C4B0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-bottom: 8px;
+}
+body.mist-ui-ready #Backgrounds :is(
+  .bg-header-row-1,
+  .bg-header-row-2
+) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #Backgrounds :is(
+  #bg-filter,
+  #bg-sort
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: var(--mainFontFamily) !important;
+}
+body.mist-ui-ready #Backgrounds #bg-filter::placeholder {
+  color: #988B79 !important;
+  opacity: 1 !important;
+}
+/* 20.24.3 Tabs 外层：去除 jQuery UI 原生边框 */
+body.mist-ui-ready #Backgrounds #bg_tabs,
+body.mist-ui-ready #Backgrounds #bg_tabs.bg_tabs,
+body.mist-ui-ready #Backgrounds #bg_tabs.ui-widget-content,
+body.mist-ui-ready #Backgrounds #bg_tabs .bg_tabs_list,
+body.mist-ui-ready #Backgrounds #bg_tabs .bg_tab_panel {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+body.mist-ui-ready #Backgrounds #bg_tabs {
+  margin-top: 8px;
+}
+/* Tabs 导航保持原生布局，但不再铺满宽度 */
+body.mist-ui-ready #Backgrounds #bg_tabs .bg_tabs_list {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 0 8px !important;
+}
+body.mist-ui-ready #Backgrounds #bg_tabs .bg_tab_button {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  float: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* 全局 / 聊天：小型文字标签 */
+body.mist-ui-ready #Backgrounds #bg_tabs .bg_tab_button .ui-tabs-anchor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 5px 17px !important;
+  color: #6B5C4B !important;
+  -webkit-text-fill-color: #6B5C4B !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 15.5px !important;
+  font-weight: normal !important;
+  line-height: 1.4 !important;
+  white-space: nowrap;
+  transition: background-color .18s ease;
+}
+/* 选中：浅咖底色，没有边框 */
+body.mist-ui-ready #Backgrounds #bg_tabs .bg_tab_button.ui-tabs-active .ui-tabs-anchor {
+  color: var(--mist-panel-ink) !important;
+  -webkit-text-fill-color: var(--mist-panel-ink) !important;
+  background: var(--mist-paper-alt) !important;
+}
+/* Hover：色差轻微，文字不变色 */
+body.mist-ui-ready #Backgrounds #bg_tabs .bg_tab_button:not(.ui-tabs-active):hover .ui-tabs-anchor {
+  color: #6B5C4B !important;
+  -webkit-text-fill-color: #6B5C4B !important;
+  background: var(--mist-paper) !important;
+}
+body.mist-ui-ready #Backgrounds #bg_tabs .bg_tab_button .ui-tabs-anchor:focus-visible {
+  outline: 1px solid var(--mist-panel-line) !important;
+  outline-offset: 2px;
+}
+/* 右侧编辑、缩放按钮保持原生位置 */
+body.mist-ui-ready #Backgrounds #bg_tabs .heading-controls {
+  margin-left: auto !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #Backgrounds #bg_tabs .heading-controls :is(
+  button,
+  i
+) {
+  color: var(--mist-panel-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 20.24.4 图片图库：无外框、无阴影 */
+body.mist-ui-ready #Backgrounds :is(
+  #bg_global_tab,
+  #bg_chat_tab,
+  #bg_folder_grid,
+  #bg_menu_content,
+  #bg_custom_content,
+  .bg_list,
+  .bg_folder_breadcrumb
+) {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* 图片项目没有卡片边框 */
+body.mist-ui-ready #Backgrounds .bg_example,
+body.mist-ui-ready #Backgrounds .bg_example:hover,
+body.mist-ui-ready #Backgrounds .bg_example.selected-background {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 缩略图保留原来的背景图片，不改变展示比例 */
+body.mist-ui-ready #Backgrounds .bg_example :is(
+  .thumbnail-clipper,
+  .bg_example_img
+) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+/* 图片操作菜单：仅去边框和投影 */
+body.mist-ui-ready #Backgrounds .bg_example .jg-menu {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* 20.24.5 聊天背景空状态提示 */
+body.mist-ui-ready #Backgrounds #bg_chat_hint {
+  color: #625748 !important;
+  -webkit-text-fill-color: #625748 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 15.5px !important;
+  font-weight: normal !important;
+  line-height: 1.7 !important;
+  padding: 12px 8px !important;
+}
+body.mist-ui-ready #Backgrounds #bg_chat_hint > span {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  text-shadow: none !important;
+}
+/* Image Generation：保留代码标签的小块咖色底 */
+body.mist-ui-ready #Backgrounds #bg_chat_hint code {
+  color: #65533D !important;
+  -webkit-text-fill-color: #65533D !important;
+  background: var(--mist-paper-alt) !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 14.5px !important;
+  font-weight: normal !important;
+  padding: 3px 7px !important;
+}
+body.mist-ui-ready #Backgrounds #bg_chat_hint code i {
+  color: #9C815D !important;
+  -webkit-text-fill-color: #9C815D !important;
+  text-shadow: none !important;
+}
+/* 20.24.6 Mobile */
+@media screen and (max-width: 600px) {
+  body.mist-ui-ready #Backgrounds #bg_tabs .bg_tabs_list {
+    gap: 3px;
+  }
+  body.mist-ui-ready #Backgrounds #bg_tabs .bg_tab_button .ui-tabs-anchor {
+    padding: 5px 11px !important;
+    font-size: 14px !important;
+  }
+  body.mist-ui-ready #Backgrounds #bg_chat_hint {
+    font-size: 14px !important;
+  }
+}
+
+/* ===== 20.25 IMAGE PROMPT TEMPLATES ===== */
+/* 提示词标题与恢复按钮：一左一右 */
+body.mist-ui-ready #sd_prompt_templates > .title_restorable {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+  gap: 10px !important;
+  width: 100%;
+  min-width: 0;
+  padding: 5px 0 !important;
+  margin: 7px 0 3px !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* 标题 */
+body.mist-ui-ready #sd_prompt_templates > .title_restorable > label {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--mist-ink) !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 15px !important;
+  font-weight: normal !important;
+  line-height: 1.5 !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+/* 恢复默认：紧凑横排 */
+body.mist-ui-ready #sd_prompt_templates > .title_restorable > button.menu_button.fa-undo {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  gap: 5px !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 25px !important;
+  padding: 3px 5px !important;
+  margin: 0 !important;
+  color: var(--mist-muted) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 12.5px !important;
+  font-weight: normal !important;
+  line-height: 1.4 !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  transition: color .18s ease !important;
+}
+/* 图标单独采用茶棕色 */
+body.mist-ui-ready #sd_prompt_templates > .title_restorable > button.fa-undo::before {
+  flex: 0 0 auto;
+  color: #9C815D !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+/* Hover：仅轻微加深 */
+body.mist-ui-ready #sd_prompt_templates > .title_restorable > button.fa-undo:hover {
+  color: #62513F !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #sd_prompt_templates > .title_restorable > button.fa-undo:hover::before {
+  color: #806747 !important;
+}
+/* 键盘焦点 */
+body.mist-ui-ready #sd_prompt_templates > .title_restorable > button.fa-undo:focus-visible {
+  outline: 1px solid #B8A68B !important;
+  outline-offset: 2px;
+}
+
+/* ===== 20.26 TAVERN HELPER SCRIPT EDITOR ===== */
+/* 仅处理酒馆助手的脚本编辑弹窗 */
+body.mist-ui-ready .popup[role="dialog"]:has(.TH-script-editor-container) {
+  color: var(--mist-ink) !important;
+  background: var(--mist-bg) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color-scheme: light;
+  font-family: var(--mainFontFamily) !important;
+}
+/* 弹窗标题 */
+body.mist-ui-ready .popup[role="dialog"]:has(.TH-script-editor-container) .th-text-md {
+  color: var(--mist-ink) !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 18px !important;
+  font-weight: normal !important;
+  text-shadow: none !important;
+}
+/* 脚本编辑各个区域 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container {
+  width: 100%;
+  min-width: 0;
+  color: var(--mist-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 标题文字：脚本名称、内容、作者备注、变量列表 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container strong {
+  color: var(--mist-ink) !important;
+  -webkit-text-fill-color: var(--mist-ink) !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 15.5px !important;
+  font-weight: normal !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+/* 说明文字 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container small {
+  color: var(--mist-muted) !important;
+  -webkit-text-fill-color: var(--mist-muted) !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 12.5px !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+/* 脚本名称与作者备注输入框 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container > :is(
+  input.text_pole,
+  textarea.text_pole
+) {
+  color: var(--mist-ink) !important;
+  -webkit-text-fill-color: var(--mist-ink) !important;
+  background: var(--mist-paper) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  padding: 8px 10px !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 14.5px !important;
+  line-height: 1.6 !important;
+  caret-color: #9C815D;
+}
+/* 占位提示 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container > :is(
+  input.text_pole,
+  textarea.text_pole
+)::placeholder {
+  color: #9A8B78 !important;
+  -webkit-text-fill-color: #9A8B78 !important;
+  opacity: 1 !important;
+}
+/* 选中输入框时不出现黑框或黄色竖线 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container > :is(
+  input.text_pole,
+  textarea.text_pole
+):focus {
+  background: var(--mist-paper) !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  outline: 1px solid #B8A68B !important;
+  outline-offset: -1px;
+  box-shadow: none !important;
+}
+/* 脚本内容：折叠状态的代码预览 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container > .text_pole.relative {
+  color: var(--mist-ink) !important;
+  background: var(--mist-paper) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 代码保持等宽字体 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container > .text_pole.relative pre {
+  color: var(--mist-ink) !important;
+  -webkit-text-fill-color: var(--mist-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-family: var(--monoFontFamily), "SFMono-Regular", Consolas, monospace !important;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+  padding: 9px 11px !important;
+}
+/* 折叠底部渐变：黑色改为柔和茶纸色 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container [class*="bg-gradient-to-t"] {
+  background: linear-gradient(
+    to top,
+    var(--mist-paper) 0%,
+    rgba(240, 235, 227, .88) 42%,
+    rgba(240, 235, 227, 0) 100%
+  ) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+/* 展开编辑按钮 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container [class*="bg-gradient-to-t"] > button.menu_button {
+  color: var(--mist-deep-ink) !important;
+  background: var(--mist-paper-alt) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 13px !important;
+  padding: 5px 11px !important;
+  transition: background-color .18s ease;
+}
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container [class*="bg-gradient-to-t"] > button.menu_button:hover {
+  color: var(--mist-deep-ink) !important;
+  background: #DED5C6 !important;
+  box-shadow: none !important;
+}
+/* 展开、最大化与新增变量等图标 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container :is(
+  .fa-maximize,
+  .fa-plus
+) {
+  color: #9C815D !important;
+  -webkit-text-fill-color: #9C815D !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container :is(
+  .fa-maximize,
+  .fa-plus
+):hover {
+  color: #806747 !important;
+}
+/* 变量列表：清理灰黑色编辑器容器 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container:has(.jse-main) > div:has(> .jse-main),
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container .jse-main {
+  color: var(--mist-deep-ink) !important;
+  background: var(--mist-paper) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* JSON 编辑器：保留工具栏，但修改色系 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container .jse-main :is(
+  .jse-tree-mode,
+  .jse-contents,
+  .jse-json-node,
+  .jse-props
+) {
+  color: var(--mist-deep-ink) !important;
+  background: var(--mist-paper) !important;
+  border-color: #D9CCBA !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container .jse-main :is(
+  .jse-menu,
+  .jse-navigation-bar
+) {
+  color: #62513F !important;
+  background: var(--mist-paper-alt) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* JSON 工具按钮 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container .jse-main .jse-button {
+  color: #62513F !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container .jse-main .jse-button:hover {
+  background: #DDD1BE !important;
+}
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container .jse-main .jse-button.jse-selected {
+  color: var(--mist-deep-ink) !important;
+  background: #D9CCBA !important;
+}
+/* 变量数据文字 */
+body.mist-ui-ready .popup[role="dialog"] .TH-script-editor-container .jse-main :is(
+  .jse-bracket,
+  .jse-meta,
+  .jse-header,
+  .jse-footer
+) {
+  color: #625748 !important;
+  text-shadow: none !important;
+}
+/* 底部确认 / 取消：精准匹配脚本编辑器按钮容器 */
+body.mist-ui-ready .popup[role="dialog"]:has(.TH-script-editor-container) div:has(> button.popup-button-ok) > button.menu_button {
+  color: var(--mist-deep-ink) !important;
+  -webkit-text-fill-color: var(--mist-deep-ink) !important;
+  background: var(--mist-paper-alt) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+  padding: 6px 19px !important;
+  transition: background-color .18s ease !important;
+}
+/* Hover：轻微加深底色，不改变文字颜色 */
+body.mist-ui-ready .popup[role="dialog"]:has(.TH-script-editor-container) div:has(> button.popup-button-ok) > button.menu_button:hover {
+  color: var(--mist-deep-ink) !important;
+  background: #DED5C6 !important;
+  box-shadow: none !important;
+}
+/* Focus / Active：无双层边框和阴影 */
+body.mist-ui-ready .popup[role="dialog"]:has(.TH-script-editor-container) div:has(> button.popup-button-ok) > button.menu_button:is(:focus, :focus-visible, :active) {
+  outline: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* 键盘焦点：通过背景色辨认 */
+body.mist-ui-ready .popup[role="dialog"]:has(.TH-script-editor-container) div:has(> button.popup-button-ok) > button.menu_button:focus-visible {
+  background: #DED5C6 !important;
+}
+
+/* ===== 20.27 PERSONA MANAGEMENT ===== */
+/* 人设列表：保留原有布局和头像大小 */
+body.mist-ui-ready #PersonaManagement #user_avatar_block .avatar-container {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: background-color .18s ease, border-color .18s ease !important;
+}
+/* Hover：淡奶咖底与浅色细框 */
+body.mist-ui-ready #PersonaManagement #user_avatar_block .avatar-container:hover:not(.selected) {
+  background: #F4EFE7 !important;
+  border-color: #D8CBBB !important;
+  box-shadow: none !important;
+}
+/* 选中的人设 */
+body.mist-ui-ready #PersonaManagement #user_avatar_block .avatar-container.selected {
+  background: var(--mist-paper) !important;
+  border: 1px solid #AA9270 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* 已选中卡片的 Hover */
+body.mist-ui-ready #PersonaManagement #user_avatar_block .avatar-container.selected:hover {
+  background: #EBE3D6 !important;
+  border-color: #907656 !important;
+  box-shadow: none !important;
+}
+/* 卡片文字保留原来的深色体系 */
+body.mist-ui-ready #PersonaManagement #user_avatar_block .avatar-container :is(
+  .ch_name,
+  .ch_description
+) {
+  color: var(--mist-deep-ink) !important;
+  text-shadow: none !important;
+}
+body.mist-ui-ready #PersonaManagement #user_avatar_block .avatar-container .ch_additional_info {
+  color: var(--mist-muted) !important;
+  text-shadow: none !important;
+}
+/* 当前人设名称：深卡其 */
+body.mist-ui-ready #PersonaManagement #your_name.persona_name {
+  color: #8B704C !important;
+  -webkit-text-fill-color: #8B704C !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+/* 人设内容编辑区：与世界书正文一致 */
+body.mist-ui-ready #PersonaManagement textarea#persona_description {
+  color: var(--mist-ink) !important;
+  -webkit-text-fill-color: var(--mist-ink) !important;
+  background: var(--mist-paper) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  padding: 10px 12px !important;
+  line-height: 1.65 !important;
+  caret-color: #9C815D;
+}
+/* 聚焦时不产生黄色边框或竖线 */
+body.mist-ui-ready #PersonaManagement textarea#persona_description:focus {
+  background: var(--mist-paper) !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* 键盘焦点保留低对比度轮廓 */
+body.mist-ui-ready #PersonaManagement textarea#persona_description:focus-visible {
+  outline: 1px solid #C9B9A2 !important;
+  outline-offset: -1px;
+}
+/* 人设编辑区占位文字 */
+body.mist-ui-ready #PersonaManagement textarea#persona_description::placeholder {
+  color: #9A8B78 !important;
+  -webkit-text-fill-color: #9A8B78 !important;
+  opacity: 1 !important;
+}
+
+
+/* ===== 21. 茶间留笺 · 慢焙手帖 ===== */
+@font-face {
+  font-family: 'HuiwenMingchao';
+  src: url('https://s3plus.meituan.net/opapisdk/op_ticket_1_5673241091_1763725905844_qdqqd_yamppd.otf') format('opentype');
+  font-display: swap;
+}
+body.mist-ui-ready {
+  --letter-ink: var(--mist-ink);
+  --letter-muted: #958671;
+  --letter-brown: #80694D;
+  --letter-line: #D9CEBF;
+  --letter-hover: #654F35;
+  --letter-paper: var(--mist-paper);
+}
+/* ===== 21.1 开篇艺术题签 ===== */
+body.mist-ui-ready #chat > .mist-letter-opening {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: min(100%, 920px);
+  aspect-ratio: 920 / 185;
+  container-type: inline-size;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible;
+}
+/* 整组缩至原来的72%，同时稍微偏右 */
+body.mist-ui-ready #chat .mist-letter-art-title {
+  position: absolute;
+  left: 17%;
+  top: -9cqw;
+  width: 100%;
+  aspect-ratio: 920 / 390;
+  container-type: inline-size;
+  margin: 0;
+  transform: scale(.72);
+  transform-origin: top left;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+  isolation: isolate;
+}
+/* 羽化纸纹：不再出现完整的茶渍圆环 */
+body.mist-ui-ready #chat .mist-letter-art-title::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 27%;
+  top: 31%;
+  width: 62%;
+  height: 60%;
+  background:
+    radial-gradient(ellipse at 37% 49%, rgba(160,140,112,.085) 0%, transparent 69%),
+    radial-gradient(ellipse at 71% 56%, rgba(181,159,125,.065) 0%, transparent 72%),
+    radial-gradient(ellipse at 47% 67%, rgba(168,147,113,.045) 0%, transparent 67%);
+  -webkit-mask-image: radial-gradient(ellipse, #000 19%, rgba(0,0,0,.62) 48%, transparent 78%);
+  mask-image: radial-gradient(ellipse, #000 19%, rgba(0,0,0,.62) 48%, transparent 78%);
+  filter: blur(11px);
+  opacity: .72;
+  pointer-events: none;
+}
+body.mist-ui-ready #chat .mist-letter-art-title span {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  line-height: 1;
+  white-space: pre;
+  transform-origin: center center;
+  translate: 18cqw 0;
+  font-family: 'HuiwenMingchao', 'Songti SC', serif;
+  font-weight: normal;
+  pointer-events: none;
+}
+/* ===== 21.2 信件本体 ===== */
+body.mist-ui-ready #chat > .mes.mist-letter {
+  position: relative;
+  display: block !important;
+  flex: 0 0 auto;
+  align-self: center;
+  width: min(100%, 1000px) !important;
+  max-width: 100% !important;
+  min-width: 0;
+  margin: 0 auto !important;
+  padding: 5px 0 7px !important;
+  color: var(--letter-ink);
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter > .mes_block {
+  display: flex !important;
+  flex-direction: column;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 clamp(18px,3vw,38px) !important;
+  box-sizing: border-box;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* 用户留言略微缩进 */
+body.mist-ui-ready #chat > .mes.mist-letter[is_user="true"] > .mes_block {
+  padding-left: clamp(30px,5vw,65px) !important;
+}
+/* 正文不再出现重复头像 */
+body.mist-ui-ready #chat > .mes.mist-letter > .mesAvatarWrapper {
+  display: none !important;
+}
+/* ===== 21.3 信首 ===== */
+body.mist-ui-ready #chat .mist-letter-head {
+  order: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px 14px;
+  width: 100%;
+  margin: 0 0 17px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+body.mist-ui-ready #chat .mist-letter-index {
+  flex: 0 0 auto;
+  color: var(--letter-brown);
+  font-family: var(--mist-title-font);
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1.5;
+}
+body.mist-ui-ready #chat .mist-letter-head-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  min-width: 0;
+  margin-left: auto;
+}
+body.mist-ui-ready #chat .mist-letter-date {
+  color: #806E58;
+  font-family: var(--mainFontFamily);
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-align: right;
+}
+body.mist-ui-ready #chat .mist-letter-record {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 7px;
+  color: var(--letter-muted);
+  font-family: var(--mainFontFamily);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+body.mist-ui-ready #chat .mist-letter-record span + span::before {
+  content: "·";
+  margin-right: 7px;
+  color: #BAAC98;
+}
+/* ===== 21.4 正文 ===== */
+body.mist-ui-ready #chat > .mes.mist-letter .mes_reasoning_details {
+  order: 1;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mes_text {
+  order: 2;
+  width: 100%;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--letter-ink) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+/* 正文的字号、行高、字距仍由原主题控制 */
+/* 引用文本：从亮橘改为深咖色 */
+body.mist-ui-ready #chat > .mes.mist-letter .mes_text q {
+  color: #826448 !important;
+  text-shadow: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mes_media_wrapper {
+  order: 3;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mes_file_wrapper {
+  order: 4;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mes_bias {
+  order: 5;
+}
+/* ===== 21.5 小号落款与淡色纸印 ===== */
+body.mist-ui-ready #chat .mist-letter-sign {
+  order: 6;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin: 12px 0 2px;
+  padding: 0 3px;
+  box-sizing: border-box;
+  color: var(--letter-brown);
+  background: transparent;
+}
+body.mist-ui-ready #chat .mist-letter-sign-name {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 3px 5px;
+  color: var(--letter-brown) !important;
+  font-family: var(--mist-title-font) !important;
+  font-size: 16px !important;
+  font-weight: normal !important;
+  line-height: 1.45;
+  letter-spacing: .3px;
+  text-shadow: none !important;
+}
+/* 落款下方：不规则的淡咖色纸印 */
+body.mist-ui-ready #chat .mist-letter-sign-name::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -5%;
+  top: 34%;
+  width: 110%;
+  height: 51%;
+  border-radius: 33% 53% 40% 48%;
+  background: rgba(174,146,108,.14);
+  transform: rotate(-4deg);
+  filter: blur(3px);
+  pointer-events: none;
+}
+/* ===== 21.6 操作区：统一成一行 ===== */
+body.mist-ui-ready #chat > .mes.mist-letter .ch_name {
+  order: 7;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  position: relative;
+  width: 100%;
+  min-height: 25px;
+  margin: 2px 0 0 !important;
+  padding: 0 !important;
+  color: var(--letter-brown) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* 名字与时间已经放到信首和落款 */
+body.mist-ui-ready #chat > .mes.mist-letter .ch_name > .flex-container.flex1 {
+  display: none !important;
+}
+/* 翻页、更多、编辑共享一条操作栏 */
+body.mist-ui-ready #chat > .mes.mist-letter .mes_buttons {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 5px !important;
+  width: auto;
+  min-height: 25px;
+  margin-left: auto !important;
+  padding: 0 !important;
+  color: var(--letter-brown) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+}
+/* 清除原生图标阴影和额外背景 */
+body.mist-ui-ready #chat > .mes.mist-letter .mes_buttons .mes_button,
+body.mist-ui-ready #chat > .mes.mist-letter .mes_buttons .mes_button::before,
+body.mist-ui-ready #chat > .mes.mist-letter .mes_edit_buttons .menu_button,
+body.mist-ui-ready #chat > .mes.mist-letter .mes_edit_buttons .menu_button::before {
+  color: #80694D !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+/* 统一点击区域 */
+body.mist-ui-ready #chat > .mes.mist-letter :is(
+  .mes_edit,
+  .extraMesButtonsHint
+) {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 25px;
+  width: 25px;
+  height: 25px;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  transition: color .18s ease;
+}
+/* 不再使用原生厚重图标 */
+body.mist-ui-ready #chat > .mes.mist-letter :is(
+  .mes_edit,
+  .extraMesButtonsHint
+)::before {
+  display: none !important;
+}
+/* 细线编辑笔 */
+body.mist-ui-ready #chat > .mes.mist-letter .mes_edit::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5Z' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5Z' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+/* 三个小圆点，代替模糊的 Font Awesome 图标 */
+body.mist-ui-ready #chat > .mes.mist-letter .extraMesButtonsHint::after {
+  content: "";
+  display: block;
+  width: 17px;
+  height: 17px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='5' cy='12' r='1.8'/%3E%3Ccircle cx='12' cy='12' r='1.8'/%3E%3Ccircle cx='19' cy='12' r='1.8'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='5' cy='12' r='1.8'/%3E%3Ccircle cx='12' cy='12' r='1.8'/%3E%3Ccircle cx='19' cy='12' r='1.8'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+/* Hover：只加深咖色，不出现背景块 */
+body.mist-ui-ready #chat > .mes.mist-letter .mes_buttons .mes_button:hover,
+body.mist-ui-ready #chat > .mes.mist-letter .mes_buttons .mes_button:hover::before {
+  color: var(--letter-hover) !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+/* 更多操作展开区 */
+body.mist-ui-ready #chat > .mes.mist-letter .extraMesButtons {
+  color: var(--letter-brown) !important;
+  background: var(--mist-bg) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .extraMesButtons .mes_button {
+  color: var(--letter-brown) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .extraMesButtons .mes_button::before {
+  color: inherit !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+/* ===== 21.7 翻页：统一高度与垂直居中 ===== */
+body.mist-ui-ready #chat > .mes.mist-letter .mist-letter-swipes {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  flex: 0 0 auto;
+  order: -1;
+  gap: 2px !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  margin: 0 7px 0 0 !important;
+  padding: 0 !important;
+  color: #80694D !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mist-letter-swipes .swipeRightBlock {
+  position: static !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  flex: 0 0 auto !important;
+  gap: 2px !important;
+  width: auto !important;
+  height: 26px !important;
+  min-height: 26px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mist-letter-swipes :is(
+  .swipe_left,
+  .swipe_right
+) {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  display: flex;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  flex: 0 0 24px !important;
+  width: 24px !important;
+  height: 26px !important;
+  min-width: 24px !important;
+  min-height: 26px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #80694D !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+  transform: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mist-letter-swipes :is(
+  .swipe_left,
+  .swipe_right
+)::before {
+  display: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mist-letter-swipes :is(
+  .swipe_left,
+  .swipe_right
+)::after {
+  content: "";
+  position: static !important;
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mist-letter-swipes .swipe_left::after {
+  transform: rotate(-135deg);
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mist-letter-swipes .swipe_right::after {
+  transform: rotate(45deg);
+}
+/* 计数固定在两支箭头之间 */
+body.mist-ui-ready #chat > .mes.mist-letter .mist-letter-swipes .swipes-counter {
+  position: static !important;
+  display: inline-flex;
+  align-items: center !important;
+  justify-content: center !important;
+  align-self: center !important;
+  order: -1;
+  flex: 0 0 auto;
+  min-width: 28px;
+  height: 26px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #80694D !important;
+  font-family: var(--mainFontFamily) !important;
+  font-size: 11.5px !important;
+  font-weight: normal !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+  text-shadow: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mist-letter-swipes .swipes-counter:empty {
+  display: none;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mist-letter-swipes :is(
+  .swipe_left,
+  .swipe_right
+):hover {
+  color: #654F35 !important;
+  background: transparent !important;
+}
+/* ===== 21.8 编辑状态的正文输入框 ===== */
+body.mist-ui-ready #chat > .mes.mist-letter .mes_text textarea.edit_textarea,
+body.mist-ui-ready #chat > .mes.mist-letter #curEditTextarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 11px 13px !important;
+  color: var(--letter-ink) !important;
+  -webkit-text-fill-color: var(--letter-ink) !important;
+  background: var(--mist-paper) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  border-radius: 4px !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  caret-color: #8B7659;
+  font-family: var(--mainFontFamily) !important;
+  resize: vertical;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mes_text textarea.edit_textarea:focus,
+body.mist-ui-ready #chat > .mes.mist-letter #curEditTextarea:focus {
+  color: var(--letter-ink) !important;
+  background: var(--mist-paper) !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mes_text textarea.edit_textarea:focus-visible,
+body.mist-ui-ready #chat > .mes.mist-letter #curEditTextarea:focus-visible {
+  outline: 1px solid #C7B69C !important;
+  outline-offset: -1px;
+}
+/* 编辑模式下的确认、取消等按钮 */
+body.mist-ui-ready #chat > .mes.mist-letter .mes_edit_buttons {
+  align-items: center;
+  gap: 6px;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mes_edit_buttons .menu_button {
+  color: var(--letter-brown) !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+body.mist-ui-ready #chat > .mes.mist-letter .mes_edit_buttons .menu_button:hover {
+  color: var(--letter-hover) !important;
+  background: transparent !important;
+}
+/* ===== 21.9 信件之间的唯一分隔线 ===== */
+body.mist-ui-ready #chat > .mes.mist-letter::after {
+  content: "";
+  display: block;
+  width: 19%;
+  max-width: 150px;
+  min-width: 65px;
+  height: 1px;
+  margin: 17px auto 6px;
+  background: var(--letter-line);
+  border: 0;
+  border-radius: 0;
+  transform: none;
+  box-shadow: none;
+}
+body.mist-ui-ready #chat > .mes.mist-letter.mist-letter-last::after {
+  display: none;
+}
+/* 开篇题签后不画分隔线 */
+/* ===== 21.10 手机适配 ===== */
+@media screen and (max-width: 600px) {
+  body.mist-ui-ready #chat > .mist-letter-opening {
+    width: 100%;
+    aspect-ratio: 920 / 205;
+  }
+  body.mist-ui-ready #chat .mist-letter-art-title {
+    left: 13%;
+    top: -8cqw;
+    transform: scale(.78);
+  }
+  body.mist-ui-ready #chat > .mes.mist-letter {
+    padding: 5px 0 7px !important;
+  }
+  body.mist-ui-ready #chat > .mes.mist-letter > .mes_block {
+    padding: 0 14px !important;
+  }
+  body.mist-ui-ready #chat > .mes.mist-letter[is_user="true"] > .mes_block {
+    padding-left: 26px !important;
+    padding-right: 14px !important;
+  }
+  body.mist-ui-ready #chat .mist-letter-head {
+    margin-bottom: 13px;
+    gap: 4px 8px;
+  }
+  body.mist-ui-ready #chat .mist-letter-index {
+    font-size: 15px;
+  }
+  body.mist-ui-ready #chat .mist-letter-date {
+    font-size: 11px;
+  }
+  body.mist-ui-ready #chat .mist-letter-record {
+    font-size: 10px;
+  }
+  body.mist-ui-ready #chat .mist-letter-sign {
+    margin-top: 10px;
+  }
+  body.mist-ui-ready #chat .mist-letter-sign-name {
+    font-size: 15px !important;
+  }
+  body.mist-ui-ready #chat .mist-letter-swipes {
+    gap: 2px;
+  }
+  body.mist-ui-ready #chat > .mes.mist-letter::after {
+    width: 23%;
+    margin: 15px auto 5px;
+  }
+}
+
+/* ===== 22. EXTENSION CONTROLS AND NIGHT ===== */
+body.mist-ui-ready {
+  --mist-paper: #F0EBE3;
+  --mist-paper-alt: #EAE3D6;
+  --mist-deep-ink: #51483F;
+  --mist-accent: #9C815D;
+  --SmartThemeBodyColor: #38352F;
+  --SmartThemeEmColor: #817769;
+  --SmartThemeUnderlineColor: #9C815D;
+  --SmartThemeQuoteColor: #826448;
+  --SmartThemeShadowColor: #38352F;
+  --SmartThemeBlurTintColor: #F8F7F1;
+  --SmartThemeChatTintColor: #F8F7F1;
+  --SmartThemeUserMesBlurTintColor: transparent;
+  --SmartThemeBotMesBlurTintColor: transparent;
+  --SmartThemeBorderColor: rgba(201, 185, 162, .73);
+}
+body.mist-ui-ready.mist-night {
+  --mist-bg: #242522;
+  --mist-ink: #E5DED2;
+  --mist-muted: #B8AFA2;
+  --mist-deep-ink: #D2C6B6;
+  --mist-paper: #30312E;
+  --mist-paper-alt: #393A35;
+  --mist-hover: #393A35;
+  --mist-accent: #C4A980;
+  --mist-compose-panel: #30312E;
+  --mist-compose-hover: #383A35;
+  --mist-compose-active: #454640;
+  --mist-compose-danger: #C59A8C;
+  --mist-panel-track: #6A6258;
+  --mist-panel-khaki: #B39A79;
+  --mist-panel-line: #655C50;
+  --SmartThemeBodyColor: #E5DED2;
+  --SmartThemeEmColor: #B8AFA2;
+  --SmartThemeUnderlineColor: #C4A980;
+  --SmartThemeQuoteColor: #C4A980;
+  --SmartThemeBlurTintColor: #30312E;
+  --SmartThemeChatTintColor: #242522;
+  --SmartThemeUserMesBlurTintColor: transparent;
+  --SmartThemeBotMesBlurTintColor: transparent;
+  --SmartThemeBorderColor: rgba(147, 131, 109, .55);
+  --white30a: rgba(218, 205, 183, .08);
+  --letter-ink: #E5DED2;
+  --letter-muted: #B8AFA2;
+  --letter-brown: #B39A79;
+  --letter-line: #61594D;
+  --letter-hover: #C6AA85;
+  --letter-paper: #30312E;
+  color: var(--mist-ink) !important;
+  color-scheme: dark;
+}
+body.mist-ui-ready.mist-night :is(#chat, #sheld, #send_form, #form_sheld, #top-bar, #top-settings-holder,
+  .drawer-content, .popup, .wide100p, #ai-config-button .drawer-content,
+  #sys-settings-button .drawer-content, #WI-SP-button .drawer-content) {
+  background-color: var(--mist-bg) !important;
+  color: var(--mist-ink) !important;
+}
+body.mist-ui-ready.mist-night :is(#chat .mes, #chat .mes_text, #chat .ch_name,
+  .drawer-content label, .drawer-content span, .popup, .popup *, #send_textarea) {
+  color: var(--mist-ink) !important;
+}
+body.mist-ui-ready.mist-night :is(input, textarea, select) {
+  background-color: var(--mist-paper) !important;
+  color: var(--mist-ink) !important;
+  color-scheme: dark;
+}
+body.mist-ui-ready.mist-night .drawer-content {
+  color-scheme: dark !important;
+}
+body.mist-ui-ready #chat .mes_text {
+  font-size: var(--mist-font-size, 1em) !important;
+}
+body.mist-ui-ready.mist-night #chat > .mes.mist-letter,
+body.mist-ui-ready.mist-night #chat > .mes.mist-letter > .mes_block {
+  background: transparent !important;
+  color: var(--mist-ink) !important;
+}
+/* One fixed canvas spans the top bar, scrolling chat and input. Panels stay opaque. */
+body.mist-ui-ready.mist-night.mist-chat-image::before,
+body.mist-ui-ready.mist-night.mist-chat-image::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: min(var(--sheldWidth), 100dvw);
+  height: 100dvh;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+body.mist-ui-ready.mist-night.mist-chat-image::before {
+  z-index: 0;
+  background-image: var(--mist-chat-image);
+  background-size: cover;
+  background-position: var(--mist-bg-position-x, 50%) var(--mist-bg-position-y, 50%);
+  filter: blur(var(--mist-blur, 0px));
+}
+body.mist-ui-ready.mist-night.mist-chat-image::after {
+  z-index: 1;
+  background: rgba(25, 26, 24, var(--mist-darkness, .55));
+}
+body.mist-ui-ready.mist-night.mist-chat-image :is(
+  #top-bar, #top-settings-holder, #sheld, #chat, #form_sheld,
+  #send_form, #nonQRFormItems, #leftSendForm, #rightSendForm, #send_textarea
+) {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+body.mist-ui-ready.mist-night #chat > .mist-letter-opening .mist-letter-art-title span {
+  color: var(--mist-ink) !important;
+}
+body.mist-ui-ready.mist-night #chat > .mist-letter-opening .mist-letter-art-title span[style*="--mist-accent"] {
+  color: var(--mist-accent) !important;
+}
+body.mist-ui-ready.mist-night #chat > .mes.mist-letter .mes_text q,
+body.mist-ui-ready.mist-night #chat > .mes.mist-letter .mes_text :is(blockquote, blockquote *, q) {
+  color: #C4A980 !important;
+}
+body.mist-ui-ready.mist-night #nonQRFormItems :is(
+  #options_button, #extensionsMenuButton, #stscript_continue, #stscript_pause,
+  #stscript_stop, #mes_stop, #mes_impersonate, #mes_continue, #send_but
+)::after {
+  filter: brightness(0) saturate(100%) invert(88%) sepia(12%) saturate(359%) hue-rotate(341deg) brightness(100%) !important;
+}
+body.mist-ui-ready.mist-night #options,
+body.mist-ui-ready.mist-night #extensionsMenu,
+body.mist-ui-ready.mist-night #dialogue_del_mes {
+  background: var(--mist-compose-panel) !important;
+  color: var(--mist-ink) !important;
+}
+body.mist-ui-ready.mist-night #options :is(a, i, span),
+body.mist-ui-ready.mist-night #extensionsMenu :is(a, i, span) {
+  color: var(--mist-ink) !important;
+  -webkit-text-fill-color: var(--mist-ink) !important;
+}
+body.mist-ui-ready :is(#rm_print_characters_block .character_name_block,
+  #rm_print_characters_block .character_select .ch_name) {
+  background: transparent !important;
+  background-image: none !important;
+}
+body.mist-ui-ready #rm_print_characters_block .character_select:hover {
+  background: var(--mist-paper) !important;
+}
+body.mist-ui-ready.mist-night #rm_print_characters_block .character_select:hover {
+  background: #30312E !important;
+}
+body.mist-ui-ready.mist-night #rm_print_characters_block .character_select :is(.ch_name, .ch_description) {
+  color: var(--mist-ink) !important;
+  -webkit-text-fill-color: var(--mist-ink) !important;
+}
+body.mist-ui-ready.mist-night .drawer-content :is(input[type="number"], .range-block-counter input) {
+  color: var(--mist-ink) !important;
+  -webkit-text-fill-color: var(--mist-ink) !important;
+  color-scheme: dark !important;
+}
+body.mist-ui-ready :is(.drawer-content, #tavern_helper) :is([data-type="script"], [data-type="folder"]) {
+  color: var(--mist-ink) !important;
+  background: var(--mist-paper) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready :is(.drawer-content, #tavern_helper) :is([data-type="script"], [data-type="folder"]) :is(span, i) {
+  color: var(--mist-ink) !important;
+  -webkit-text-fill-color: var(--mist-ink) !important;
+}
+body.mist-ui-ready :is(.drawer-content, #tavern_helper) :is([data-type="script"], [data-type="folder"]):hover {
+  background: var(--mist-paper-alt) !important;
+}
+/* Keep the tea archive legible when the welcome page is shown at night. */
+body.mist-ui-ready.mist-night #chat .mist-tea-card .mist-tea-paper {
+  background: #34352F !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-paper::before {
+  opacity: .12;
+  mix-blend-mode: screen;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-paper :is(
+  .mist-tea-name, .mist-tea-sales, .mist-tea-chat-title, .mist-tea-preview,
+  .mist-tea-foot
+) {
+  color: var(--mist-ink) !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-paper :is(.mist-tea-index, .mist-tea-pin) {
+  color: var(--mist-accent) !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-ready :is(
+  .mist-tea-others, .mist-tea-other-item, .mist-tea-other-head,
+  .mist-tea-other-main, .mist-tea-other-text, .mist-tea-other-name,
+  .mist-tea-other-stats, .mist-tea-other-preview, .mist-tea-other-date
+) {
+  color: var(--mist-ink) !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-other-head:hover {
+  background: #393A35 !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-card > .mist-tea-history {
+  background: #34352F !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-card > .mist-tea-history::after {
+  opacity: .1;
+  mix-blend-mode: screen;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-history::before,
+body.mist-ui-ready.mist-night #chat .mist-tea-other-item:not(:last-child)::after {
+  background: #776B5D;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-convo-entry:hover {
+  background: #3C3D37;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-convo-open,
+body.mist-ui-ready.mist-night #chat .mist-tea-convo-title {
+  color: #E5DED2 !important;
+}
+body.mist-ui-ready.mist-night #chat :is(
+  .mist-tea-convo-preview, .mist-tea-other-preview, .mist-tea-preview,
+  .mist-tea-other-stats, .mist-tea-convo-stats
+) {
+  color: #CEC2B2 !important;
+}
+body.mist-ui-ready.mist-night #chat :is(
+  .mist-tea-other-no, .mist-tea-other-date, .mist-tea-convo-date,
+  .mist-tea-foot, .mist-tea-sales
+) {
+  color: #B9A98F !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-convo-stats {
+  background: #44443C !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-other-main:hover .mist-tea-other-name {
+  color: #E5DED2 !important;
+}
+body.mist-ui-ready.mist-night #chat :is(
+  .mist-tea-dots, .mist-tea-toggle, .mist-tea-other-toggle,
+  .mist-tea-single-count
+) {
+  color: #CBB99D !important;
+}
+body.mist-ui-ready.mist-night #chat :is(
+  .mist-tea-dots, .mist-tea-toggle, .mist-tea-other-toggle
+):hover {
+  color: #E5DED2 !important;
+  background: #424139 !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-actions {
+  background: #34352F !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-action {
+  color: #E5DED2 !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-tea-action:hover {
+  background: #44443C !important;
+}
+/* Reception uses its own fixed day colors, so give its copy and native buttons a night palette. */
+body.mist-ui-ready.mist-night #chat .mist-reception-description {
+  color: #C9BDAE !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-reception-note {
+  background: #34352F !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-reception-note-label {
+  color: #C4A980 !important;
+}
+body.mist-ui-ready.mist-night #chat .mist-reception-note-text {
+  color: #D2C6B6 !important;
+}
+body.mist-ui-ready.mist-night #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button {
+  color: #D2C6B6 !important;
+}
+body.mist-ui-ready.mist-night #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button::before {
+  filter: brightness(1.65) saturate(.75);
+}
+body.mist-ui-ready.mist-night #chat:has(.mist-tea-reception) .mes[type="welcome_prompt"] .drawer-opener.menu_button:hover {
+  color: #E5DED2 !important;
+  background: #34352F !important;
+  transform: none;
+}
+/* Persona cards and their name strips must stay dark and quiet at night. */
+body.mist-ui-ready.mist-night #PersonaManagement #user_avatar_block .avatar-container:hover:not(.selected) {
+  background: #32332F !important;
+  border-color: #554F45 !important;
+}
+body.mist-ui-ready.mist-night #PersonaManagement #user_avatar_block .avatar-container.selected,
+body.mist-ui-ready.mist-night #PersonaManagement #user_avatar_block .avatar-container.selected:hover {
+  background: #34352F !important;
+  border-color: #766A59 !important;
+}
+body.mist-ui-ready.mist-night #PersonaManagement #user_avatar_block .avatar-container :is(
+  .character_select_container, .character_name_block, .ch_name,
+  .ch_additional_info, .ch_description
+) {
+  background: transparent !important;
+  background-image: none !important;
+}
+body.mist-ui-ready.mist-night #PersonaManagement #user_avatar_block .avatar-container :is(.ch_name, .ch_description) {
+  color: #E5DED2 !important;
+  -webkit-text-fill-color: #E5DED2 !important;
+}
+body.mist-ui-ready.mist-night #PersonaManagement #user_avatar_block .avatar-container .ch_additional_info {
+  color: #B8AFA2 !important;
+  -webkit-text-fill-color: #B8AFA2 !important;
+}
+body.mist-ui-ready.mist-night #PersonaManagement #your_name.persona_name {
+  color: #C4A980 !important;
+  -webkit-text-fill-color: #C4A980 !important;
+}
+/* Native confirmation dialogs share one restrained night palette. */
+body.mist-ui-ready.mist-night dialog.popup {
+  background: #282925 !important;
+  color: #E5DED2 !important;
+  color-scheme: dark !important;
+}
+body.mist-ui-ready.mist-night dialog.popup .popup-controls :is(.popup-button-ok, .popup-button-cancel, .menu_button),
+body.mist-ui-ready.mist-night .popup[role="dialog"]:has(.TH-script-editor-container) div:has(> button.popup-button-ok) > button.menu_button,
+body.mist-ui-ready.mist-night #dialogue_popup_controls :is(#dialogue_popup_ok, #dialogue_popup_cancel) {
+  color: #E5DED2 !important;
+  -webkit-text-fill-color: #E5DED2 !important;
+  background: #393A35 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body.mist-ui-ready.mist-night dialog.popup .popup-controls :is(.popup-button-ok, .popup-button-cancel, .menu_button):is(:hover, :focus-visible),
+body.mist-ui-ready.mist-night .popup[role="dialog"]:has(.TH-script-editor-container) div:has(> button.popup-button-ok) > button.menu_button:is(:hover, :focus-visible),
+body.mist-ui-ready.mist-night #dialogue_popup_controls :is(#dialogue_popup_ok, #dialogue_popup_cancel):is(:hover, :focus-visible) {
+  color: #E5DED2 !important;
+  -webkit-text-fill-color: #E5DED2 !important;
+  background: #464740 !important;
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* The four bars belong to the collapsed top bar, beside the character name. */
+body.mist-ui-ready #top-bar,
+body.mist-ui-ready #top-settings-holder { overflow: visible !important; }
+body.mist-ui-ready #top-settings-holder { position: relative !important; }
+#mist-shortcuts {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 6px;
+  z-index: 25;
+  color: var(--mist-ink);
+  font-family: var(--mainFontFamily, serif);
+}
+body.mist-ui-ready #top-settings-holder.mist-collapsed #mist-shortcuts { display: block; }
+body.mist-ui-ready #top-settings-holder.mist-collapsed #mist-reveal { max-width: calc(100% - 64px); }
+body.mist-ui-ready #top-settings-holder.mist-collapsed #mist-reveal.mist-character { width: min(440px, calc(100% - 64px)); }
+#mist-shortcuts .mist-bars { display: flex; align-items: flex-start; gap: 0; }
+#mist-shortcuts .mist-bars button {
+  display: flex !important;
+  align-items: flex-start;
+  justify-content: center;
+  width: 12px !important;
+  height: var(--mist-nav-height) !important;
+  padding: 4px 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  appearance: none;
+}
+#mist-shortcuts .mist-bars span { display: block; width: 3px; height: 23px; background: #65533D; border-radius: 0; }
+#mist-shortcuts .mist-bars button:nth-child(2) span { width: 6px; height: 30px; }
+#mist-shortcuts .mist-bars button:nth-child(3) span { width: 2px; height: 17px; }
+#mist-shortcuts .mist-bars button:nth-child(4) span { width: 5px; height: 26px; }
+#mist-shortcuts .mist-bars button:hover span,
+#mist-shortcuts .mist-bars button:focus-visible span { background: #9C815D; }
+body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars span { background: #9C876B; }
+body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars button:hover span,
+body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars button:focus-visible span { background: #C5AD8B; }
+#mist-shortcuts #mist-panel {
+  position: absolute;
+  top: calc(var(--mist-nav-height) + 4px);
+  right: 0;
+  width: min(320px, calc(100vw - 16px));
+  max-height: calc(100dvh - var(--mist-nav-height) - 16px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 16px;
+  background: #F8F7F1 !important;
+  color: #38352F !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: 13px;
+  line-height: 1.45;
+}
+#mist-shortcuts #mist-panel[hidden],
+#mist-shortcuts .mist-night-only[hidden] { display: none !important; }
+#mist-shortcuts #mist-panel header { display: flex; align-items: center; justify-content: space-between; font-size: 17px; }
+#mist-shortcuts #mist-panel strong { font-weight: 600; }
+#mist-shortcuts #mist-panel small { display: block; margin: 4px 0; color: #817769 !important; }
+#mist-shortcuts #mist-panel .mist-section {
+  margin-top: 12px;
+  padding: 12px;
+  background: #F0EBE3 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+#mist-shortcuts #mist-panel label { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; color: inherit !important; }
+#mist-shortcuts #mist-panel label span { flex: 0 0 58px; color: inherit !important; }
+#mist-shortcuts #mist-panel input[type="range"] {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  flex: 1;
+  min-width: 0;
+  height: 4px !important;
+  min-height: 4px !important;
+  padding: 0 !important;
+  background: #C8BCA9 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+#mist-shortcuts #mist-panel input[type="range"]::-webkit-slider-runnable-track { height: 4px; background: #C8BCA9; border: 0; }
+#mist-shortcuts #mist-panel input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin-top: -5px;
+  background: #826448 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  box-shadow: none !important;
+}
+#mist-shortcuts #mist-panel input[type="range"]::-moz-range-track { height: 4px; background: #C8BCA9; border: 0; }
+#mist-shortcuts #mist-panel input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; background: #826448; border: 0; border-radius: 50%; }
+#mist-shortcuts #mist-panel input[type="checkbox"] {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  position: relative;
+  width: 34px !important;
+  height: 18px !important;
+  background: #C8BCA9 !important;
+  border: 0 !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+#mist-shortcuts #mist-panel input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  background: #F8F7F1;
+  border-radius: 50%;
+  transition: transform .15s ease;
+}
+#mist-shortcuts #mist-panel input[type="checkbox"]:checked { background: #826448 !important; }
+#mist-shortcuts #mist-panel input[type="checkbox"]:checked::before { transform: translateX(16px); }
+#mist-shortcuts #mist-panel select {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 100%;
+  height: 32px !important;
+  min-height: 32px !important;
+  margin-top: 8px;
+  padding: 5px 30px 5px 9px !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+  color: #38352F !important;
+  -webkit-text-fill-color: #38352F !important;
+  background-color: #E7DECF !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23826448' stroke-width='1.5'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  background-size: 11px 8px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+#mist-shortcuts #mist-panel .mist-shortcut-options label select { width: 68%; margin: 0; }
+#mist-shortcuts #mist-panel button:not(.mist-close) {
+  margin-top: 9px;
+  min-height: 30px !important;
+  padding: 5px 9px !important;
+  font-size: 13px !important;
+  line-height: 20px !important;
+  background: #E7DECF !important;
+  color: inherit !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+#mist-shortcuts #mist-panel button:not(.mist-close):hover { background: #D8CBB9 !important; }
+#mist-shortcuts #mist-panel .mist-close { padding: 0 2px; border: 0 !important; background: transparent !important; color: inherit !important; font-size: 21px; cursor: pointer; }
+#mist-shortcuts #mist-panel button:disabled { opacity: .45; cursor: not-allowed; }
+#mist-shortcuts #mist-panel .mist-upload { justify-content: center; min-height: 30px; padding: 5px 9px; background: #E7DECF; font-size: 13px !important; line-height: 20px; cursor: pointer; }
+#mist-shortcuts #mist-panel .mist-upload input { max-width: 180px; font-size: 11px; }
+#mist-shortcuts #mist-panel .mist-upload input::file-selector-button { border: 0; background: #D8CBB9; color: #38352F; padding: 4px 6px; font-size: 13px; }
+#mist-shortcuts #mist-panel :is(input, select, button):focus-visible { outline: 2px solid #9C815D !important; outline-offset: 2px; }
+body.mist-night #mist-shortcuts #mist-panel { background: #282925 !important; color: #E5DED2 !important; }
+body.mist-night #mist-shortcuts #mist-panel .mist-section { background: #34352F !important; }
+body.mist-night #mist-shortcuts #mist-panel small { color: #B8AFA2 !important; }
+body.mist-night #mist-shortcuts #mist-panel select { background-color: #44443C !important; color: #E5DED2 !important; -webkit-text-fill-color: #E5DED2 !important; }
+body.mist-night #mist-shortcuts #mist-panel button:not(.mist-close),
+body.mist-night #mist-shortcuts #mist-panel .mist-upload { background: #44443C !important; }
+body.mist-night #mist-shortcuts #mist-panel button:not(.mist-close):hover { background: #525146 !important; }
+body.mist-night #mist-shortcuts #mist-panel input[type="range"],
+body.mist-night #mist-shortcuts #mist-panel input[type="range"]::-webkit-slider-runnable-track { background: #655E52 !important; }
+body.mist-night #mist-shortcuts #mist-panel input[type="range"]::-webkit-slider-thumb,
+body.mist-night #mist-shortcuts #mist-panel input[type="range"]::-moz-range-thumb { background: #B39A79 !important; }
+body.mist-night #mist-shortcuts #mist-panel .mist-upload input::file-selector-button { background: #575144; color: #E5DED2; }
+
+/* The native theme file actions do not apply to the extension theme. */
+body.mist-ui-ready #UI-presets-block [aria-disabled="true"] {
+  opacity: .45 !important;
+  cursor: not-allowed !important;
+}
+@media (max-width: 600px) { #mist-shortcuts { right: 4px; } #mist-shortcuts .mist-bars button { width: 12px !important; } }
