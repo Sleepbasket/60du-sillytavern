@@ -4925,40 +4925,91 @@ body.mist-ui-ready.mist-night #chat .mes_text iframe {
   background: transparent !important;
 }
 body.mist-ui-ready #chat .mes_text {
-  font-size: var(--mist-font-size, 1em) !important;
+  font-size: calc(var(--mist-reading-base, var(--mainFontSize, 16px)) * var(--mist-font-scale, 1)) !important;
+  line-height: var(--mist-line-height, 1.9) !important;
+}
+body.mist-ui-ready.mist-quote-tint #chat > .mes.mist-letter .mes_text q {
+  background-color: rgba(156, 129, 93, .12);
+  padding: .06em .12em;
+  border-radius: 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+body.mist-ui-ready.mist-night.mist-quote-tint #chat > .mes.mist-letter .mes_text q {
+  background-color: rgba(196, 169, 128, .15);
+}
+body.mist-ui-ready.mist-indent #chat > .mes.mist-letter .mes_text > p {
+  text-indent: 2em !important;
+}
+body.mist-ui-ready.mist-indent .mist-source-indent {
+  display: none !important;
+}
+/* The phone default is larger; the same relative slider still adjusts it. */
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  body.mist-ui-ready {
+    --mist-reading-base: max(18px, calc(var(--mainFontSize, 16px) * 1.12));
+  }
+  body.mist-ui-ready #chat .mist-letter-index { font-size: 17px; }
+  body.mist-ui-ready #chat .mist-letter-date { font-size: 12px; }
+  body.mist-ui-ready #chat .mist-letter-record { font-size: 11px; }
+  body.mist-ui-ready #chat .mist-letter-sign-name { font-size: 17px !important; }
 }
 body.mist-ui-ready.mist-night #chat > .mes.mist-letter,
 body.mist-ui-ready.mist-night #chat > .mes.mist-letter > .mes_block {
   background: transparent !important;
   color: var(--mist-ink) !important;
 }
-/* One fixed canvas spans the top bar, scrolling chat and input. Panels stay opaque. */
-body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::before,
-body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::after {
-  content: '';
+/* Clip zoomed images inside one continuous canvas. Panels remain opaque. */
+#mist-chat-canvas {
+  display: none;
   position: fixed;
+  z-index: 0;
   top: 0;
   left: 50%;
   width: min(var(--sheldWidth), 100dvw);
   height: 100dvh;
   transform: translateX(-50%);
   pointer-events: none;
+  overflow: hidden;
+  background: var(--mist-bg);
 }
-body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::before {
-  z-index: 0;
+body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel)) #mist-chat-canvas,
+body.mist-ui-ready.mist-paper-texture:not(.mist-night):not(:has(#chat .welcomePanel)) #mist-chat-canvas {
+  display: block;
+}
+#mist-chat-canvas .mist-chat-image-layer {
+  display: none;
+  position: absolute;
+  inset: 0;
   background-image: var(--mist-chat-image);
   background-size: cover;
   background-position: var(--mist-bg-position-x, 50%) var(--mist-bg-position-y, 50%);
+  transform: scale(var(--mist-bg-scale, 1));
+  transform-origin: var(--mist-bg-position-x, 50%) var(--mist-bg-position-y, 50%);
   filter: blur(var(--mist-blur, 0px));
 }
-body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::after {
-  z-index: 1;
+body.mist-night #mist-chat-canvas .mist-chat-image-layer { display: block; }
+body.mist-night #mist-chat-canvas::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: rgba(25, 26, 24, var(--mist-darkness, .55));
+}
+/* Grain and sparse fibers on the original cream paper, with no external asset. */
+body.mist-paper-texture:not(.mist-night) #mist-chat-canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: .14;
+  mix-blend-mode: multiply;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' seed='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23p)' opacity='.72'/%3E%3Cpath d='M8 19l11 2M45 63l7-3M120 17l9 2M151 98l-8 2M17 126l12-2M89 154l9 3M138 161l13-2' fill='none' stroke='%237D705B' stroke-width='.6' opacity='.5'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(108deg, transparent 0 22px, rgba(105,92,67,.05) 22px 22.5px, transparent 23px 41px);
+  background-size: 180px 180px, 131px 157px;
 }
 /* Touch screens also need the full canvas in landscape, even above 768px. */
 @media (max-width: 768px), (hover: none) and (pointer: coarse) {
-  body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::before,
-  body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::after {
+  #mist-chat-canvas {
     left: 0;
     width: 100vw;
     width: 100dvw;
@@ -4966,6 +5017,10 @@ body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel))::af
   }
 }
 body.mist-ui-ready.mist-night.mist-chat-image:not(:has(#chat .welcomePanel)) :is(
+  #top-bar, #top-settings-holder, #sheld, #chat, #form_sheld,
+  #send_form, #nonQRFormItems, #leftSendForm, #rightSendForm, #send_textarea
+),
+body.mist-ui-ready.mist-paper-texture:not(.mist-night):not(:has(#chat .welcomePanel)) :is(
   #top-bar, #top-settings-holder, #sheld, #chat, #form_sheld,
   #send_form, #nonQRFormItems, #leftSendForm, #rightSendForm, #send_textarea
 ) {
@@ -5254,7 +5309,8 @@ body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars button:focus-visible sp
   line-height: 1.45;
 }
 #mist-shortcuts #mist-panel[hidden],
-#mist-shortcuts .mist-night-only[hidden] { display: none !important; }
+#mist-shortcuts .mist-night-only[hidden],
+#mist-shortcuts .mist-day-only[hidden] { display: none !important; }
 #mist-shortcuts #mist-panel header { display: flex; align-items: center; justify-content: space-between; font-size: 17px; }
 #mist-shortcuts #mist-panel strong { font-weight: 600; }
 #mist-shortcuts #mist-panel small { display: block; margin: 4px 0; color: #817769 !important; }
@@ -5267,6 +5323,8 @@ body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars button:focus-visible sp
 }
 #mist-shortcuts #mist-panel label { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; color: inherit !important; }
 #mist-shortcuts #mist-panel label span { flex: 0 0 58px; color: inherit !important; }
+#mist-shortcuts #mist-panel .mist-switch span { flex: 1 1 auto; }
+#mist-shortcuts #mist-panel input[type="checkbox"] { flex: 0 0 34px; }
 #mist-shortcuts #mist-panel input[type="range"] {
   -webkit-appearance: none !important;
   appearance: none !important;

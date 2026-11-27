@@ -3,14 +3,16 @@ import { initLetter, registerLetterChatSurface } from './letter.js';
 import { initTeaHome } from './tea-home.js';
 import { initReception } from './reception.js';
 import { initHostTheme } from './host-theme.js';
+import { initReading } from './reading.js';
 
 const KEY = 'manbei_shoutie';
 const IMAGE_KEY = 'manbei_shoutie_night_image';
 const DEFAULT = Object.freeze({
-  themeActive: true, night: false, font: 100, scope: 'global',
+  themeActive: true, night: false, font: 100, lineHeight: 190,
+  quoteTint: true, indent: false, dayBackground: 'plain', scope: 'global',
   focus: { x: 50, y: 25, scale: 100 }, characters: {},
   background: 'none', blur: 0, darkness: 55,
-  backgroundFocus: { x: 50, y: 50 }, backgroundFocusByCharacter: {},
+  backgroundFocus: { x: 50, y: 50, scale: 100 }, backgroundFocusByCharacter: {},
   shortcuts: ['preset', 'api', 'world']
 });
 const TARGETS = {
@@ -29,6 +31,7 @@ let cleanupLetter = () => {};
 let cleanupTeaHome = () => {};
 let cleanupReception = () => {};
 let cleanupThemeBridge = null;
+let reading = null;
 let barObserver;
 let started = false;
 let startupTimer;
@@ -67,26 +70,33 @@ async function loadImage() {
 }
 function cssUrl(url) { return 'url("' + String(url).replaceAll('"', '%22').replaceAll('\\', '%5C') + '")'; }
 function backgroundFocus(s, current) {
-  return s.background === 'character' && current
+  const stored = s.background === 'character' && current
     ? s.backgroundFocusByCharacter?.[current.key] || s.backgroundFocus
     : s.backgroundFocus;
+  return { ...DEFAULT.backgroundFocus, ...stored };
 }
 function apply() {
   const s = settings();
   if (!started || !s) return;
   const body = document.body;
   body.classList.toggle('mist-night', !!s.night);
+  body.classList.toggle('mist-quote-tint', !!s.quoteTint);
+  body.classList.toggle('mist-indent', !!s.indent);
+  body.classList.toggle('mist-paper-texture', s.dayBackground === 'paper');
+  reading?.setEnabled(!!s.indent);
   const current = character();
   const focus = s.characters?.[current?.key] || s.focus;
   body.style.setProperty('--mist-focus-x', Math.max(0, Math.min(100, Number(focus.x) || 0)) + '%');
   body.style.setProperty('--mist-focus-y', Math.max(0, Math.min(100, Number(focus.y) || 0)) + '%');
   body.style.setProperty('--mist-focus-scale', String(Math.max(0.8, Math.min(2, Number(focus.scale) / 100 || 1))));
-  body.style.setProperty('--mist-font-size', String(Math.max(0.8, Math.min(1.4, Number(s.font) / 100 || 1))) + 'em');
+  body.style.setProperty('--mist-font-scale', String(Math.max(0.8, Math.min(1.6, Number(s.font) / 100 || 1))));
+  body.style.setProperty('--mist-line-height', String(Math.max(1.4, Math.min(2.6, Number(s.lineHeight) / 100 || 1.9))));
   body.style.setProperty('--mist-blur', Math.max(0, Math.min(24, Number(s.blur) || 0)) + 'px');
   body.style.setProperty('--mist-darkness', String(Math.max(0, Math.min(.9, Number(s.darkness) / 100 || 0))));
   const bgFocus = backgroundFocus(s, current);
   body.style.setProperty('--mist-bg-position-x', Math.max(0, Math.min(100, Number(bgFocus.x) || 0)) + '%');
   body.style.setProperty('--mist-bg-position-y', Math.max(0, Math.min(100, Number(bgFocus.y) || 0)) + '%');
+  body.style.setProperty('--mist-bg-scale', String(Math.max(.5, Math.min(2.5, Number(bgFocus.scale) / 100 || 1))));
   const url = s.background === 'upload' ? imageData : s.background === 'character' ? current?.avatarUrl : '';
   body.classList.toggle('mist-chat-image', !!s.night && !!url);
   if (url && s.night) body.style.setProperty('--mist-chat-image', cssUrl(url));
@@ -101,14 +111,20 @@ function apply() {
     panel.querySelector('[name="night"]').checked = !!s.night;
     panel.querySelector('[name="scope"]').value = s.scope;
     panel.querySelector('[name="font"]').value = s.font;
+    panel.querySelector('[name="lineHeight"]').value = s.lineHeight;
+    panel.querySelector('[name="quoteTint"]').checked = !!s.quoteTint;
+    panel.querySelector('[name="indent"]').checked = !!s.indent;
+    panel.querySelector('[name="dayBackground"]').value = s.dayBackground;
     panel.querySelector('[name="background"]').value = s.background;
     panel.querySelector('[name="blur"]').value = s.blur;
     panel.querySelector('[name="darkness"]').value = s.darkness;
     panel.querySelector('[name="backgroundX"]').value = bgFocus.x;
     panel.querySelector('[name="backgroundY"]').value = bgFocus.y;
+    panel.querySelector('[name="backgroundScale"]').value = bgFocus.scale;
     panel.querySelectorAll('[name="shortcut"]').forEach((el, i) => { el.value = s.shortcuts[i]; });
     for (const key of ['x', 'y', 'scale']) panel.querySelector('[name="' + key + '"]').value = focus[key];
     panel.querySelector('.mist-night-only').hidden = !s.night;
+    panel.querySelector('.mist-day-only').hidden = !!s.night;
     panel.querySelector('.mist-character-note').textContent = current ? current.name : '当前没有选中的角色';
     panel.querySelector('[name="scope"] option[value="character"]').disabled = !current;
     panel.querySelector('.mist-focus-clear').disabled = !current || !s.characters?.[current.key];
@@ -159,12 +175,19 @@ function makePanel() {
     makeRange('x', '左右', 0, 100) + makeRange('y', '上下', 0, 100) +
     makeRange('scale', '图片比例', 80, 200) +
     '<button type="button" class="mist-focus-clear">删除当前角色设置</button></div>' +
-    '<div class="mist-section"><strong>正文字号</strong>' + makeRange('font', '字号', 80, 140) + '</div>' +
+    '<div class="mist-section"><strong>正文管理</strong>' +
+    makeRange('font', '字号', 80, 160) + makeRange('lineHeight', '行距', 140, 260) +
+    '<label class="mist-switch"><span>引号淡底色</span><input type="checkbox" name="quoteTint"></label>' +
+    '<label class="mist-switch"><span>首行缩进</span><input type="checkbox" name="indent"></label>' +
+    '<small>首行缩进为两个中文字符；默认关闭。</small></div>' +
+    '<div class="mist-section mist-day-only"><strong>日间正文背景</strong>' +
+    '<select name="dayBackground"><option value="plain">米白纯色</option><option value="paper">米白纸纹</option></select></div>' +
     '<div class="mist-section mist-night-only"><strong>夜间正文背景</strong>' +
     '<select name="background"><option value="none">纯色</option><option value="upload">上传图片</option><option value="character">当前角色图片</option></select>' +
     '<label class="mist-upload">选择图片<input type="file" accept="image/*" name="image"></label>' +
-    '<small class="mist-background-note">角色图片位置按角色保存；上传图片位置全局保存。原图像素偏小时，铺满画布可能变软。</small>' +
+    '<small class="mist-background-note">角色图片的位置和比例按角色保存；上传图片单独全局保存。原图像素偏小时，放大可能变软。</small>' +
     makeRange('backgroundX', '背景左右', 0, 100) + makeRange('backgroundY', '背景上下', 0, 100) +
+    makeRange('backgroundScale', '图片比例', 50, 250) +
     makeRange('blur', '模糊', 0, 24) + makeRange('darkness', '暗度', 0, 90) + '</div>' +
     '<div class="mist-section"><strong>三条快捷入口</strong><div class="mist-shortcut-options"></div></div>' +
     '<button type="button" class="mist-reset">恢复默认</button></section>';
@@ -195,11 +218,14 @@ function makePanel() {
     if (['x', 'y', 'scale'].includes(el.name)) updateFocus(el.name, el.value);
     else if (el.name === 'backgroundX') updateBackgroundFocus('x', el.value);
     else if (el.name === 'backgroundY') updateBackgroundFocus('y', el.value);
-    else if (['font', 'blur', 'darkness'].includes(el.name)) { s[el.name] = Number(el.value); save(); apply(); }
+    else if (el.name === 'backgroundScale') updateBackgroundFocus('scale', el.value);
+    else if (['font', 'lineHeight', 'blur', 'darkness'].includes(el.name)) { s[el.name] = Number(el.value); save(); apply(); }
   });
   root.addEventListener('change', async event => {
     const el = event.target, s = settings();
     if (el.name === 'night') s.night = el.checked;
+    else if (['quoteTint', 'indent'].includes(el.name)) s[el.name] = el.checked;
+    else if (el.name === 'dayBackground') s.dayBackground = el.value;
     else if (el.name === 'scope') s.scope = el.value;
     else if (el.name === 'background') s.background = el.value;
     else if (el.name === 'shortcut') {
@@ -253,14 +279,20 @@ function begin() {
   started = true;
   const link = document.createElement('link');
   link.id = 'mist-theme-link'; link.rel = 'stylesheet';
-  link.href = new URL('./theme.css?v=0.4.4', import.meta.url).href;
+  link.href = new URL('./theme.css?v=0.5.0', import.meta.url).href;
   document.head.append(link);
+  const canvas = document.createElement('div');
+  canvas.id = 'mist-chat-canvas';
+  canvas.setAttribute('aria-hidden', 'true');
+  canvas.innerHTML = '<div class="mist-chat-image-layer"></div>';
+  document.body.prepend(canvas);
   cleanupTopbar = initTopbar(character, apply);
   cleanupTeaHome = initTeaHome();
   cleanupReception = initReception();
   const { eventSource, event_types, eventTypes } = context();
   const letterEvents = { eventSource, eventTypes: event_types || eventTypes };
   cleanupLetter = initLetter(letterEvents);
+  reading = initReading();
   makePanel();
   const bar = document.getElementById('top-settings-holder');
   barObserver = new MutationObserver(() => {
@@ -281,6 +313,8 @@ function stop() {
   const chatChanged = (event_types || eventTypes)?.CHAT_CHANGED;
   if (eventSource && chatChanged) eventSource.removeListener?.(chatChanged, listenChat);
   cleanupLetter();
+  reading?.cleanup();
+  reading = null;
   cleanupReception();
   cleanupTeaHome();
   cleanupTopbar();
@@ -289,8 +323,9 @@ function stop() {
   document.removeEventListener('keydown', escapeKey);
   document.getElementById('mist-shortcuts')?.remove();
   document.getElementById('mist-theme-link')?.remove();
-  document.body.classList.remove('mist-night', 'mist-chat-image', 'mist-ui-ready');
-  for (const name of ['--mist-focus-x','--mist-focus-y','--mist-focus-scale','--mist-font-size','--mist-blur','--mist-darkness','--mist-chat-image','--mist-bg-position-x','--mist-bg-position-y'])
+  document.getElementById('mist-chat-canvas')?.remove();
+  document.body.classList.remove('mist-night', 'mist-chat-image', 'mist-ui-ready', 'mist-quote-tint', 'mist-indent', 'mist-paper-texture');
+  for (const name of ['--mist-focus-x','--mist-focus-y','--mist-focus-scale','--mist-font-size','--mist-font-scale','--mist-line-height','--mist-blur','--mist-darkness','--mist-chat-image','--mist-bg-position-x','--mist-bg-position-y','--mist-bg-scale'])
     document.body.style.removeProperty(name);
 }
 function startBridge(forceTheme = false) {
