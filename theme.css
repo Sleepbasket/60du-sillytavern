@@ -4953,10 +4953,14 @@ body.mist-ui-ready.mist-indent #chat > .mes.mist-letter .mes_text > p {
 body.mist-ui-ready.mist-indent .mist-source-indent {
   display: none !important;
 }
-/* Mobile starts at the former minimum (80%), with its own saved slider value. */
+/* An explicit mobile baseline avoids multiplying the host's global font scale. */
 @media (max-width: 768px), (max-height: 600px) and (hover: none) and (pointer: coarse) {
   body.mist-ui-ready {
-    --mist-reading-base: max(18px, calc(var(--mainFontSize, 16px) * 1.12));
+    --mist-reading-base: 13.5px;
+  }
+  body.mist-ui-ready #chat .mes_text {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 }
 body.mist-ui-ready.mist-night #chat > .mes.mist-letter,
@@ -5304,10 +5308,15 @@ body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars button:focus-visible sp
   top: calc(var(--mist-nav-height) + 4px);
   right: 0;
   width: min(320px, calc(100vw - 16px));
-  max-height: calc(100dvh - var(--mist-nav-height) - 16px);
+  max-height: var(--mist-panel-max-height, calc(100dvh - var(--mist-nav-height) - 16px));
   overflow-y: auto;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   box-sizing: border-box;
   padding: 16px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  scroll-padding-bottom: max(16px, env(safe-area-inset-bottom));
   background: #F8F7F1 !important;
   color: #38352F !important;
   border: 0 !important;

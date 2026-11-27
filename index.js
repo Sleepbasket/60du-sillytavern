@@ -9,7 +9,7 @@ import { initBackground } from './background.js?v=0.5.2';
 const KEY = 'manbei_shoutie';
 const IMAGE_KEY = 'manbei_shoutie_night_image';
 const DEFAULT = Object.freeze({
-  themeActive: true, night: false, font: 100, mobileFont: 80, lineHeight: 175,
+  themeActive: true, night: false, font: 100, mobileFont: 100, lineHeight: 175,
   quoteTint: true, indent: false, dayBackground: 'plain', scope: 'global',
   focus: { x: 50, y: 25, scale: 100 }, characters: {},
   background: 'none', blur: 0, darkness: 55,
@@ -49,6 +49,11 @@ function settings() {
   const ctx = context();
   if (!ctx?.extensionSettings) return null;
   const value = ctx.extensionSettings[KEY] ??= structuredClone(DEFAULT);
+  if (value.phoneTextRevision !== 1) {
+    // One-time reset: the previous percentage inherited an unbounded host size.
+    value.mobileFont = DEFAULT.mobileFont;
+    value.phoneTextRevision = 1;
+  }
   if (value.readingRevision !== 2) {
     // Replace the previous default's extra spacing, while keeping custom values.
     if (value.lineHeight === 190) value.lineHeight = DEFAULT.lineHeight;
@@ -144,6 +149,7 @@ function apply({ syncPanel = true } = {}) {
     panel.querySelector('.mist-character-note').textContent = current ? current.name : '当前没有选中的角色';
     panel.querySelector('[name="scope"] option[value="character"]').disabled = !current;
     panel.querySelector('.mist-focus-clear').disabled = !current || !s.characters?.[current.key];
+    fitPanel();
   }
 }
 function updateFocus(key, value) {
@@ -304,6 +310,19 @@ function togglePanel(force) {
   if (!panel) return;
   panel.hidden = force === undefined ? !panel.hidden : !force;
   document.querySelector('.mist-settings-toggle')?.setAttribute('aria-expanded', String(!panel.hidden));
+  fitPanel();
+}
+function fitPanel() {
+  const panel = document.getElementById('mist-panel');
+  if (!started || !panel || panel.hidden) return;
+  const viewport = window.visualViewport;
+  const offset = viewport?.offsetTop || 0;
+  const height = viewport?.height || window.innerHeight;
+  const top = panel.getBoundingClientRect().top;
+  const available = Math.max(0, Math.floor(offset + height - Math.max(top, offset) - 12));
+  const value = available + 'px';
+  if (panel.style.getPropertyValue('--mist-panel-max-height') !== value)
+    panel.style.setProperty('--mist-panel-max-height', value);
 }
 function outsideClick(event) {
   if (!event.target.closest('#mist-shortcuts')) togglePanel(false);
@@ -319,7 +338,7 @@ function begin() {
   readingMedia.addEventListener?.('change', onReadingViewportChange);
   const link = document.createElement('link');
   link.id = 'mist-theme-link'; link.rel = 'stylesheet';
-  link.href = new URL('./theme.css?v=0.5.2', import.meta.url).href;
+  link.href = new URL('./theme.css?v=0.5.3', import.meta.url).href;
   document.head.append(link);
   const canvas = document.createElement('div');
   canvas.id = 'mist-chat-canvas';
@@ -335,6 +354,9 @@ function begin() {
   cleanupLetter = initLetter(letterEvents);
   reading = initReading();
   makePanel();
+  window.addEventListener('resize', fitPanel, { passive: true });
+  window.visualViewport?.addEventListener('resize', fitPanel, { passive: true });
+  window.visualViewport?.addEventListener('scroll', fitPanel, { passive: true });
   const bar = document.getElementById('top-settings-holder');
   barObserver = new MutationObserver(() => {
     if (!bar.classList.contains('mist-collapsed')) togglePanel(false);
@@ -354,6 +376,9 @@ function stop() {
   liveFrame = 0;
   readingMedia?.removeEventListener?.('change', onReadingViewportChange);
   readingMedia = null;
+  window.removeEventListener('resize', fitPanel);
+  window.visualViewport?.removeEventListener('resize', fitPanel);
+  window.visualViewport?.removeEventListener('scroll', fitPanel);
   const { eventSource, event_types, eventTypes } = context() || {};
   const chatChanged = (event_types || eventTypes)?.CHAT_CHANGED;
   if (eventSource && chatChanged) eventSource.removeListener?.(chatChanged, listenChat);
