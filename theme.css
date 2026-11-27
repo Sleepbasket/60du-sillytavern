@@ -4926,17 +4926,26 @@ body.mist-ui-ready.mist-night #chat .mes_text iframe {
 }
 body.mist-ui-ready #chat .mes_text {
   font-size: calc(var(--mist-reading-base, var(--mainFontSize, 16px)) * var(--mist-font-scale, 1)) !important;
-  line-height: var(--mist-line-height, 1.9) !important;
+  line-height: var(--mist-line-height, 1.75) !important;
 }
-body.mist-ui-ready.mist-quote-tint #chat > .mes.mist-letter .mes_text q {
+body.mist-ui-ready.mist-quote-tint #chat > .mes.mist-letter .mes_text q,
+body.mist-ui-ready.mist-quote-tint #chat > .mes.mist-letter .mes_text .mist-quote-group {
   background-color: rgba(156, 129, 93, .12);
-  padding: .06em .12em;
+  /* Extra space below balances the theme font's low sitting CJK glyphs. */
+  padding: .06em .12em .16em;
   border-radius: 4px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
-body.mist-ui-ready.mist-night.mist-quote-tint #chat > .mes.mist-letter .mes_text q {
+body.mist-ui-ready.mist-night.mist-quote-tint #chat > .mes.mist-letter .mes_text q,
+body.mist-ui-ready.mist-night.mist-quote-tint #chat > .mes.mist-letter .mes_text .mist-quote-group {
   background-color: rgba(196, 169, 128, .15);
+}
+/* Adjacent translated quotes share a strip instead of meeting as two pills. */
+body.mist-ui-ready.mist-quote-tint #chat > .mes.mist-letter .mes_text .mist-quote-group q {
+  background: transparent !important;
+  padding: 0;
+  border-radius: 0;
 }
 body.mist-ui-ready.mist-indent #chat > .mes.mist-letter .mes_text > p {
   text-indent: 2em !important;
@@ -4944,15 +4953,11 @@ body.mist-ui-ready.mist-indent #chat > .mes.mist-letter .mes_text > p {
 body.mist-ui-ready.mist-indent .mist-source-indent {
   display: none !important;
 }
-/* The phone default is larger; the same relative slider still adjusts it. */
-@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+/* Mobile starts at the former minimum (80%), with its own saved slider value. */
+@media (max-width: 768px), (max-height: 600px) and (hover: none) and (pointer: coarse) {
   body.mist-ui-ready {
     --mist-reading-base: max(18px, calc(var(--mainFontSize, 16px) * 1.12));
   }
-  body.mist-ui-ready #chat .mist-letter-index { font-size: 17px; }
-  body.mist-ui-ready #chat .mist-letter-date { font-size: 12px; }
-  body.mist-ui-ready #chat .mist-letter-record { font-size: 11px; }
-  body.mist-ui-ready #chat .mist-letter-sign-name { font-size: 17px !important; }
 }
 body.mist-ui-ready.mist-night #chat > .mes.mist-letter,
 body.mist-ui-ready.mist-night #chat > .mes.mist-letter > .mes_block {
@@ -4980,12 +4985,13 @@ body.mist-ui-ready.mist-paper-texture:not(.mist-night):not(:has(#chat .welcomePa
 #mist-chat-canvas .mist-chat-image-layer {
   display: none;
   position: absolute;
-  inset: 0;
-  background-image: var(--mist-chat-image);
-  background-size: cover;
-  background-position: var(--mist-bg-position-x, 50%) var(--mist-bg-position-y, 50%);
-  transform: scale(var(--mist-bg-scale, 1));
-  transform-origin: var(--mist-bg-position-x, 50%) var(--mist-bg-position-y, 50%);
+  max-width: none !important;
+  max-height: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
   filter: blur(var(--mist-blur, 0px));
 }
 body.mist-night #mist-chat-canvas .mist-chat-image-layer { display: block; }
@@ -5000,11 +5006,11 @@ body.mist-paper-texture:not(.mist-night) #mist-chat-canvas::before {
   content: '';
   position: absolute;
   inset: 0;
-  opacity: .14;
+  opacity: .40;
   mix-blend-mode: multiply;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' seed='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23p)' opacity='.72'/%3E%3Cpath d='M8 19l11 2M45 63l7-3M120 17l9 2M151 98l-8 2M17 126l12-2M89 154l9 3M138 161l13-2' fill='none' stroke='%237D705B' stroke-width='.6' opacity='.5'/%3E%3C/svg%3E"),
-    repeating-linear-gradient(108deg, transparent 0 22px, rgba(105,92,67,.05) 22px 22.5px, transparent 23px 41px);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' seed='6' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23p)' opacity='.78'/%3E%3Cpath d='M8 19l11 2M45 63l7-3M120 17l9 2M151 98l-8 2M17 126l12-2M89 154l9 3M138 161l13-2M70 32l2 5M106 94l-3 6M50 146l7 1M156 44l2 7' fill='none' stroke='%237D705B' stroke-width='.85' opacity='.65'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(108deg, transparent 0 22px, rgba(105,92,67,.10) 22px 22.7px, transparent 23px 41px);
   background-size: 180px 180px, 131px 157px;
 }
 /* Touch screens also need the full canvas in landscape, even above 768px. */
@@ -5292,6 +5298,8 @@ body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars span { background: #9C8
 body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars button:hover span,
 body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars button:focus-visible span { background: #C5AD8B; }
 #mist-shortcuts #mist-panel {
+  --mist-range-track: #C8BCA9;
+  --mist-range-thumb: #826448;
   position: absolute;
   top: calc(var(--mist-nav-height) + 4px);
   right: 0;
@@ -5330,29 +5338,35 @@ body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars button:focus-visible sp
   appearance: none !important;
   flex: 1;
   min-width: 0;
-  height: 4px !important;
-  min-height: 4px !important;
+  height: 22px !important;
+  min-height: 22px !important;
+  /* Enlarge within the existing label row, without increasing row spacing. */
+  margin-block: -4px !important;
   padding: 0 !important;
-  background: #C8BCA9 !important;
+  background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   cursor: pointer;
+  touch-action: none;
+  transition: none !important;
+  filter: none !important;
+  -webkit-tap-highlight-color: transparent;
 }
-#mist-shortcuts #mist-panel input[type="range"]::-webkit-slider-runnable-track { height: 4px; background: #C8BCA9; border: 0; }
+#mist-shortcuts #mist-panel input[type="range"]::-webkit-slider-runnable-track { height: 4px; background: var(--mist-range-track); border: 0; }
 #mist-shortcuts #mist-panel input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none !important;
   appearance: none !important;
-  width: 14px !important;
-  height: 14px !important;
-  margin-top: -5px;
-  background: #826448 !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin-top: -6px;
+  background: var(--mist-range-thumb) !important;
   border: 0 !important;
   border-radius: 50% !important;
   box-shadow: none !important;
 }
-#mist-shortcuts #mist-panel input[type="range"]::-moz-range-track { height: 4px; background: #C8BCA9; border: 0; }
-#mist-shortcuts #mist-panel input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; background: #826448; border: 0; border-radius: 50%; }
+#mist-shortcuts #mist-panel input[type="range"]::-moz-range-track { height: 4px; background: var(--mist-range-track); border: 0; }
+#mist-shortcuts #mist-panel input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; background: var(--mist-range-thumb); border: 0; border-radius: 50%; }
 #mist-shortcuts #mist-panel input[type="checkbox"] {
   -webkit-appearance: none !important;
   appearance: none !important;
@@ -5420,6 +5434,20 @@ body.mist-ui-ready.mist-night #mist-shortcuts .mist-bars button:focus-visible sp
 #mist-shortcuts #mist-panel .mist-upload input { max-width: 180px; font-size: 11px; }
 #mist-shortcuts #mist-panel .mist-upload input::file-selector-button { border: 0; background: #D8CBB9; color: #38352F; padding: 4px 6px; font-size: 13px; }
 #mist-shortcuts #mist-panel :is(input, select, button):focus-visible { outline: 2px solid #9C815D !important; outline-offset: 2px; }
+#mist-shortcuts #mist-panel input[type="range"]:focus {
+  outline: none !important;
+  background: transparent !important;
+  filter: none !important;
+}
+#mist-shortcuts #mist-panel input[type="range"]:focus-visible {
+  outline: 1px solid var(--mist-range-track) !important;
+  outline-offset: 1px !important;
+}
+#mist-shortcuts #mist-panel input[type="range"]:active { --mist-range-thumb: #766044; }
+body.mist-night #mist-shortcuts #mist-panel input[type="range"]:active { --mist-range-thumb: #A28B70; }
+@media (hover: none) and (pointer: coarse) {
+  #mist-shortcuts #mist-panel input[type="range"]:focus-visible { outline: none !important; }
+}
 body.mist-night #mist-shortcuts #mist-panel { background: #282925 !important; color: #E5DED2 !important; }
 body.mist-night #mist-shortcuts #mist-panel .mist-section { background: #34352F !important; }
 body.mist-night #mist-shortcuts #mist-panel small { color: #B8AFA2 !important; }
@@ -5427,10 +5455,10 @@ body.mist-night #mist-shortcuts #mist-panel select { background-color: #44443C !
 body.mist-night #mist-shortcuts #mist-panel button:not(.mist-close),
 body.mist-night #mist-shortcuts #mist-panel .mist-upload { background: #44443C !important; }
 body.mist-night #mist-shortcuts #mist-panel button:not(.mist-close):hover { background: #525146 !important; }
-body.mist-night #mist-shortcuts #mist-panel input[type="range"],
-body.mist-night #mist-shortcuts #mist-panel input[type="range"]::-webkit-slider-runnable-track { background: #655E52 !important; }
-body.mist-night #mist-shortcuts #mist-panel input[type="range"]::-webkit-slider-thumb,
-body.mist-night #mist-shortcuts #mist-panel input[type="range"]::-moz-range-thumb { background: #B39A79 !important; }
+body.mist-night #mist-shortcuts #mist-panel {
+  --mist-range-track: #655E52;
+  --mist-range-thumb: #B39A79;
+}
 body.mist-night #mist-shortcuts #mist-panel .mist-upload input::file-selector-button { background: #575144; color: #E5DED2; }
 
 /* The native theme file actions do not apply to the extension theme. */

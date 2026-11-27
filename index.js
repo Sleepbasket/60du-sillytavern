@@ -3,16 +3,17 @@ import { initLetter, registerLetterChatSurface } from './letter.js';
 import { initTeaHome } from './tea-home.js';
 import { initReception } from './reception.js';
 import { initHostTheme } from './host-theme.js';
-import { initReading } from './reading.js';
+import { initReading } from './reading.js?v=0.5.2';
+import { initBackground } from './background.js?v=0.5.2';
 
 const KEY = 'manbei_shoutie';
 const IMAGE_KEY = 'manbei_shoutie_night_image';
 const DEFAULT = Object.freeze({
-  themeActive: true, night: false, font: 100, lineHeight: 190,
+  themeActive: true, night: false, font: 100, mobileFont: 80, lineHeight: 175,
   quoteTint: true, indent: false, dayBackground: 'plain', scope: 'global',
   focus: { x: 50, y: 25, scale: 100 }, characters: {},
   background: 'none', blur: 0, darkness: 55,
-  backgroundFocus: { x: 50, y: 50, scale: 100 }, backgroundFocusByCharacter: {},
+  backgroundFocus: { x: 50, y: 50, scale: 100, fit: 'cover' }, backgroundFocusByCharacter: {},
   shortcuts: ['preset', 'api', 'world']
 });
 const TARGETS = {
@@ -32,6 +33,10 @@ let cleanupTeaHome = () => {};
 let cleanupReception = () => {};
 let cleanupThemeBridge = null;
 let reading = null;
+let backgroundView = null;
+let readingMedia = null;
+let liveFrame = 0;
+const PHONE_MEDIA = '(max-width: 768px), (max-height: 600px) and (hover: none) and (pointer: coarse)';
 let barObserver;
 let started = false;
 let startupTimer;
@@ -44,6 +49,11 @@ function settings() {
   const ctx = context();
   if (!ctx?.extensionSettings) return null;
   const value = ctx.extensionSettings[KEY] ??= structuredClone(DEFAULT);
+  if (value.readingRevision !== 2) {
+    // Replace the previous default's extra spacing, while keeping custom values.
+    if (value.lineHeight === 190) value.lineHeight = DEFAULT.lineHeight;
+    value.readingRevision = 2;
+  }
   for (const [key, def] of Object.entries(DEFAULT)) {
     if (value[key] === undefined) value[key] = structuredClone(def);
   }
@@ -68,14 +78,14 @@ async function loadImage() {
   catch (error) { console.warn('[慢焙手帖] 背景图读取失败', error); imageData = ''; }
   apply();
 }
-function cssUrl(url) { return 'url("' + String(url).replaceAll('"', '%22').replaceAll('\\', '%5C') + '")'; }
+function phoneReading() { return readingMedia?.matches === true; }
 function backgroundFocus(s, current) {
   const stored = s.background === 'character' && current
     ? s.backgroundFocusByCharacter?.[current.key] || s.backgroundFocus
     : s.backgroundFocus;
   return { ...DEFAULT.backgroundFocus, ...stored };
 }
-function apply() {
+function apply({ syncPanel = true } = {}) {
   const s = settings();
   if (!started || !s) return;
   const body = document.body;
@@ -84,23 +94,25 @@ function apply() {
   body.classList.toggle('mist-indent', !!s.indent);
   body.classList.toggle('mist-paper-texture', s.dayBackground === 'paper');
   reading?.setEnabled(!!s.indent);
+  reading?.setQuoteEnabled(!!s.quoteTint);
   const current = character();
   const focus = s.characters?.[current?.key] || s.focus;
   body.style.setProperty('--mist-focus-x', Math.max(0, Math.min(100, Number(focus.x) || 0)) + '%');
   body.style.setProperty('--mist-focus-y', Math.max(0, Math.min(100, Number(focus.y) || 0)) + '%');
   body.style.setProperty('--mist-focus-scale', String(Math.max(0.8, Math.min(2, Number(focus.scale) / 100 || 1))));
-  body.style.setProperty('--mist-font-scale', String(Math.max(0.8, Math.min(1.6, Number(s.font) / 100 || 1))));
-  body.style.setProperty('--mist-line-height', String(Math.max(1.4, Math.min(2.6, Number(s.lineHeight) / 100 || 1.9))));
+  const font = phoneReading() ? s.mobileFont : s.font;
+  body.style.setProperty('--mist-font-scale', String(Math.max(0.8, Math.min(1.6, Number(font) / 100 || 1))));
+  body.style.setProperty('--mist-line-height', String(Math.max(1.4, Math.min(2.6, Number(s.lineHeight) / 100 || 1.75))));
   body.style.setProperty('--mist-blur', Math.max(0, Math.min(24, Number(s.blur) || 0)) + 'px');
   body.style.setProperty('--mist-darkness', String(Math.max(0, Math.min(.9, Number(s.darkness) / 100 || 0))));
   const bgFocus = backgroundFocus(s, current);
   body.style.setProperty('--mist-bg-position-x', Math.max(0, Math.min(100, Number(bgFocus.x) || 0)) + '%');
   body.style.setProperty('--mist-bg-position-y', Math.max(0, Math.min(100, Number(bgFocus.y) || 0)) + '%');
-  body.style.setProperty('--mist-bg-scale', String(Math.max(.5, Math.min(2.5, Number(bgFocus.scale) / 100 || 1))));
+  body.style.setProperty('--mist-bg-scale', String(Math.max(.25, Math.min(3, Number(bgFocus.scale) / 100 || 1))));
   const url = s.background === 'upload' ? imageData : s.background === 'character' ? current?.avatarUrl : '';
   body.classList.toggle('mist-chat-image', !!s.night && !!url);
-  if (url && s.night) body.style.setProperty('--mist-chat-image', cssUrl(url));
-  else body.style.removeProperty('--mist-chat-image');
+  backgroundView?.update({ ...bgFocus, url: s.night ? url || '' : '' });
+  if (!syncPanel) return;
   document.querySelectorAll('#mist-shortcuts [data-shortcut]').forEach((button, index) => {
     const item = TARGETS[s.shortcuts[index]] || TARGETS.preset;
     button.title = item[0];
@@ -110,7 +122,10 @@ function apply() {
   if (panel) {
     panel.querySelector('[name="night"]').checked = !!s.night;
     panel.querySelector('[name="scope"]').value = s.scope;
-    panel.querySelector('[name="font"]').value = s.font;
+    panel.querySelector('[name="font"]').value = font;
+    panel.querySelector('.mist-font-note').textContent = phoneReading()
+      ? '手机字号单独保存。'
+      : '电脑字号单独保存。';
     panel.querySelector('[name="lineHeight"]').value = s.lineHeight;
     panel.querySelector('[name="quoteTint"]').checked = !!s.quoteTint;
     panel.querySelector('[name="indent"]').checked = !!s.indent;
@@ -121,6 +136,7 @@ function apply() {
     panel.querySelector('[name="backgroundX"]').value = bgFocus.x;
     panel.querySelector('[name="backgroundY"]').value = bgFocus.y;
     panel.querySelector('[name="backgroundScale"]').value = bgFocus.scale;
+    panel.querySelector('[name="backgroundFit"]').value = bgFocus.fit;
     panel.querySelectorAll('[name="shortcut"]').forEach((el, i) => { el.value = s.shortcuts[i]; });
     for (const key of ['x', 'y', 'scale']) panel.querySelector('[name="' + key + '"]').value = focus[key];
     panel.querySelector('.mist-night-only').hidden = !s.night;
@@ -137,7 +153,7 @@ function updateFocus(key, value) {
     s.characters[current.key] ??= { ...s.focus };
     s.characters[current.key][key] = Number(value);
   } else s.focus[key] = Number(value);
-  save(); apply();
+  scheduleLiveApply();
 }
 function updateBackgroundFocus(key, value) {
   const s = settings();
@@ -145,9 +161,21 @@ function updateBackgroundFocus(key, value) {
   const target = s.background === 'character' && current
     ? (s.backgroundFocusByCharacter[current.key] ??= { ...s.backgroundFocus })
     : s.backgroundFocus;
-  target[key] = Number(value);
-  save(); apply();
+  target[key] = key === 'fit' ? value : Number(value);
+  scheduleLiveApply();
 }
+function scheduleLiveApply() {
+  if (!liveFrame) liveFrame = requestAnimationFrame(() => {
+    liveFrame = 0;
+    apply({ syncPanel: false });
+  });
+}
+function flushLiveApply() {
+  if (liveFrame) cancelAnimationFrame(liveFrame);
+  liveFrame = 0;
+  apply({ syncPanel: false });
+}
+function onReadingViewportChange() { apply(); }
 function nativeOpen(key) {
   const item = TARGETS[key];
   const button = item && document.querySelector('#' + item[1] + ' > .drawer-toggle');
@@ -159,7 +187,7 @@ function nativeOpen(key) {
 }
 function makeRange(name, label, min, max) {
   return '<label class="mist-control"><span>' + label + '</span><input type="range" name="' + name +
-    '" min="' + min + '" max="' + max + '"></label>';
+    '" min="' + min + '" max="' + max + '" step="0.1"></label>';
 }
 function makePanel() {
   const root = document.createElement('div');
@@ -177,6 +205,7 @@ function makePanel() {
     '<button type="button" class="mist-focus-clear">删除当前角色设置</button></div>' +
     '<div class="mist-section"><strong>正文管理</strong>' +
     makeRange('font', '字号', 80, 160) + makeRange('lineHeight', '行距', 140, 260) +
+    '<small class="mist-font-note"></small>' +
     '<label class="mist-switch"><span>引号淡底色</span><input type="checkbox" name="quoteTint"></label>' +
     '<label class="mist-switch"><span>首行缩进</span><input type="checkbox" name="indent"></label>' +
     '<small>首行缩进为两个中文字符；默认关闭。</small></div>' +
@@ -185,9 +214,10 @@ function makePanel() {
     '<div class="mist-section mist-night-only"><strong>夜间正文背景</strong>' +
     '<select name="background"><option value="none">纯色</option><option value="upload">上传图片</option><option value="character">当前角色图片</option></select>' +
     '<label class="mist-upload">选择图片<input type="file" accept="image/*" name="image"></label>' +
-    '<small class="mist-background-note">角色图片的位置和比例按角色保存；上传图片单独全局保存。原图像素偏小时，放大可能变软。</small>' +
+    '<label>显示方式<select name="backgroundFit"><option value="cover">铺满画布</option><option value="contain">完整图片</option></select></label>' +
+    '<small class="mist-background-note">直接缩放完整原图；角色图按角色保存，上传图单独保存。选择完整图片或缩小时可能留边。</small>' +
     makeRange('backgroundX', '背景左右', 0, 100) + makeRange('backgroundY', '背景上下', 0, 100) +
-    makeRange('backgroundScale', '图片比例', 50, 250) +
+    makeRange('backgroundScale', '图片比例', 25, 300) +
     makeRange('blur', '模糊', 0, 24) + makeRange('darkness', '暗度', 0, 90) + '</div>' +
     '<div class="mist-section"><strong>三条快捷入口</strong><div class="mist-shortcut-options"></div></div>' +
     '<button type="button" class="mist-reset">恢复默认</button></section>';
@@ -219,15 +249,23 @@ function makePanel() {
     else if (el.name === 'backgroundX') updateBackgroundFocus('x', el.value);
     else if (el.name === 'backgroundY') updateBackgroundFocus('y', el.value);
     else if (el.name === 'backgroundScale') updateBackgroundFocus('scale', el.value);
-    else if (['font', 'lineHeight', 'blur', 'darkness'].includes(el.name)) { s[el.name] = Number(el.value); save(); apply(); }
+    else if (['font', 'lineHeight', 'blur', 'darkness'].includes(el.name)) {
+      s[el.name === 'font' && phoneReading() ? 'mobileFont' : el.name] = Number(el.value);
+      scheduleLiveApply();
+    }
   });
   root.addEventListener('change', async event => {
     const el = event.target, s = settings();
+    if (el.type === 'range') { flushLiveApply(); save(); return; }
     if (el.name === 'night') s.night = el.checked;
     else if (['quoteTint', 'indent'].includes(el.name)) s[el.name] = el.checked;
     else if (el.name === 'dayBackground') s.dayBackground = el.value;
     else if (el.name === 'scope') s.scope = el.value;
     else if (el.name === 'background') s.background = el.value;
+    else if (el.name === 'backgroundFit') {
+      updateBackgroundFocus('fit', el.value);
+      updateBackgroundFocus('scale', 100);
+    }
     else if (el.name === 'shortcut') {
       const index = Number(el.dataset.index), previous = s.shortcuts[index];
       const other = s.shortcuts.indexOf(el.value);
@@ -277,16 +315,19 @@ function begin() {
     startupTimer = setTimeout(begin, 250); return;
   }
   started = true;
+  readingMedia = window.matchMedia(PHONE_MEDIA);
+  readingMedia.addEventListener?.('change', onReadingViewportChange);
   const link = document.createElement('link');
   link.id = 'mist-theme-link'; link.rel = 'stylesheet';
-  link.href = new URL('./theme.css?v=0.5.0', import.meta.url).href;
+  link.href = new URL('./theme.css?v=0.5.2', import.meta.url).href;
   document.head.append(link);
   const canvas = document.createElement('div');
   canvas.id = 'mist-chat-canvas';
   canvas.setAttribute('aria-hidden', 'true');
-  canvas.innerHTML = '<div class="mist-chat-image-layer"></div>';
+  canvas.innerHTML = '<img class="mist-chat-image-layer" alt="" draggable="false">';
   document.body.prepend(canvas);
-  cleanupTopbar = initTopbar(character, apply);
+  backgroundView = initBackground(canvas);
+  cleanupTopbar = initTopbar(character, () => apply());
   cleanupTeaHome = initTeaHome();
   cleanupReception = initReception();
   const { eventSource, event_types, eventTypes } = context();
@@ -309,12 +350,18 @@ function stop() {
   clearTimeout(startupTimer);
   if (!started) return;
   started = false;
+  if (liveFrame) cancelAnimationFrame(liveFrame);
+  liveFrame = 0;
+  readingMedia?.removeEventListener?.('change', onReadingViewportChange);
+  readingMedia = null;
   const { eventSource, event_types, eventTypes } = context() || {};
   const chatChanged = (event_types || eventTypes)?.CHAT_CHANGED;
   if (eventSource && chatChanged) eventSource.removeListener?.(chatChanged, listenChat);
   cleanupLetter();
   reading?.cleanup();
   reading = null;
+  backgroundView?.cleanup();
+  backgroundView = null;
   cleanupReception();
   cleanupTeaHome();
   cleanupTopbar();
